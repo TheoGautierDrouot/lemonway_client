@@ -1,4 +1,4 @@
-module gitlab.zonesecure.org/tgautier/lw_client
+module github.com/TheoGautier/lw_client
 
 go 1.13
 
