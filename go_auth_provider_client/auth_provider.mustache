@@ -1,0 +1,6 @@
+{{>partial_header}}
+package {{packageName}}
+
+type AuthProvider interface {
+    GetToken() (string, error)
+}
