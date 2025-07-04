@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AmountToRefund** | Pointer to **int32** | Refund Amount. If empty, the total amount of the payment will be refunded. | [optional] 
-**Comment** | Pointer to **string** | Comment on the refund  **Please explain why you refunded** | [optional] 
+**Comment** | Pointer to **string** | Comment on the refund.   **Explain the reason for the refunded amount**   **Note:** In the API Response displayed before the comment will appear the refund transaction id. Example: comment\&quot;: \&quot;Refund 2763789 Items not wanted\&quot; | [optional] 
 
 ## Methods
 

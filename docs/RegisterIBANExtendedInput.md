@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 **IntermediaryBicCode** | Pointer to **string** | BIC/SWIFT Code of the Intermediary Bank. | [optional] 
 **IntermediaryBankName** | Pointer to **string** | Intermediary Bank Name | [optional] 
 **IntermediaryBankCountry** | Pointer to **string** | Bank Country Code of the Intermediary Bank. Two-letter country code (ISO alpha-2) for example, France&#x3D;&lt;b&gt;FR&lt;/b&gt; | [optional] 
-**Comment** | Pointer to **string** | Reason for New Bank Account Details if another one is already linked to the Payment Account. | [optional] 
+**Comment** | Pointer to **string** | Reason for new Bank Account details if another one is already linked to the Payment Account. | [optional] 
 
 ## Methods
 

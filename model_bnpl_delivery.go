@@ -16,6 +16,7 @@ import (
 
 // BnplDelivery struct for BnplDelivery
 type BnplDelivery struct {
+	// Possible values:     `CollectionOfTheGoodsInTheMerchantStore`  `CollectionInAThirdPartyPoint`  `DeliveryToCustomerAddress`
 	DeliveryMode string `json:"deliveryMode"`
 	ExpressDelivery bool `json:"expressDelivery"`
 	DeliveryAddress BnplAddress `json:"deliveryAddress"`

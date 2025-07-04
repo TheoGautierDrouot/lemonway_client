@@ -5,9 +5,9 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Wallet** | **string** | Payment Account ID. | 
-**Country** | **string** | ISO2 code of the country from which the IBAN must be generated  We currently serve 5 countries:  &lt;ul&gt;&lt;li&gt;BE: Belgium (BNP Fortis)&lt;/li&gt;&lt;li&gt;DE: Germany (BNP Paribas Niederlassung)&lt;/li&gt;&lt;li&gt;ES: BNP Paribas Sucursal en España&lt;/li&gt;&lt;li&gt;FR: France (BNP Paribas)&lt;/li&gt;&lt;li&gt;IT: Italy (BNL)&lt;/li&gt;&lt;/ul&gt; | 
+**Country** | **string** | ISO2 code of the country from which the IBAN must be generated  We currently serve 4 countries:  &lt;ul&gt;&lt;li&gt;BE: Belgium (BNP Fortis)&lt;/li&gt;&lt;li&gt;ES: BNP Paribas Sucursal en España&lt;/li&gt;&lt;li&gt;FR: France (BNP Paribas)&lt;/li&gt;&lt;li&gt;IT: Italy (BNL)&lt;/li&gt;&lt;/ul&gt; | 
 **GeneratePDFAndQrCode** | Pointer to **bool** | If activated, this function will return a PDF document describing the virtual IBAN, along with a &lt;a href&#x3D;\&quot;https://www.europeanpaymentscouncil.eu/document-library/guidance-documents/quick-response-code-guidelines-enable-data-capture-initiation\&quot; target&#x3D;\&quot;_blank\&quot;&gt;standard EPC QR-Code&lt;/a&gt; image. Please store these documents in your datawarehouse, as they are not accessible through Lemonway&#39;s API after the virtual IBAN has been generated. | [optional] 
-**PdfLanguage** | Pointer to **string** | ISO 639-1 language code for the PDF document. The supported languages are:  &lt;ul&gt;&lt;li&gt;en: English&lt;/li&gt;&lt;li&gt;es: Spanish&lt;/li&gt;&lt;li&gt;fr: French&lt;/li&gt;&lt;li&gt;de: German&lt;/li&gt;&lt;li&gt;it: Italian&lt;/li&gt;&lt;/ul&gt;  This field is ignored if generatePDFAndQrCode is false. | [optional] 
+**PdfLanguage** | Pointer to **string** | ISO 639-1 language code for the PDF document. The supported languages are:  &lt;ul&gt;&lt;li&gt;en: English&lt;/li&gt;&lt;li&gt;es: Spanish&lt;/li&gt;&lt;li&gt;fr: French&lt;/li&gt;&lt;li&gt;it: Italian&lt;/li&gt;&lt;/ul&gt;  This field is ignored if generatePDFAndQrCode is false. | [optional] 
 
 ## Methods
 

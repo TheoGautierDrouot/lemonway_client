@@ -127,7 +127,11 @@ func (a *RefundsApiService) RefundsRefundCreatePutExecute(r ApiRefundsRefundCrea
         if authProviderAuthType, ok := r.ctx.Value(authorizationFromProviderCtxKey).(AuthType); ok && authProviderAuthType != "" {
             token, err := a.client.authProvider.GetToken()
             if err != nil {
-                return localVarReturnValue, nil, err
+                return localVarReturnValue, nil, &GenericOpenAPIError{
+                    body: nil,
+                    error: err.Error(),
+                    model: localAdditionalValues,
+                }
             }
             localAdditionalValues["authorization"] = string(authProviderAuthType)+" "+token
         }
@@ -296,8 +300,7 @@ the outstanding refund amount will be debited from your **SC Wallet**. An ON-US 
 
 - Card payment refunds are not available from 22:00 and 03:00 (Central European Time - UTC/GMT+1 ).
 - Refunds can only be made upto 12 months after the initial payment. 
-
-**Sofort:** Refunds are only available upto **3 months** after the initial payment.  
+ 
 **iDEAL:** Refunds are only available upto **99 days** after the initial payment.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -339,7 +342,11 @@ func (a *RefundsApiService) RefundsRefundPutExecute(r ApiRefundsRefundPutRequest
         if authProviderAuthType, ok := r.ctx.Value(authorizationFromProviderCtxKey).(AuthType); ok && authProviderAuthType != "" {
             token, err := a.client.authProvider.GetToken()
             if err != nil {
-                return localVarReturnValue, nil, err
+                return localVarReturnValue, nil, &GenericOpenAPIError{
+                    body: nil,
+                    error: err.Error(),
+                    model: localAdditionalValues,
+                }
             }
             localAdditionalValues["authorization"] = string(authProviderAuthType)+" "+token
         }

@@ -18,7 +18,7 @@ import (
 type RefundMoneyInInput struct {
 	// Refund Amount. If empty, the total amount of the payment will be refunded.
 	AmountToRefund *int32 `json:"amountToRefund,omitempty"`
-	// Comment on the refund  **Please explain why you refunded**
+	// Comment on the refund.   **Explain the reason for the refunded amount**   **Note:** In the API Response displayed before the comment will appear the refund transaction id. Example: comment\": \"Refund 2763789 Items not wanted\"
 	Comment *string `json:"comment,omitempty"`
 }
 

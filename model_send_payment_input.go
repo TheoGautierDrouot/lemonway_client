@@ -16,9 +16,9 @@ import (
 
 // SendPaymentInput struct for SendPaymentInput
 type SendPaymentInput struct {
-	// Wallet ID to be Debited
+	// Account ID to be Debited
 	DebitAccountId string `json:"debitAccountId"`
-	// Wallet ID to Credited
+	// Account ID to Credited
 	CreditAccountId string `json:"creditAccountId"`
 	// Payment Amount
 	Amount *int32 `json:"amount,omitempty"`

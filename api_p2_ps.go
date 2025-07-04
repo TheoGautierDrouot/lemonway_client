@@ -161,7 +161,11 @@ func (a *P2PsApiService) P2PsP2pGetExecute(r ApiP2PsP2pGetRequest) (*GetPaymentD
         if authProviderAuthType, ok := r.ctx.Value(authorizationFromProviderCtxKey).(AuthType); ok && authProviderAuthType != "" {
             token, err := a.client.authProvider.GetToken()
             if err != nil {
-                return localVarReturnValue, nil, err
+                return localVarReturnValue, nil, &GenericOpenAPIError{
+                    body: nil,
+                    error: err.Error(),
+                    model: localAdditionalValues,
+                }
             }
             localAdditionalValues["authorization"] = string(authProviderAuthType)+" "+token
         }
@@ -333,7 +337,7 @@ func (r ApiP2PsP2pPostRequest) Execute() (*SendPaymentOutput, *http.Response, er
 /*
 P2PsP2pPost Payment between Payment Accounts (P2P)
 
-This method debits Wallet A and credits Wallet B. Payment accounts are internal to Lemonway. You can schedule this payment if you do not want the payment to occure immediately.
+This call debits Wallet A and credits Wallet B. Payment accounts are internal to Lemonway. You can schedule this payment if you do not want the payment to occure immediately.
 The following list corresponds to the payment type specified in the response attribute called:    
   
 0 Card  
@@ -342,22 +346,12 @@ The following list corresponds to the payment type specified in the response att
 4 P2P  
 13 IDEAL  
 14 DirectDebit  
-15 Cheque  
-16 Neosurf  
-17 SoFort  
-18 PFS Physical Card  
+15 Cheque   
 19 Multibanco  
 20 Payshop  
-21 MB WAY  
-22 Polish Instant Transfer  
-23 PAGARE  
-24 MobilePay  
-25 PayTrail  
-26 WeChat (via PayTend)  
-27 P24   
-28 MoneyIn by TPE   
-29 Trustly  
-35 PayPal
+21 MB WAY    
+35 PayPal  
+**Important:** The following services have been discontinued: 16 Neosurf, 17 SoFort, 18 PFS Physical Card, 20 Payshop, 22 Polish Instant Transfer, 23 PAGARE, 24 MobilePay,26 WeChat (via PayTend),28 MoneyIn by TPE, 29 Trustly.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiP2PsP2pPostRequest
@@ -395,7 +389,11 @@ func (a *P2PsApiService) P2PsP2pPostExecute(r ApiP2PsP2pPostRequest) (*SendPayme
         if authProviderAuthType, ok := r.ctx.Value(authorizationFromProviderCtxKey).(AuthType); ok && authProviderAuthType != "" {
             token, err := a.client.authProvider.GetToken()
             if err != nil {
-                return localVarReturnValue, nil, err
+                return localVarReturnValue, nil, &GenericOpenAPIError{
+                    body: nil,
+                    error: err.Error(),
+                    model: localAdditionalValues,
+                }
             }
             localAdditionalValues["authorization"] = string(authProviderAuthType)+" "+token
         }

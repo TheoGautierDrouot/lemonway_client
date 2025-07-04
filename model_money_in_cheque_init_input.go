@@ -42,7 +42,7 @@ type MoneyInChequeInitInput struct {
 	CommissionAmount *int32 `json:"commissionAmount,omitempty"`
 	// Comment Regarding the Transaction
 	Comment *string `json:"comment,omitempty"`
-	// If true:  1. [amountCom] will be ignored and will be replaced with Lemonway's fee  2. You will not receive any fee
+	// If true:  1. [amountCom] will be ignored and will be replaced with Lemonway's fee    2. You will not receive any fee
 	AutoCommission *bool `json:"autoCommission,omitempty"`
 }
 

@@ -18,7 +18,7 @@ import (
 type Customer struct {
 	// Client account Id.
 	AccountId string `json:"accountId"`
-	// Client civility.
+	// Client civility.    Possible values: `Mr` and `Ms`
 	Civility string `json:"civility"`
 	// Client first name.
 	FirstName string `json:"firstName"`

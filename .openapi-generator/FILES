@@ -1,5 +1,4 @@
 .gitignore
-.openapi-generator-ignore
 .travis.yml
 README.md
 api/openapi.yaml
@@ -108,6 +107,7 @@ docs/GetPaymentDetailsInput.md
 docs/GetPaymentDetailsOutput.md
 docs/GetPaymentPlansOutput.md
 docs/GetUltimateBeneficialOwnerOutput.md
+docs/GetVibanCountOutput.md
 docs/Holder.md
 docs/Iban.md
 docs/IndividualAccount.md
@@ -207,7 +207,7 @@ docs/SendPaymentInput.md
 docs/SendPaymentOutput.md
 docs/SignDocumentInitInput.md
 docs/SignDocumentInitOutput.md
-docs/ThreeDs.md
+docs/ThreeDS.md
 docs/ThreeDs.md
 docs/Transaction.md
 docs/TransactionAccount.md
@@ -332,6 +332,7 @@ model_get_payment_details_input.go
 model_get_payment_details_output.go
 model_get_payment_plans_output.go
 model_get_ultimate_beneficial_owner_output.go
+model_get_viban_count_output.go
 model_holder.go
 model_iban.go
 model_individual_account.go

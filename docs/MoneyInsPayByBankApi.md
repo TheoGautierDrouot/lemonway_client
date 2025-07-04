@@ -106,7 +106,7 @@ import (
 func main() {
     authorization := "authorization_example" // string | Authorization bearer (OAuth 2)
     pSUIPAddress := "pSUIPAddress_example" // string | IP address of the final client (PSU).
-    rawInput := *openapiclient.NewMoneyInTransferInitInput("ReturnUrl_example", "CancelUrl_example", "ErrorUrl_example", "AccountId_example") // MoneyInTransferInitInput | 
+    rawInput := *openapiclient.NewMoneyInTransferInitInput("ReturnUrl_example", "CancelUrl_example", "ErrorUrl_example", "CountryCode_example", "AccountId_example") // MoneyInTransferInitInput | 
     pSUAcceptLanguage := "pSUAcceptLanguage_example" // string | Response language accepted by final client (PSU). English by default (optional)
     pSUUserAgent := "pSUUserAgent_example" // string | User-agent of the final client (PSU). (optional)
 

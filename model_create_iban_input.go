@@ -18,11 +18,11 @@ import (
 type CreateIBANInput struct {
 	// Payment Account ID.
 	Wallet string `json:"wallet"`
-	// ISO2 code of the country from which the IBAN must be generated  We currently serve 5 countries:  <ul><li>BE: Belgium (BNP Fortis)</li><li>DE: Germany (BNP Paribas Niederlassung)</li><li>ES: BNP Paribas Sucursal en España</li><li>FR: France (BNP Paribas)</li><li>IT: Italy (BNL)</li></ul>
+	// ISO2 code of the country from which the IBAN must be generated  We currently serve 4 countries:  <ul><li>BE: Belgium (BNP Fortis)</li><li>ES: BNP Paribas Sucursal en España</li><li>FR: France (BNP Paribas)</li><li>IT: Italy (BNL)</li></ul>
 	Country string `json:"country"`
 	// If activated, this function will return a PDF document describing the virtual IBAN, along with a <a href=\"https://www.europeanpaymentscouncil.eu/document-library/guidance-documents/quick-response-code-guidelines-enable-data-capture-initiation\" target=\"_blank\">standard EPC QR-Code</a> image. Please store these documents in your datawarehouse, as they are not accessible through Lemonway's API after the virtual IBAN has been generated.
 	GeneratePDFAndQrCode *bool `json:"generatePDFAndQrCode,omitempty"`
-	// ISO 639-1 language code for the PDF document. The supported languages are:  <ul><li>en: English</li><li>es: Spanish</li><li>fr: French</li><li>de: German</li><li>it: Italian</li></ul>  This field is ignored if generatePDFAndQrCode is false.
+	// ISO 639-1 language code for the PDF document. The supported languages are:  <ul><li>en: English</li><li>es: Spanish</li><li>fr: French</li><li>it: Italian</li></ul>  This field is ignored if generatePDFAndQrCode is false.
 	PdfLanguage *string `json:"pdfLanguage,omitempty"`
 }
 

@@ -6,13 +6,13 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**MoneyInsIDealConfirmPut**](MoneyInsLocalPaymentsApi.md#MoneyInsIDealConfirmPut) | **Put** /v2/moneyins/ideal/{transactionid}/confirm | Finalize an iDeal Payment
 [**MoneyInsIDealInitPost**](MoneyInsLocalPaymentsApi.md#MoneyInsIDealInitPost) | **Post** /v2/moneyins/ideal/init | Initialize iDeal Payment
-[**MoneyInsMbwayInitPost**](MoneyInsLocalPaymentsApi.md#MoneyInsMbwayInitPost) | **Post** /v2/moneyins/mbway/init | Initialize MB WAY Payment
-[**MoneyInsMobilePayInitPost**](MoneyInsLocalPaymentsApi.md#MoneyInsMobilePayInitPost) | **Post** /v2/moneyins/mobilePay/init | Initialize MobilePay Payment
+[**MoneyInsMbwayInitPost**](MoneyInsLocalPaymentsApi.md#MoneyInsMbwayInitPost) | **Post** /v2/moneyins/mbway/init | (Deprecated) Initialize MB WAY Payment
+[**MoneyInsMobilePayInitPost**](MoneyInsLocalPaymentsApi.md#MoneyInsMobilePayInitPost) | **Post** /v2/moneyins/mobilePay/init | (Deprecated) Initialize MobilePay Payment
 [**MoneyInsMultibancoInitPost**](MoneyInsLocalPaymentsApi.md#MoneyInsMultibancoInitPost) | **Post** /v2/moneyins/multibanco/init | Initialize Multibanco Payment
-[**MoneyInsPayTrailInitPost**](MoneyInsLocalPaymentsApi.md#MoneyInsPayTrailInitPost) | **Post** /v2/moneyins/paytrail/init | Initialize PayTrail Payment (Deprecated)
-[**MoneyInsPayshopInitPost**](MoneyInsLocalPaymentsApi.md#MoneyInsPayshopInitPost) | **Post** /v2/moneyins/payshop/init | Initialize Payshop Payment
-[**MoneyInsSofortInitPost**](MoneyInsLocalPaymentsApi.md#MoneyInsSofortInitPost) | **Post** /v2/moneyins/sofort/init | Initialize Sofort Payment
-[**MoneyInsTrustlyInitPost**](MoneyInsLocalPaymentsApi.md#MoneyInsTrustlyInitPost) | **Post** /v2/moneyins/trustly/init | Initialize Trustly Payment
+[**MoneyInsPayTrailInitPost**](MoneyInsLocalPaymentsApi.md#MoneyInsPayTrailInitPost) | **Post** /v2/moneyins/paytrail/init | (Deprecated) Initialize PayTrail Payment
+[**MoneyInsPayshopInitPost**](MoneyInsLocalPaymentsApi.md#MoneyInsPayshopInitPost) | **Post** /v2/moneyins/payshop/init | (Deprecated) Initialize Payshop Payment
+[**MoneyInsSofortInitPost**](MoneyInsLocalPaymentsApi.md#MoneyInsSofortInitPost) | **Post** /v2/moneyins/sofort/init | (Deprecated) Initialize Sofort Payment
+[**MoneyInsTrustlyInitPost**](MoneyInsLocalPaymentsApi.md#MoneyInsTrustlyInitPost) | **Post** /v2/moneyins/trustly/init | (Deprecated) Initialize Trustly Payment
 
 
 
@@ -172,7 +172,7 @@ No authorization required
 
 > MoneyInMbwayInitOutput MoneyInsMbwayInitPost(ctx).Authorization(authorization).PSUIPAddress(pSUIPAddress).Parameters(parameters).PSUAcceptLanguage(pSUAcceptLanguage).PSUUserAgent(pSUUserAgent).Execute()
 
-Initialize MB WAY Payment
+(Deprecated) Initialize MB WAY Payment
 
 
 
@@ -246,7 +246,7 @@ No authorization required
 
 > MoneyInMobilePayInitOutput MoneyInsMobilePayInitPost(ctx).Authorization(authorization).PSUIPAddress(pSUIPAddress).Parameters(parameters).PSUAcceptLanguage(pSUAcceptLanguage).PSUUserAgent(pSUUserAgent).Execute()
 
-Initialize MobilePay Payment
+(Deprecated) Initialize MobilePay Payment
 
 
 
@@ -394,7 +394,7 @@ No authorization required
 
 > MoneyInPayTrailInitOutput MoneyInsPayTrailInitPost(ctx).Authorization(authorization).PSUIPAddress(pSUIPAddress).Parameters(parameters).PSUAcceptLanguage(pSUAcceptLanguage).PSUUserAgent(pSUUserAgent).Execute()
 
-Initialize PayTrail Payment (Deprecated)
+(Deprecated) Initialize PayTrail Payment
 
 
 
@@ -468,7 +468,7 @@ No authorization required
 
 > MoneyInPayshopInitOutput MoneyInsPayshopInitPost(ctx).Authorization(authorization).PSUIPAddress(pSUIPAddress).Parameters(parameters).PSUAcceptLanguage(pSUAcceptLanguage).PSUUserAgent(pSUUserAgent).Execute()
 
-Initialize Payshop Payment
+(Deprecated) Initialize Payshop Payment
 
 
 
@@ -542,7 +542,7 @@ No authorization required
 
 > MoneyInSofortInitOutput MoneyInsSofortInitPost(ctx).Authorization(authorization).PSUIPAddress(pSUIPAddress).Parameters(parameters).PSUAcceptLanguage(pSUAcceptLanguage).PSUUserAgent(pSUUserAgent).Execute()
 
-Initialize Sofort Payment
+(Deprecated) Initialize Sofort Payment
 
 
 
@@ -616,7 +616,7 @@ No authorization required
 
 > MoneyInTrustlyInitOutput MoneyInsTrustlyInitPost(ctx).Authorization(authorization).PSUIPAddress(pSUIPAddress).Parameters(parameters).PSUAcceptLanguage(pSUAcceptLanguage).PSUUserAgent(pSUUserAgent).Execute()
 
-Initialize Trustly Payment
+(Deprecated) Initialize Trustly Payment
 
 
 

@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AccountId** | **string** | Client account Id. | 
-**Civility** | **string** | Client civility. | 
+**Civility** | **string** | Client civility.    Possible values: &#x60;Mr&#x60; and &#x60;Ms&#x60; | 
 **FirstName** | **string** | Client first name. | 
 **LastName** | **string** | Client last name. | 
 **BirthDate** | Pointer to **string** | Client birth date. | [optional] 

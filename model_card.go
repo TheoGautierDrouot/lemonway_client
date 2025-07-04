@@ -32,6 +32,8 @@ type Card struct {
 	Type *string `json:"type,omitempty"`
 	// Card is registered
 	IsRegistered *bool `json:"isRegistered,omitempty"`
+	// Card's holder name
+	HolderName *string `json:"holderName,omitempty"`
 }
 
 // NewCard instantiates a new Card object
@@ -307,6 +309,38 @@ func (o *Card) SetIsRegistered(v bool) {
 	o.IsRegistered = &v
 }
 
+// GetHolderName returns the HolderName field value if set, zero value otherwise.
+func (o *Card) GetHolderName() string {
+	if o == nil || o.HolderName == nil {
+		var ret string
+		return ret
+	}
+	return *o.HolderName
+}
+
+// GetHolderNameOk returns a tuple with the HolderName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Card) GetHolderNameOk() (*string, bool) {
+	if o == nil || o.HolderName == nil {
+		return nil, false
+	}
+	return o.HolderName, true
+}
+
+// HasHolderName returns a boolean if a field has been set.
+func (o *Card) HasHolderName() bool {
+	if o != nil && o.HolderName != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetHolderName gets a reference to the given string and assigns it to the HolderName field.
+func (o *Card) SetHolderName(v string) {
+	o.HolderName = &v
+}
+
 func (o Card) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Id != nil {
@@ -332,6 +366,9 @@ func (o Card) MarshalJSON() ([]byte, error) {
 	}
 	if o.IsRegistered != nil {
 		toSerialize["isRegistered"] = o.IsRegistered
+	}
+	if o.HolderName != nil {
+		toSerialize["holderName"] = o.HolderName
 	}
 	return json.Marshal(toSerialize)
 }

@@ -4,9 +4,82 @@ All URIs are relative to *https://sandbox-api.lemonway.fr/mb/drouot/dev/directki
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**MoneyInsBankwireIbanCountGet**](MoneyInsVirtualIBANApi.md#MoneyInsBankwireIbanCountGet) | **Get** /v2/moneyins/bankwire/iban/count | Get VIBANs count
 [**MoneyInsBankwireIbanCreatePost**](MoneyInsVirtualIBANApi.md#MoneyInsBankwireIbanCreatePost) | **Post** /v2/moneyins/bankwire/iban/create | Create Dedicated Virtual IBANs
 [**MoneyInsBankwireIbanDisablePost**](MoneyInsVirtualIBANApi.md#MoneyInsBankwireIbanDisablePost) | **Post** /v2/moneyins/bankwire/iban/{ibanid}/disable | Disable a Dedicated Virtual IBAN
 
+
+
+## MoneyInsBankwireIbanCountGet
+
+> GetVibanCountOutput MoneyInsBankwireIbanCountGet(ctx).Authorization(authorization).PSUIPAddress(pSUIPAddress).PSUAcceptLanguage(pSUAcceptLanguage).PSUUserAgent(pSUUserAgent).Execute()
+
+Get VIBANs count
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    authorization := "authorization_example" // string | Authorization bearer (OAuth 2)
+    pSUIPAddress := "pSUIPAddress_example" // string | IP address of the final client (PSU).
+    pSUAcceptLanguage := "pSUAcceptLanguage_example" // string | Response language accepted by final client (PSU). English by default (optional)
+    pSUUserAgent := "pSUUserAgent_example" // string | User-agent of the final client (PSU). (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.MoneyInsVirtualIBANApi.MoneyInsBankwireIbanCountGet(context.Background()).Authorization(authorization).PSUIPAddress(pSUIPAddress).PSUAcceptLanguage(pSUAcceptLanguage).PSUUserAgent(pSUUserAgent).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `MoneyInsVirtualIBANApi.MoneyInsBankwireIbanCountGet``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `MoneyInsBankwireIbanCountGet`: GetVibanCountOutput
+    fmt.Fprintf(os.Stdout, "Response from `MoneyInsVirtualIBANApi.MoneyInsBankwireIbanCountGet`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiMoneyInsBankwireIbanCountGetRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **authorization** | **string** | Authorization bearer (OAuth 2) | 
+ **pSUIPAddress** | **string** | IP address of the final client (PSU). | 
+ **pSUAcceptLanguage** | **string** | Response language accepted by final client (PSU). English by default | 
+ **pSUUserAgent** | **string** | User-agent of the final client (PSU). | 
+
+### Return type
+
+[**GetVibanCountOutput**](GetVibanCountOutput.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
 
 ## MoneyInsBankwireIbanCreatePost

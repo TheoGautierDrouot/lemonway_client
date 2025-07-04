@@ -4,7 +4,7 @@ All URIs are relative to *https://sandbox-api.lemonway.fr/mb/drouot/dev/directki
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**MoneyInsMoneyInPayPalInit**](MoneyInsPayPalApi.md#MoneyInsMoneyInPayPalInit) | **Post** /v2/moneyins/paypal/init | Initate Pay by PayPal
+[**MoneyInsMoneyInPayPalInit**](MoneyInsPayPalApi.md#MoneyInsMoneyInPayPalInit) | **Post** /v2/moneyins/paypal/init | Initiate Pay by PayPal
 [**MoneyInsPayPalTransactionResume**](MoneyInsPayPalApi.md#MoneyInsPayPalTransactionResume) | **Post** /v2/moneyins/paypal/{transactionId}/resume | PayPal Resume
 
 
@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 > InitPayPalTransactionOutput MoneyInsMoneyInPayPalInit(ctx).Authorization(authorization).PSUIPAddress(pSUIPAddress).Input(input).PSUAcceptLanguage(pSUAcceptLanguage).PSUUserAgent(pSUUserAgent).Execute()
 
-Initate Pay by PayPal
+Initiate Pay by PayPal
 
 
 

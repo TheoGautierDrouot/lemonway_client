@@ -20,45 +20,45 @@ import (
 )
 
 
-// AccountsCreateKYCApiService AccountsCreateKYCApi service
-type AccountsCreateKYCApiService service
+// MoneyInsDirectDebitsApiService MoneyInsDirectDebitsApi service
+type MoneyInsDirectDebitsApiService service
 
-type ApiAccountsAddUltimateBeneficialOwnerRequest struct {
+type ApiMoneyInsCancelPutRequest struct {
 	ctx context.Context
-	ApiService *AccountsCreateKYCApiService
-	accountId string
+	ApiService *MoneyInsDirectDebitsApiService
+	transactionid int64
 	authorization *string
 	pSUIPAddress *string
-	parameters *AddUltimateBeneficialOwnerInput
+	parameters *CancelMoneyInInput
 	pSUAcceptLanguage *string
 	pSUUserAgent *string
 }
 
 // Authorization bearer (OAuth 2)
-func (r ApiAccountsAddUltimateBeneficialOwnerRequest) Authorization(authorization string) ApiAccountsAddUltimateBeneficialOwnerRequest {
+func (r ApiMoneyInsCancelPutRequest) Authorization(authorization string) ApiMoneyInsCancelPutRequest {
 	r.authorization = &authorization
 	return r
 }
 
 // IP address of the final client (PSU).
-func (r ApiAccountsAddUltimateBeneficialOwnerRequest) PSUIPAddress(pSUIPAddress string) ApiAccountsAddUltimateBeneficialOwnerRequest {
+func (r ApiMoneyInsCancelPutRequest) PSUIPAddress(pSUIPAddress string) ApiMoneyInsCancelPutRequest {
 	r.pSUIPAddress = &pSUIPAddress
 	return r
 }
 
-func (r ApiAccountsAddUltimateBeneficialOwnerRequest) Parameters(parameters AddUltimateBeneficialOwnerInput) ApiAccountsAddUltimateBeneficialOwnerRequest {
+func (r ApiMoneyInsCancelPutRequest) Parameters(parameters CancelMoneyInInput) ApiMoneyInsCancelPutRequest {
 	r.parameters = &parameters
 	return r
 }
 
 // Response language accepted by final client (PSU). English by default
-func (r ApiAccountsAddUltimateBeneficialOwnerRequest) PSUAcceptLanguage(pSUAcceptLanguage string) ApiAccountsAddUltimateBeneficialOwnerRequest {
+func (r ApiMoneyInsCancelPutRequest) PSUAcceptLanguage(pSUAcceptLanguage string) ApiMoneyInsCancelPutRequest {
 	r.pSUAcceptLanguage = &pSUAcceptLanguage
 	return r
 }
 
 // User-agent of the final client (PSU).
-func (r ApiAccountsAddUltimateBeneficialOwnerRequest) PSUUserAgent(pSUUserAgent string) ApiAccountsAddUltimateBeneficialOwnerRequest {
+func (r ApiMoneyInsCancelPutRequest) PSUUserAgent(pSUUserAgent string) ApiMoneyInsCancelPutRequest {
 	r.pSUUserAgent = &pSUUserAgent
 	return r
 }
@@ -66,68 +66,59 @@ func (r ApiAccountsAddUltimateBeneficialOwnerRequest) PSUUserAgent(pSUUserAgent 
 
 // Use Authorization from given provider. Overrides usage of manually set Authorization header.
 // Auth type describes authorization type to use, like "Bearer" or "Basic"
-func (r ApiAccountsAddUltimateBeneficialOwnerRequest) AuthorizationFromProvider(authType AuthType) ApiAccountsAddUltimateBeneficialOwnerRequest {
+func (r ApiMoneyInsCancelPutRequest) AuthorizationFromProvider(authType AuthType) ApiMoneyInsCancelPutRequest {
     r.ctx = context.WithValue(r.ctx, authorizationFromProviderCtxKey, authType)
     return r
 }
 
 // Use Basic Authorization from given provider. Overrides usage of manually set Authorization header.
-func (r ApiAccountsAddUltimateBeneficialOwnerRequest) AuthorizationBasicFromProvider() ApiAccountsAddUltimateBeneficialOwnerRequest {
+func (r ApiMoneyInsCancelPutRequest) AuthorizationBasicFromProvider() ApiMoneyInsCancelPutRequest {
     return r.AuthorizationFromProvider(AuthTypeBasic)
 }
 
 // Use Bearer Authorization from given provider. Overrides usage of manually set Authorization header.
-func (r ApiAccountsAddUltimateBeneficialOwnerRequest) AuthorizationBearerFromProvider() ApiAccountsAddUltimateBeneficialOwnerRequest {
+func (r ApiMoneyInsCancelPutRequest) AuthorizationBearerFromProvider() ApiMoneyInsCancelPutRequest {
     return r.AuthorizationFromProvider(AuthTypeBearer)
 }
 
-func (r ApiAccountsAddUltimateBeneficialOwnerRequest) Execute() (*AddUltimateBeneficialOwnerOutput, *http.Response, error) {
-	return r.ApiService.AccountsAddUltimateBeneficialOwnerExecute(r)
+func (r ApiMoneyInsCancelPutRequest) Execute() (*CancelMoneyInOutput, *http.Response, error) {
+	return r.ApiService.MoneyInsCancelPutExecute(r)
 }
 
 /*
-AccountsAddUltimateBeneficialOwner Create an Ultimate Beneficial Owner
+MoneyInsCancelPut Cancel a Money-In
 
-The method enables you to link an Ultimate Beneficial Owner to a legal payment account.  
-To be validated all Legal accounts need to provide their Ultimate Beneficial Owner information.  
-An Ultimate Beneficial Owner is a natural person that owns directly or indirectly (i.e. through another entity)  
-more than 25% of the shares/stock or voting rights of the legal entity, or a person having significant control over it   
-through other means. Any company established in EEA or EU is obliged to obtain and maintain this information with the competent   
-central register (as per article 30 of Directive 2015/843/EU).   
-Similar requirements may also exist in other countries.  
-In order to comply with AML-CTF legal provisions, payment institutions are required  
-to identify the beneficial owner(s) of a legal entity(i.e.a company or an organisation).  
-If the Legal Representative is also an Ultimate Beneficial Owner,  you can specify this information when creating or updating a legal account.
+With the PUT /moneyins/{transactionid}/cancel method, you can cancel a pre-authorization / SEPA Direct Debit (SDD) request.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param accountId Account ID
- @return ApiAccountsAddUltimateBeneficialOwnerRequest
+ @param transactionid
+ @return ApiMoneyInsCancelPutRequest
 */
-func (a *AccountsCreateKYCApiService) AccountsAddUltimateBeneficialOwner(ctx context.Context, accountId string) ApiAccountsAddUltimateBeneficialOwnerRequest {
-	return ApiAccountsAddUltimateBeneficialOwnerRequest{
+func (a *MoneyInsDirectDebitsApiService) MoneyInsCancelPut(ctx context.Context, transactionid int64) ApiMoneyInsCancelPutRequest {
+	return ApiMoneyInsCancelPutRequest{
 		ApiService: a,
 		ctx: ctx,
-		accountId: accountId,
+		transactionid: transactionid,
 	}
 }
 
 // Execute executes the request
-//  @return AddUltimateBeneficialOwnerOutput
-func (a *AccountsCreateKYCApiService) AccountsAddUltimateBeneficialOwnerExecute(r ApiAccountsAddUltimateBeneficialOwnerRequest) (*AddUltimateBeneficialOwnerOutput, *http.Response, error) {
+//  @return CancelMoneyInOutput
+func (a *MoneyInsDirectDebitsApiService) MoneyInsCancelPutExecute(r ApiMoneyInsCancelPutRequest) (*CancelMoneyInOutput, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
+		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *AddUltimateBeneficialOwnerOutput
+		localVarReturnValue  *CancelMoneyInOutput
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AccountsCreateKYCApiService.AccountsAddUltimateBeneficialOwner")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MoneyInsDirectDebitsApiService.MoneyInsCancelPut")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v2/accounts/{accountId}/ultimateBeneficialOwner"
-	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", url.PathEscape(parameterToString(r.accountId, "")), -1)
+	localVarPath := localBasePath + "/v2/moneyins/{transactionid}/cancel"
+	localVarPath = strings.Replace(localVarPath, "{"+"transactionid"+"}", url.PathEscape(parameterToString(r.transactionid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -162,7 +153,7 @@ func (a *AccountsCreateKYCApiService) AccountsAddUltimateBeneficialOwnerExecute(
         r.pSUIPAddress = &value
 	}
 	if r.parameters == nil {
-        value, ok := localAdditionalValues["parameters"].(AddUltimateBeneficialOwnerInput)
+        value, ok := localAdditionalValues["parameters"].(CancelMoneyInInput)
         if !ok {
             return localVarReturnValue, nil, reportError("parameters is required and must be specified")
         }
@@ -233,42 +224,36 @@ func (a *AccountsCreateKYCApiService) AccountsAddUltimateBeneficialOwnerExecute(
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiAccountsDocumentsUploadPostRequest struct {
+type ApiMoneyInsMandateGetRequest struct {
 	ctx context.Context
-	ApiService *AccountsCreateKYCApiService
+	ApiService *MoneyInsDirectDebitsApiService
 	accountid string
 	authorization *string
 	pSUIPAddress *string
-	parameters *UploadDocumentInput
 	pSUAcceptLanguage *string
 	pSUUserAgent *string
 }
 
 // Authorization bearer (OAuth 2)
-func (r ApiAccountsDocumentsUploadPostRequest) Authorization(authorization string) ApiAccountsDocumentsUploadPostRequest {
+func (r ApiMoneyInsMandateGetRequest) Authorization(authorization string) ApiMoneyInsMandateGetRequest {
 	r.authorization = &authorization
 	return r
 }
 
 // IP address of the final client (PSU).
-func (r ApiAccountsDocumentsUploadPostRequest) PSUIPAddress(pSUIPAddress string) ApiAccountsDocumentsUploadPostRequest {
+func (r ApiMoneyInsMandateGetRequest) PSUIPAddress(pSUIPAddress string) ApiMoneyInsMandateGetRequest {
 	r.pSUIPAddress = &pSUIPAddress
 	return r
 }
 
-func (r ApiAccountsDocumentsUploadPostRequest) Parameters(parameters UploadDocumentInput) ApiAccountsDocumentsUploadPostRequest {
-	r.parameters = &parameters
-	return r
-}
-
 // Response language accepted by final client (PSU). English by default
-func (r ApiAccountsDocumentsUploadPostRequest) PSUAcceptLanguage(pSUAcceptLanguage string) ApiAccountsDocumentsUploadPostRequest {
+func (r ApiMoneyInsMandateGetRequest) PSUAcceptLanguage(pSUAcceptLanguage string) ApiMoneyInsMandateGetRequest {
 	r.pSUAcceptLanguage = &pSUAcceptLanguage
 	return r
 }
 
 // User-agent of the final client (PSU).
-func (r ApiAccountsDocumentsUploadPostRequest) PSUUserAgent(pSUUserAgent string) ApiAccountsDocumentsUploadPostRequest {
+func (r ApiMoneyInsMandateGetRequest) PSUUserAgent(pSUUserAgent string) ApiMoneyInsMandateGetRequest {
 	r.pSUUserAgent = &pSUUserAgent
 	return r
 }
@@ -276,48 +261,34 @@ func (r ApiAccountsDocumentsUploadPostRequest) PSUUserAgent(pSUUserAgent string)
 
 // Use Authorization from given provider. Overrides usage of manually set Authorization header.
 // Auth type describes authorization type to use, like "Bearer" or "Basic"
-func (r ApiAccountsDocumentsUploadPostRequest) AuthorizationFromProvider(authType AuthType) ApiAccountsDocumentsUploadPostRequest {
+func (r ApiMoneyInsMandateGetRequest) AuthorizationFromProvider(authType AuthType) ApiMoneyInsMandateGetRequest {
     r.ctx = context.WithValue(r.ctx, authorizationFromProviderCtxKey, authType)
     return r
 }
 
 // Use Basic Authorization from given provider. Overrides usage of manually set Authorization header.
-func (r ApiAccountsDocumentsUploadPostRequest) AuthorizationBasicFromProvider() ApiAccountsDocumentsUploadPostRequest {
+func (r ApiMoneyInsMandateGetRequest) AuthorizationBasicFromProvider() ApiMoneyInsMandateGetRequest {
     return r.AuthorizationFromProvider(AuthTypeBasic)
 }
 
 // Use Bearer Authorization from given provider. Overrides usage of manually set Authorization header.
-func (r ApiAccountsDocumentsUploadPostRequest) AuthorizationBearerFromProvider() ApiAccountsDocumentsUploadPostRequest {
+func (r ApiMoneyInsMandateGetRequest) AuthorizationBearerFromProvider() ApiMoneyInsMandateGetRequest {
     return r.AuthorizationFromProvider(AuthTypeBearer)
 }
 
-func (r ApiAccountsDocumentsUploadPostRequest) Execute() (*UploadDocumentOutput, *http.Response, error) {
-	return r.ApiService.AccountsDocumentsUploadPostExecute(r)
+func (r ApiMoneyInsMandateGetRequest) Execute() (*AccountMandatsOutput, *http.Response, error) {
+	return r.ApiService.MoneyInsMandateGetExecute(r)
 }
 
 /*
-AccountsDocumentsUploadPost Upload Documents for KYC (Know Your Customers)
-
-KYC is a regulatory obligation for Payment Institutions. European Directive 2015/849 of the European Parliament states this requirement    
-for the prevention of the use of the financial system for the purposes of money laundering and terrorist financing.    
-
-To upload documents for KYC use the following guidelines:  
-* Use JPG, JPEG, PNG or PDF (maximum 2 pages) for ID documentation only (for example: Passport, Driving Licence and Residence Permit).  
-* Maximum file upload size is **4MB** for automatic verification.    
-* Minimum file upload size is **100KB**.  
-* Full Colour, and straighten file.   
-* Card ID: Scan both sides. One file should contain both sides (maximum 2 pages).  
-
-**Important** Documents over 4MB and upto 10MB will be manually validated.  
-**Note:** TIFF format is not accepted.  
-**Note:** If a document has been rejected, it is still possible to use the same slot to upload a new file.
+MoneyInsMandateGet Get Mandate Associated to a Payment Account
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param accountid Account ID
- @return ApiAccountsDocumentsUploadPostRequest
+ @return ApiMoneyInsMandateGetRequest
 */
-func (a *AccountsCreateKYCApiService) AccountsDocumentsUploadPost(ctx context.Context, accountid string) ApiAccountsDocumentsUploadPostRequest {
-	return ApiAccountsDocumentsUploadPostRequest{
+func (a *MoneyInsDirectDebitsApiService) MoneyInsMandateGet(ctx context.Context, accountid string) ApiMoneyInsMandateGetRequest {
+	return ApiMoneyInsMandateGetRequest{
 		ApiService: a,
 		ctx: ctx,
 		accountid: accountid,
@@ -325,217 +296,22 @@ func (a *AccountsCreateKYCApiService) AccountsDocumentsUploadPost(ctx context.Co
 }
 
 // Execute executes the request
-//  @return UploadDocumentOutput
-func (a *AccountsCreateKYCApiService) AccountsDocumentsUploadPostExecute(r ApiAccountsDocumentsUploadPostRequest) (*UploadDocumentOutput, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *UploadDocumentOutput
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AccountsCreateKYCApiService.AccountsDocumentsUploadPost")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/v2/accounts/{accountid}/documents/upload"
-	localVarPath = strings.Replace(localVarPath, "{"+"accountid"+"}", url.PathEscape(parameterToString(r.accountid, "")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-    localAdditionalValues := make(map[string]interface{})
-
-    if r.ctx != nil {
-        if authProviderAuthType, ok := r.ctx.Value(authorizationFromProviderCtxKey).(AuthType); ok && authProviderAuthType != "" {
-            token, err := a.client.authProvider.GetToken()
-            if err != nil {
-                return localVarReturnValue, nil, &GenericOpenAPIError{
-                    body: nil,
-                    error: err.Error(),
-                    model: localAdditionalValues,
-                }
-            }
-            localAdditionalValues["authorization"] = string(authProviderAuthType)+" "+token
-        }
-    }
-	if r.authorization == nil {
-        value, ok := localAdditionalValues["authorization"].(string)
-        if !ok {
-            return localVarReturnValue, nil, reportError("authorization is required and must be specified")
-        }
-        r.authorization = &value
-	}
-	if r.pSUIPAddress == nil {
-        value, ok := localAdditionalValues["pSUIPAddress"].(string)
-        if !ok {
-            return localVarReturnValue, nil, reportError("pSUIPAddress is required and must be specified")
-        }
-        r.pSUIPAddress = &value
-	}
-	if r.parameters == nil {
-        value, ok := localAdditionalValues["parameters"].(UploadDocumentInput)
-        if !ok {
-            return localVarReturnValue, nil, reportError("parameters is required and must be specified")
-        }
-        r.parameters = &value
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	localVarHeaderParams["Authorization"] = parameterToString(*r.authorization, "")
-	if r.pSUAcceptLanguage != nil {
-		localVarHeaderParams["PSU-Accept-Language"] = parameterToString(*r.pSUAcceptLanguage, "")
-	}
-	localVarHeaderParams["PSU-IP-Address"] = parameterToString(*r.pSUIPAddress, "")
-	if r.pSUUserAgent != nil {
-		localVarHeaderParams["PSU-User-Agent"] = parameterToString(*r.pSUUserAgent, "")
-	}
-	// body params
-	localVarPostBody = r.parameters
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiAccountsGetUltimateBeneficialOwnerRequest struct {
-	ctx context.Context
-	ApiService *AccountsCreateKYCApiService
-	accountId string
-	authorization *string
-	pSUIPAddress *string
-	pSUAcceptLanguage *string
-	pSUUserAgent *string
-}
-
-// Authorization bearer (OAuth 2)
-func (r ApiAccountsGetUltimateBeneficialOwnerRequest) Authorization(authorization string) ApiAccountsGetUltimateBeneficialOwnerRequest {
-	r.authorization = &authorization
-	return r
-}
-
-// IP address of the final client (PSU).
-func (r ApiAccountsGetUltimateBeneficialOwnerRequest) PSUIPAddress(pSUIPAddress string) ApiAccountsGetUltimateBeneficialOwnerRequest {
-	r.pSUIPAddress = &pSUIPAddress
-	return r
-}
-
-// Response language accepted by final client (PSU). English by default
-func (r ApiAccountsGetUltimateBeneficialOwnerRequest) PSUAcceptLanguage(pSUAcceptLanguage string) ApiAccountsGetUltimateBeneficialOwnerRequest {
-	r.pSUAcceptLanguage = &pSUAcceptLanguage
-	return r
-}
-
-// User-agent of the final client (PSU).
-func (r ApiAccountsGetUltimateBeneficialOwnerRequest) PSUUserAgent(pSUUserAgent string) ApiAccountsGetUltimateBeneficialOwnerRequest {
-	r.pSUUserAgent = &pSUUserAgent
-	return r
-}
-
-
-// Use Authorization from given provider. Overrides usage of manually set Authorization header.
-// Auth type describes authorization type to use, like "Bearer" or "Basic"
-func (r ApiAccountsGetUltimateBeneficialOwnerRequest) AuthorizationFromProvider(authType AuthType) ApiAccountsGetUltimateBeneficialOwnerRequest {
-    r.ctx = context.WithValue(r.ctx, authorizationFromProviderCtxKey, authType)
-    return r
-}
-
-// Use Basic Authorization from given provider. Overrides usage of manually set Authorization header.
-func (r ApiAccountsGetUltimateBeneficialOwnerRequest) AuthorizationBasicFromProvider() ApiAccountsGetUltimateBeneficialOwnerRequest {
-    return r.AuthorizationFromProvider(AuthTypeBasic)
-}
-
-// Use Bearer Authorization from given provider. Overrides usage of manually set Authorization header.
-func (r ApiAccountsGetUltimateBeneficialOwnerRequest) AuthorizationBearerFromProvider() ApiAccountsGetUltimateBeneficialOwnerRequest {
-    return r.AuthorizationFromProvider(AuthTypeBearer)
-}
-
-func (r ApiAccountsGetUltimateBeneficialOwnerRequest) Execute() (*GetUltimateBeneficialOwnerOutput, *http.Response, error) {
-	return r.ApiService.AccountsGetUltimateBeneficialOwnerExecute(r)
-}
-
-/*
-AccountsGetUltimateBeneficialOwner Get all Ultimate Beneficial Owners associated to a payment account.
-
-This method enables you get all the Ultimate Beneficial Owners associated to a legal payment account.
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param accountId Account ID
- @return ApiAccountsGetUltimateBeneficialOwnerRequest
-*/
-func (a *AccountsCreateKYCApiService) AccountsGetUltimateBeneficialOwner(ctx context.Context, accountId string) ApiAccountsGetUltimateBeneficialOwnerRequest {
-	return ApiAccountsGetUltimateBeneficialOwnerRequest{
-		ApiService: a,
-		ctx: ctx,
-		accountId: accountId,
-	}
-}
-
-// Execute executes the request
-//  @return GetUltimateBeneficialOwnerOutput
-func (a *AccountsCreateKYCApiService) AccountsGetUltimateBeneficialOwnerExecute(r ApiAccountsGetUltimateBeneficialOwnerRequest) (*GetUltimateBeneficialOwnerOutput, *http.Response, error) {
+//  @return AccountMandatsOutput
+func (a *MoneyInsDirectDebitsApiService) MoneyInsMandateGetExecute(r ApiMoneyInsMandateGetRequest) (*AccountMandatsOutput, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetUltimateBeneficialOwnerOutput
+		localVarReturnValue  *AccountMandatsOutput
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AccountsCreateKYCApiService.AccountsGetUltimateBeneficialOwner")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MoneyInsDirectDebitsApiService.MoneyInsMandateGet")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v2/accounts/{accountId}ultimateBeneficialOwner"
-	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", url.PathEscape(parameterToString(r.accountId, "")), -1)
+	localVarPath := localBasePath + "/v2/moneyins/{accountid}/mandate"
+	localVarPath = strings.Replace(localVarPath, "{"+"accountid"+"}", url.PathEscape(parameterToString(r.accountid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -632,41 +408,37 @@ func (a *AccountsCreateKYCApiService) AccountsGetUltimateBeneficialOwnerExecute(
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiAccountsIndividualPostRequest struct {
+type ApiMoneyInsMandateGetDocumentRequest struct {
 	ctx context.Context
-	ApiService *AccountsCreateKYCApiService
+	ApiService *MoneyInsDirectDebitsApiService
+	accountid string
+	mandateid int64
 	authorization *string
 	pSUIPAddress *string
-	parameters *RegisterIndividualAccountInput
 	pSUAcceptLanguage *string
 	pSUUserAgent *string
 }
 
 // Authorization bearer (OAuth 2)
-func (r ApiAccountsIndividualPostRequest) Authorization(authorization string) ApiAccountsIndividualPostRequest {
+func (r ApiMoneyInsMandateGetDocumentRequest) Authorization(authorization string) ApiMoneyInsMandateGetDocumentRequest {
 	r.authorization = &authorization
 	return r
 }
 
 // IP address of the final client (PSU).
-func (r ApiAccountsIndividualPostRequest) PSUIPAddress(pSUIPAddress string) ApiAccountsIndividualPostRequest {
+func (r ApiMoneyInsMandateGetDocumentRequest) PSUIPAddress(pSUIPAddress string) ApiMoneyInsMandateGetDocumentRequest {
 	r.pSUIPAddress = &pSUIPAddress
 	return r
 }
 
-func (r ApiAccountsIndividualPostRequest) Parameters(parameters RegisterIndividualAccountInput) ApiAccountsIndividualPostRequest {
-	r.parameters = &parameters
-	return r
-}
-
 // Response language accepted by final client (PSU). English by default
-func (r ApiAccountsIndividualPostRequest) PSUAcceptLanguage(pSUAcceptLanguage string) ApiAccountsIndividualPostRequest {
+func (r ApiMoneyInsMandateGetDocumentRequest) PSUAcceptLanguage(pSUAcceptLanguage string) ApiMoneyInsMandateGetDocumentRequest {
 	r.pSUAcceptLanguage = &pSUAcceptLanguage
 	return r
 }
 
 // User-agent of the final client (PSU).
-func (r ApiAccountsIndividualPostRequest) PSUUserAgent(pSUUserAgent string) ApiAccountsIndividualPostRequest {
+func (r ApiMoneyInsMandateGetDocumentRequest) PSUUserAgent(pSUUserAgent string) ApiMoneyInsMandateGetDocumentRequest {
 	r.pSUUserAgent = &pSUUserAgent
 	return r
 }
@@ -674,73 +446,62 @@ func (r ApiAccountsIndividualPostRequest) PSUUserAgent(pSUUserAgent string) ApiA
 
 // Use Authorization from given provider. Overrides usage of manually set Authorization header.
 // Auth type describes authorization type to use, like "Bearer" or "Basic"
-func (r ApiAccountsIndividualPostRequest) AuthorizationFromProvider(authType AuthType) ApiAccountsIndividualPostRequest {
+func (r ApiMoneyInsMandateGetDocumentRequest) AuthorizationFromProvider(authType AuthType) ApiMoneyInsMandateGetDocumentRequest {
     r.ctx = context.WithValue(r.ctx, authorizationFromProviderCtxKey, authType)
     return r
 }
 
 // Use Basic Authorization from given provider. Overrides usage of manually set Authorization header.
-func (r ApiAccountsIndividualPostRequest) AuthorizationBasicFromProvider() ApiAccountsIndividualPostRequest {
+func (r ApiMoneyInsMandateGetDocumentRequest) AuthorizationBasicFromProvider() ApiMoneyInsMandateGetDocumentRequest {
     return r.AuthorizationFromProvider(AuthTypeBasic)
 }
 
 // Use Bearer Authorization from given provider. Overrides usage of manually set Authorization header.
-func (r ApiAccountsIndividualPostRequest) AuthorizationBearerFromProvider() ApiAccountsIndividualPostRequest {
+func (r ApiMoneyInsMandateGetDocumentRequest) AuthorizationBearerFromProvider() ApiMoneyInsMandateGetDocumentRequest {
     return r.AuthorizationFromProvider(AuthTypeBearer)
 }
 
-func (r ApiAccountsIndividualPostRequest) Execute() (*RegisterIndividualAccountOutput, *http.Response, error) {
-	return r.ApiService.AccountsIndividualPostExecute(r)
+func (r ApiMoneyInsMandateGetDocumentRequest) Execute() (*MandateGetDocumentOutput, *http.Response, error) {
+	return r.ApiService.MoneyInsMandateGetDocumentExecute(r)
 }
 
 /*
-AccountsIndividualPost Create a New Individual Account
+MoneyInsMandateGetDocument Get Mandate Document
 
-Lets you to create a individual payment account  
-1. Your Client enter their data on your platform, for example on their profile space.  
-2. Your server calls our Accounts API.  
-3. Lemonway creates the payment account in your environment.  
-4. Your system reads the method response and informs the user.   
-
-We apply our validation rules for different parameters.   
-
-**Check Injection:**      
-* String parameters (email, name and so on) must not contain odd characters.  
-
-**Names (first and last name)**    
-
-* Not made-up names: "name", "nom", "prénom", "prenom", "lastname", "last_name", "last name", "firstname", "first_name", "first name", "name", "test", "unknow"      
-* Names must have at least 2 characters with at least 1 vowel     
-* The first name must not be the same as the last name     
-* Using the same the same character 3 times in a row will cause an error    
-* We might apply other validation rules, for example: in the case VIP (politician)
+Download a mandate document that is registered to one of your payment accounts.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiAccountsIndividualPostRequest
+ @param accountid Account Id
+ @param mandateid Id of the registered SDD Mandate
+ @return ApiMoneyInsMandateGetDocumentRequest
 */
-func (a *AccountsCreateKYCApiService) AccountsIndividualPost(ctx context.Context) ApiAccountsIndividualPostRequest {
-	return ApiAccountsIndividualPostRequest{
+func (a *MoneyInsDirectDebitsApiService) MoneyInsMandateGetDocument(ctx context.Context, accountid string, mandateid int64) ApiMoneyInsMandateGetDocumentRequest {
+	return ApiMoneyInsMandateGetDocumentRequest{
 		ApiService: a,
 		ctx: ctx,
+		accountid: accountid,
+		mandateid: mandateid,
 	}
 }
 
 // Execute executes the request
-//  @return RegisterIndividualAccountOutput
-func (a *AccountsCreateKYCApiService) AccountsIndividualPostExecute(r ApiAccountsIndividualPostRequest) (*RegisterIndividualAccountOutput, *http.Response, error) {
+//  @return MandateGetDocumentOutput
+func (a *MoneyInsDirectDebitsApiService) MoneyInsMandateGetDocumentExecute(r ApiMoneyInsMandateGetDocumentRequest) (*MandateGetDocumentOutput, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
+		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *RegisterIndividualAccountOutput
+		localVarReturnValue  *MandateGetDocumentOutput
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AccountsCreateKYCApiService.AccountsIndividualPost")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MoneyInsDirectDebitsApiService.MoneyInsMandateGetDocument")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v2/accounts/individual"
+	localVarPath := localBasePath + "/v2/moneyins/{accountid}/mandate/{mandateid}/document"
+	localVarPath = strings.Replace(localVarPath, "{"+"accountid"+"}", url.PathEscape(parameterToString(r.accountid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"mandateid"+"}", url.PathEscape(parameterToString(r.mandateid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -774,16 +535,9 @@ func (a *AccountsCreateKYCApiService) AccountsIndividualPostExecute(r ApiAccount
         }
         r.pSUIPAddress = &value
 	}
-	if r.parameters == nil {
-        value, ok := localAdditionalValues["parameters"].(RegisterIndividualAccountInput)
-        if !ok {
-            return localVarReturnValue, nil, reportError("parameters is required and must be specified")
-        }
-        r.parameters = &value
-	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
+	localVarHTTPContentTypes := []string{}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -807,8 +561,6 @@ func (a *AccountsCreateKYCApiService) AccountsIndividualPostExecute(r ApiAccount
 	if r.pSUUserAgent != nil {
 		localVarHeaderParams["PSU-User-Agent"] = parameterToString(*r.pSUUserAgent, "")
 	}
-	// body params
-	localVarPostBody = r.parameters
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -846,56 +598,70 @@ func (a *AccountsCreateKYCApiService) AccountsIndividualPostExecute(r ApiAccount
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiAccountsKycStatusGetRequest struct {
+type ApiMoneyInsSddGetRequest struct {
 	ctx context.Context
-	ApiService *AccountsCreateKYCApiService
-	updateDate *string
+	ApiService *MoneyInsDirectDebitsApiService
 	authorization *string
 	pSUIPAddress *string
+	reference *string
+	updateDate *string
+	updateEndDate *string
 	page *int32
 	limit *int32
 	pSUAcceptLanguage *string
 	pSUUserAgent *string
 }
 
-// UTC Unix timestamp
-func (r ApiAccountsKycStatusGetRequest) UpdateDate(updateDate string) ApiAccountsKycStatusGetRequest {
-	r.updateDate = &updateDate
-	return r
-}
-
 // Authorization bearer (OAuth 2)
-func (r ApiAccountsKycStatusGetRequest) Authorization(authorization string) ApiAccountsKycStatusGetRequest {
+func (r ApiMoneyInsSddGetRequest) Authorization(authorization string) ApiMoneyInsSddGetRequest {
 	r.authorization = &authorization
 	return r
 }
 
 // IP address of the final client (PSU).
-func (r ApiAccountsKycStatusGetRequest) PSUIPAddress(pSUIPAddress string) ApiAccountsKycStatusGetRequest {
+func (r ApiMoneyInsSddGetRequest) PSUIPAddress(pSUIPAddress string) ApiMoneyInsSddGetRequest {
 	r.pSUIPAddress = &pSUIPAddress
 	return r
 }
 
+// Unique ID Generated by your Server
+func (r ApiMoneyInsSddGetRequest) Reference(reference string) ApiMoneyInsSddGetRequest {
+	r.reference = &reference
+	return r
+}
+
+// UTC Unix Timestamp
+func (r ApiMoneyInsSddGetRequest) UpdateDate(updateDate string) ApiMoneyInsSddGetRequest {
+	r.updateDate = &updateDate
+	return r
+}
+
+// End Date UTC Unix Timestamp
+func (r ApiMoneyInsSddGetRequest) UpdateEndDate(updateEndDate string) ApiMoneyInsSddGetRequest {
+	r.updateEndDate = &updateEndDate
+	return r
+}
+
 // Index start from 1, let null to get all
-func (r ApiAccountsKycStatusGetRequest) Page(page int32) ApiAccountsKycStatusGetRequest {
+func (r ApiMoneyInsSddGetRequest) Page(page int32) ApiMoneyInsSddGetRequest {
 	r.page = &page
 	return r
 }
 
 // Default 20, let it null if no pagination
-func (r ApiAccountsKycStatusGetRequest) Limit(limit int32) ApiAccountsKycStatusGetRequest {
+func (r ApiMoneyInsSddGetRequest) Limit(limit int32) ApiMoneyInsSddGetRequest {
 	r.limit = &limit
 	return r
 }
 
 // Response language accepted by final client (PSU). English by default
-func (r ApiAccountsKycStatusGetRequest) PSUAcceptLanguage(pSUAcceptLanguage string) ApiAccountsKycStatusGetRequest {
+func (r ApiMoneyInsSddGetRequest) PSUAcceptLanguage(pSUAcceptLanguage string) ApiMoneyInsSddGetRequest {
 	r.pSUAcceptLanguage = &pSUAcceptLanguage
 	return r
 }
 
 // User-agent of the final client (PSU).
-func (r ApiAccountsKycStatusGetRequest) PSUUserAgent(pSUUserAgent string) ApiAccountsKycStatusGetRequest {
+func (r ApiMoneyInsSddGetRequest) PSUUserAgent(pSUUserAgent string) ApiMoneyInsSddGetRequest {
 	r.pSUUserAgent = &pSUUserAgent
 	return r
 }
@@ -903,57 +669,56 @@ func (r ApiAccountsKycStatusGetRequest) PSUUserAgent(pSUUserAgent string) ApiAcc
 
 // Use Authorization from given provider. Overrides usage of manually set Authorization header.
 // Auth type describes authorization type to use, like "Bearer" or "Basic"
-func (r ApiAccountsKycStatusGetRequest) AuthorizationFromProvider(authType AuthType) ApiAccountsKycStatusGetRequest {
+func (r ApiMoneyInsSddGetRequest) AuthorizationFromProvider(authType AuthType) ApiMoneyInsSddGetRequest {
     r.ctx = context.WithValue(r.ctx, authorizationFromProviderCtxKey, authType)
     return r
 }
 
 // Use Basic Authorization from given provider. Overrides usage of manually set Authorization header.
-func (r ApiAccountsKycStatusGetRequest) AuthorizationBasicFromProvider() ApiAccountsKycStatusGetRequest {
+func (r ApiMoneyInsSddGetRequest) AuthorizationBasicFromProvider() ApiMoneyInsSddGetRequest {
     return r.AuthorizationFromProvider(AuthTypeBasic)
 }
 
 // Use Bearer Authorization from given provider. Overrides usage of manually set Authorization header.
-func (r ApiAccountsKycStatusGetRequest) AuthorizationBearerFromProvider() ApiAccountsKycStatusGetRequest {
+func (r ApiMoneyInsSddGetRequest) AuthorizationBearerFromProvider() ApiMoneyInsSddGetRequest {
     return r.AuthorizationFromProvider(AuthTypeBearer)
 }
 
-func (r ApiAccountsKycStatusGetRequest) Execute() (*KycStatusOutput, *http.Response, error) {
-	return r.ApiService.AccountsKycStatusGetExecute(r)
+func (r ApiMoneyInsSddGetRequest) Execute() (*GetMoneyInSddOutput, *http.Response, error) {
+	return r.ApiService.MoneyInsSddGetExecute(r)
 }
 
 /*
-AccountsKycStatusGet Find a user, document or an IBAN that has been modified since an entry date
+MoneyInsSddGet List of Money-In by SEPA Direct Debit (SDD)
 
-Use to find users, documents, IBAN for which the status has changed since a specified date.  
-**Note:** Returns the same user multiple times in the same request if his status has changed multiple time since a specified date.
+Returns the list of Money-In by SDD which status has changed since the input date.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiAccountsKycStatusGetRequest
+ @return ApiMoneyInsSddGetRequest
 */
-func (a *AccountsCreateKYCApiService) AccountsKycStatusGet(ctx context.Context) ApiAccountsKycStatusGetRequest {
-	return ApiAccountsKycStatusGetRequest{
+func (a *MoneyInsDirectDebitsApiService) MoneyInsSddGet(ctx context.Context) ApiMoneyInsSddGetRequest {
+	return ApiMoneyInsSddGetRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//  @return KycStatusOutput
-func (a *AccountsCreateKYCApiService) AccountsKycStatusGetExecute(r ApiAccountsKycStatusGetRequest) (*KycStatusOutput, *http.Response, error) {
+//  @return GetMoneyInSddOutput
+func (a *MoneyInsDirectDebitsApiService) MoneyInsSddGetExecute(r ApiMoneyInsSddGetRequest) (*GetMoneyInSddOutput, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *KycStatusOutput
+		localVarReturnValue  *GetMoneyInSddOutput
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AccountsCreateKYCApiService.AccountsKycStatusGet")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MoneyInsDirectDebitsApiService.MoneyInsSddGet")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v2/accounts/kycstatus"
+	localVarPath := localBasePath + "/v2/moneyins/sdd"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -973,13 +738,6 @@ func (a *AccountsCreateKYCApiService) AccountsKycStatusGetExecute(r ApiAccountsK
             localAdditionalValues["authorization"] = string(authProviderAuthType)+" "+token
         }
     }
-	if r.updateDate == nil {
-        value, ok := localAdditionalValues["updateDate"].(string)
-        if !ok {
-            return localVarReturnValue, nil, reportError("updateDate is required and must be specified")
-        }
-        r.updateDate = &value
-	}
 	if r.authorization == nil {
         value, ok := localAdditionalValues["authorization"].(string)
         if !ok {
@@ -995,7 +753,15 @@ func (a *AccountsCreateKYCApiService) AccountsKycStatusGetExecute(r ApiAccountsK
         r.pSUIPAddress = &value
 	}
 
-	localVarQueryParams.Add("updateDate", parameterToString(*r.updateDate, ""))
+	if r.reference != nil {
+		localVarQueryParams.Add("reference", parameterToString(*r.reference, ""))
+	}
+	if r.updateDate != nil {
+		localVarQueryParams.Add("updateDate", parameterToString(*r.updateDate, ""))
+	}
+	if r.updateEndDate != nil {
+		localVarQueryParams.Add("updateEndDate", parameterToString(*r.updateEndDate, ""))
+	}
 	if r.page != nil {
 		localVarQueryParams.Add("page", parameterToString(*r.page, ""))
 	}
@@ -1064,41 +830,41 @@ func (a *AccountsCreateKYCApiService) AccountsKycStatusGetExecute(r ApiAccountsK
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiAccountsLegalPostRequest struct {
+type ApiMoneyInsSddInitPostRequest struct {
 	ctx context.Context
-	ApiService *AccountsCreateKYCApiService
+	ApiService *MoneyInsDirectDebitsApiService
 	authorization *string
 	pSUIPAddress *string
-	parameters *RegisterLegalAccountInput
+	parameters *MoneyInSddInitInput
 	pSUAcceptLanguage *string
 	pSUUserAgent *string
 }
 
 // Authorization bearer (OAuth 2)
-func (r ApiAccountsLegalPostRequest) Authorization(authorization string) ApiAccountsLegalPostRequest {
+func (r ApiMoneyInsSddInitPostRequest) Authorization(authorization string) ApiMoneyInsSddInitPostRequest {
 	r.authorization = &authorization
 	return r
 }
 
 // IP address of the final client (PSU).
-func (r ApiAccountsLegalPostRequest) PSUIPAddress(pSUIPAddress string) ApiAccountsLegalPostRequest {
+func (r ApiMoneyInsSddInitPostRequest) PSUIPAddress(pSUIPAddress string) ApiMoneyInsSddInitPostRequest {
 	r.pSUIPAddress = &pSUIPAddress
 	return r
 }
 
-func (r ApiAccountsLegalPostRequest) Parameters(parameters RegisterLegalAccountInput) ApiAccountsLegalPostRequest {
+func (r ApiMoneyInsSddInitPostRequest) Parameters(parameters MoneyInSddInitInput) ApiMoneyInsSddInitPostRequest {
 	r.parameters = &parameters
 	return r
 }
 
 // Response language accepted by final client (PSU). English by default
-func (r ApiAccountsLegalPostRequest) PSUAcceptLanguage(pSUAcceptLanguage string) ApiAccountsLegalPostRequest {
+func (r ApiMoneyInsSddInitPostRequest) PSUAcceptLanguage(pSUAcceptLanguage string) ApiMoneyInsSddInitPostRequest {
 	r.pSUAcceptLanguage = &pSUAcceptLanguage
 	return r
 }
 
 // User-agent of the final client (PSU).
-func (r ApiAccountsLegalPostRequest) PSUUserAgent(pSUUserAgent string) ApiAccountsLegalPostRequest {
+func (r ApiMoneyInsSddInitPostRequest) PSUUserAgent(pSUUserAgent string) ApiMoneyInsSddInitPostRequest {
 	r.pSUUserAgent = &pSUUserAgent
 	return r
 }
@@ -1106,73 +872,71 @@ func (r ApiAccountsLegalPostRequest) PSUUserAgent(pSUUserAgent string) ApiAccoun
 
 // Use Authorization from given provider. Overrides usage of manually set Authorization header.
 // Auth type describes authorization type to use, like "Bearer" or "Basic"
-func (r ApiAccountsLegalPostRequest) AuthorizationFromProvider(authType AuthType) ApiAccountsLegalPostRequest {
+func (r ApiMoneyInsSddInitPostRequest) AuthorizationFromProvider(authType AuthType) ApiMoneyInsSddInitPostRequest {
     r.ctx = context.WithValue(r.ctx, authorizationFromProviderCtxKey, authType)
     return r
 }
 
 // Use Basic Authorization from given provider. Overrides usage of manually set Authorization header.
-func (r ApiAccountsLegalPostRequest) AuthorizationBasicFromProvider() ApiAccountsLegalPostRequest {
+func (r ApiMoneyInsSddInitPostRequest) AuthorizationBasicFromProvider() ApiMoneyInsSddInitPostRequest {
     return r.AuthorizationFromProvider(AuthTypeBasic)
 }
 
 // Use Bearer Authorization from given provider. Overrides usage of manually set Authorization header.
-func (r ApiAccountsLegalPostRequest) AuthorizationBearerFromProvider() ApiAccountsLegalPostRequest {
+func (r ApiMoneyInsSddInitPostRequest) AuthorizationBearerFromProvider() ApiMoneyInsSddInitPostRequest {
     return r.AuthorizationFromProvider(AuthTypeBearer)
 }
 
-func (r ApiAccountsLegalPostRequest) Execute() (*RegisterLegalAccountOutput, *http.Response, error) {
-	return r.ApiService.AccountsLegalPostExecute(r)
+func (r ApiMoneyInsSddInitPostRequest) Execute() (*MoneyInSddInitOutput, *http.Response, error) {
+	return r.ApiService.MoneyInsSddInitPostExecute(r)
 }
 
 /*
-AccountsLegalPost Create a New Legal Account
+MoneyInsSddInitPost Request a SEPA Direct Debit (SDD)
 
-Lets you to create a legal payment account:      
-1. Your client enter their data on your platform, for example on their profile space.   
-2. Your server calls our Accounts API.  
-3. Lemonway creates the payment account in your environment.     
-4. Your system reads the method response and informs the user.    
-
-We apply validation rules for different parameters.   
-
-**Check Injection:**    
-* String parameters (email, name and so on) must not contain odd characters.
-
-**Names (first and last name)**  
-
-* Not made-up names: "name", "nom", "prénom", "prenom", "lastname", "last_name", "last name", "firstname", "first_name", "first name", "name", "test", "unknow"    
-* Names must have at least 2 characters with at least 1 vowel  
-* The first name must not be the same as the last name  
-* Using the same the same character 3 times in a row will cause an error  
-* We might apply other validation rules, for example: in the case VIP (politician)
+SEPA Direct Debit requests are sent to our bank every working day at 10:30am (CET).<br />
+Prequisites:<br />
+1. You allow your client to fill in a mandate, and pre-registers it with Lemonway, by calling POST /moneyins/sdd/mandate<br />
+2. Follow the SignDocumentInit process in order to electronically sign the mandate<br />
+Request the direct debit:<br />
+1. You call POST /moneyins/sdd/init to request a debit<br />
+2. Lemonway sends the request to the bank every working day at 10:30am (CET).<br />
+3. Once the request is sent to the bank, the debit on the client's bank account will happens about 1 working day later. If you indicate a date, the debit will happen on the given date.<br />
+4. When Lemonway receives the payment, the SDD payment will be validated and the client payment account will be credited<br />
+5. You can call GET /moneyins/sdd once a day in order to know which payments have been validated.You can also use our notification functionality.<br />
+**Important: Setting up an SDD with Italian Banks**. This rule **only applies to the first** B2B direct debit request for an Italian IBAN.    
+Thereafter, **all future debits** take place within the **standard 1-2 day** time frame. The mandate validation process for Italian banks  
+takes approximately 14 calendar days from the reception of the first SDD request. Even if you initially specify a debit date, the funds  
+will only be debited 14 days after the request date.  
+**Example:** If you specify that you would like the first Direct Debit to take place on 4th April 2022 and you submit a request before 10:30am (CET)  
+on the 30th March 2022. The direct debit will take place on 18th April 2022.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiAccountsLegalPostRequest
+ @return ApiMoneyInsSddInitPostRequest
 */
-func (a *AccountsCreateKYCApiService) AccountsLegalPost(ctx context.Context) ApiAccountsLegalPostRequest {
-	return ApiAccountsLegalPostRequest{
+func (a *MoneyInsDirectDebitsApiService) MoneyInsSddInitPost(ctx context.Context) ApiMoneyInsSddInitPostRequest {
+	return ApiMoneyInsSddInitPostRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//  @return RegisterLegalAccountOutput
-func (a *AccountsCreateKYCApiService) AccountsLegalPostExecute(r ApiAccountsLegalPostRequest) (*RegisterLegalAccountOutput, *http.Response, error) {
+//  @return MoneyInSddInitOutput
+func (a *MoneyInsDirectDebitsApiService) MoneyInsSddInitPostExecute(r ApiMoneyInsSddInitPostRequest) (*MoneyInSddInitOutput, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *RegisterLegalAccountOutput
+		localVarReturnValue  *MoneyInSddInitOutput
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AccountsCreateKYCApiService.AccountsLegalPost")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MoneyInsDirectDebitsApiService.MoneyInsSddInitPost")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v2/accounts/legal"
+	localVarPath := localBasePath + "/v2/moneyins/sdd/init"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1207,7 +971,7 @@ func (a *AccountsCreateKYCApiService) AccountsLegalPostExecute(r ApiAccountsLega
         r.pSUIPAddress = &value
 	}
 	if r.parameters == nil {
-        value, ok := localAdditionalValues["parameters"].(RegisterLegalAccountInput)
+        value, ok := localAdditionalValues["parameters"].(MoneyInSddInitInput)
         if !ok {
             return localVarReturnValue, nil, reportError("parameters is required and must be specified")
         }
@@ -1278,43 +1042,41 @@ func (a *AccountsCreateKYCApiService) AccountsLegalPostExecute(r ApiAccountsLega
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiAccountsUpdateUltimateBeneficialOwnerRequest struct {
+type ApiMoneyInsSddMandatePostRequest struct {
 	ctx context.Context
-	ApiService *AccountsCreateKYCApiService
-	accountId string
-	ultimateBeneficialOwnerId int64
+	ApiService *MoneyInsDirectDebitsApiService
 	authorization *string
 	pSUIPAddress *string
-	parameters *UpdateUltimateBeneficialOwnerInput
+	parameters *RegisterSddMandateInput
 	pSUAcceptLanguage *string
 	pSUUserAgent *string
 }
 
 // Authorization bearer (OAuth 2)
-func (r ApiAccountsUpdateUltimateBeneficialOwnerRequest) Authorization(authorization string) ApiAccountsUpdateUltimateBeneficialOwnerRequest {
+func (r ApiMoneyInsSddMandatePostRequest) Authorization(authorization string) ApiMoneyInsSddMandatePostRequest {
 	r.authorization = &authorization
 	return r
 }
 
 // IP address of the final client (PSU).
-func (r ApiAccountsUpdateUltimateBeneficialOwnerRequest) PSUIPAddress(pSUIPAddress string) ApiAccountsUpdateUltimateBeneficialOwnerRequest {
+func (r ApiMoneyInsSddMandatePostRequest) PSUIPAddress(pSUIPAddress string) ApiMoneyInsSddMandatePostRequest {
 	r.pSUIPAddress = &pSUIPAddress
 	return r
 }
 
-func (r ApiAccountsUpdateUltimateBeneficialOwnerRequest) Parameters(parameters UpdateUltimateBeneficialOwnerInput) ApiAccountsUpdateUltimateBeneficialOwnerRequest {
+func (r ApiMoneyInsSddMandatePostRequest) Parameters(parameters RegisterSddMandateInput) ApiMoneyInsSddMandatePostRequest {
 	r.parameters = &parameters
 	return r
 }
 
 // Response language accepted by final client (PSU). English by default
-func (r ApiAccountsUpdateUltimateBeneficialOwnerRequest) PSUAcceptLanguage(pSUAcceptLanguage string) ApiAccountsUpdateUltimateBeneficialOwnerRequest {
+func (r ApiMoneyInsSddMandatePostRequest) PSUAcceptLanguage(pSUAcceptLanguage string) ApiMoneyInsSddMandatePostRequest {
 	r.pSUAcceptLanguage = &pSUAcceptLanguage
 	return r
 }
 
 // User-agent of the final client (PSU).
-func (r ApiAccountsUpdateUltimateBeneficialOwnerRequest) PSUUserAgent(pSUUserAgent string) ApiAccountsUpdateUltimateBeneficialOwnerRequest {
+func (r ApiMoneyInsSddMandatePostRequest) PSUUserAgent(pSUUserAgent string) ApiMoneyInsSddMandatePostRequest {
 	r.pSUUserAgent = &pSUUserAgent
 	return r
 }
@@ -1322,62 +1084,56 @@ func (r ApiAccountsUpdateUltimateBeneficialOwnerRequest) PSUUserAgent(pSUUserAge
 
 // Use Authorization from given provider. Overrides usage of manually set Authorization header.
 // Auth type describes authorization type to use, like "Bearer" or "Basic"
-func (r ApiAccountsUpdateUltimateBeneficialOwnerRequest) AuthorizationFromProvider(authType AuthType) ApiAccountsUpdateUltimateBeneficialOwnerRequest {
+func (r ApiMoneyInsSddMandatePostRequest) AuthorizationFromProvider(authType AuthType) ApiMoneyInsSddMandatePostRequest {
     r.ctx = context.WithValue(r.ctx, authorizationFromProviderCtxKey, authType)
     return r
 }
 
 // Use Basic Authorization from given provider. Overrides usage of manually set Authorization header.
-func (r ApiAccountsUpdateUltimateBeneficialOwnerRequest) AuthorizationBasicFromProvider() ApiAccountsUpdateUltimateBeneficialOwnerRequest {
+func (r ApiMoneyInsSddMandatePostRequest) AuthorizationBasicFromProvider() ApiMoneyInsSddMandatePostRequest {
     return r.AuthorizationFromProvider(AuthTypeBasic)
 }
 
 // Use Bearer Authorization from given provider. Overrides usage of manually set Authorization header.
-func (r ApiAccountsUpdateUltimateBeneficialOwnerRequest) AuthorizationBearerFromProvider() ApiAccountsUpdateUltimateBeneficialOwnerRequest {
+func (r ApiMoneyInsSddMandatePostRequest) AuthorizationBearerFromProvider() ApiMoneyInsSddMandatePostRequest {
     return r.AuthorizationFromProvider(AuthTypeBearer)
 }
 
-func (r ApiAccountsUpdateUltimateBeneficialOwnerRequest) Execute() (*UpdateUltimateBeneficialOwnerOutput, *http.Response, error) {
-	return r.ApiService.AccountsUpdateUltimateBeneficialOwnerExecute(r)
+func (r ApiMoneyInsSddMandatePostRequest) Execute() (*RegisterSddMandateOutput, *http.Response, error) {
+	return r.ApiService.MoneyInsSddMandatePostExecute(r)
 }
 
 /*
-AccountsUpdateUltimateBeneficialOwner Update Ultimate Beneficial Owner data
+MoneyInsSddMandatePost Register a SDD Mandate
 
-This method enables you to update information related to an Ultimate Beneficial Owner.
+This method allows you to pre-register a mandate.<br /><ul><li>If you register a mandate with electronic signature, the mandate will be pending. You need to use the [Generate an Electronic Signature of a Document](https://documentation.lemonway.com/reference/accounts_documentssigninitpost) call to sign the mandate. The status will change accordingly.</li><li>If you register a mandate with opt-in signature, the mandate will be automatically validated. Please refer to the Support Team for this option.</li></ul>
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param accountId Account ID
- @param ultimateBeneficialOwnerId UltimateBeneficial Owner ID
- @return ApiAccountsUpdateUltimateBeneficialOwnerRequest
+ @return ApiMoneyInsSddMandatePostRequest
 */
-func (a *AccountsCreateKYCApiService) AccountsUpdateUltimateBeneficialOwner(ctx context.Context, accountId string, ultimateBeneficialOwnerId int64) ApiAccountsUpdateUltimateBeneficialOwnerRequest {
-	return ApiAccountsUpdateUltimateBeneficialOwnerRequest{
+func (a *MoneyInsDirectDebitsApiService) MoneyInsSddMandatePost(ctx context.Context) ApiMoneyInsSddMandatePostRequest {
+	return ApiMoneyInsSddMandatePostRequest{
 		ApiService: a,
 		ctx: ctx,
-		accountId: accountId,
-		ultimateBeneficialOwnerId: ultimateBeneficialOwnerId,
 	}
 }
 
 // Execute executes the request
-//  @return UpdateUltimateBeneficialOwnerOutput
-func (a *AccountsCreateKYCApiService) AccountsUpdateUltimateBeneficialOwnerExecute(r ApiAccountsUpdateUltimateBeneficialOwnerRequest) (*UpdateUltimateBeneficialOwnerOutput, *http.Response, error) {
+//  @return RegisterSddMandateOutput
+func (a *MoneyInsDirectDebitsApiService) MoneyInsSddMandatePostExecute(r ApiMoneyInsSddMandatePostRequest) (*RegisterSddMandateOutput, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *UpdateUltimateBeneficialOwnerOutput
+		localVarReturnValue  *RegisterSddMandateOutput
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AccountsCreateKYCApiService.AccountsUpdateUltimateBeneficialOwner")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MoneyInsDirectDebitsApiService.MoneyInsSddMandatePost")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v2/accounts/{accountId}/ultimateBeneficialOwner/{UltimateBeneficialOwnerId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", url.PathEscape(parameterToString(r.accountId, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"UltimateBeneficialOwnerId"+"}", url.PathEscape(parameterToString(r.ultimateBeneficialOwnerId, "")), -1)
+	localVarPath := localBasePath + "/v2/moneyins/sdd/mandate"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1412,7 +1168,208 @@ func (a *AccountsCreateKYCApiService) AccountsUpdateUltimateBeneficialOwnerExecu
         r.pSUIPAddress = &value
 	}
 	if r.parameters == nil {
-        value, ok := localAdditionalValues["parameters"].(UpdateUltimateBeneficialOwnerInput)
+        value, ok := localAdditionalValues["parameters"].(RegisterSddMandateInput)
+        if !ok {
+            return localVarReturnValue, nil, reportError("parameters is required and must be specified")
+        }
+        r.parameters = &value
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	localVarHeaderParams["Authorization"] = parameterToString(*r.authorization, "")
+	if r.pSUAcceptLanguage != nil {
+		localVarHeaderParams["PSU-Accept-Language"] = parameterToString(*r.pSUAcceptLanguage, "")
+	}
+	localVarHeaderParams["PSU-IP-Address"] = parameterToString(*r.pSUIPAddress, "")
+	if r.pSUUserAgent != nil {
+		localVarHeaderParams["PSU-User-Agent"] = parameterToString(*r.pSUUserAgent, "")
+	}
+	// body params
+	localVarPostBody = r.parameters
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiMoneyInsSddMandateUnregisterPutRequest struct {
+	ctx context.Context
+	ApiService *MoneyInsDirectDebitsApiService
+	mandatid int64
+	authorization *string
+	pSUIPAddress *string
+	parameters *UnregisterSddMandateInput
+	pSUAcceptLanguage *string
+	pSUUserAgent *string
+}
+
+// Authorization bearer (OAuth 2)
+func (r ApiMoneyInsSddMandateUnregisterPutRequest) Authorization(authorization string) ApiMoneyInsSddMandateUnregisterPutRequest {
+	r.authorization = &authorization
+	return r
+}
+
+// IP address of the final client (PSU).
+func (r ApiMoneyInsSddMandateUnregisterPutRequest) PSUIPAddress(pSUIPAddress string) ApiMoneyInsSddMandateUnregisterPutRequest {
+	r.pSUIPAddress = &pSUIPAddress
+	return r
+}
+
+func (r ApiMoneyInsSddMandateUnregisterPutRequest) Parameters(parameters UnregisterSddMandateInput) ApiMoneyInsSddMandateUnregisterPutRequest {
+	r.parameters = &parameters
+	return r
+}
+
+// Response language accepted by final client (PSU). English by default
+func (r ApiMoneyInsSddMandateUnregisterPutRequest) PSUAcceptLanguage(pSUAcceptLanguage string) ApiMoneyInsSddMandateUnregisterPutRequest {
+	r.pSUAcceptLanguage = &pSUAcceptLanguage
+	return r
+}
+
+// User-agent of the final client (PSU).
+func (r ApiMoneyInsSddMandateUnregisterPutRequest) PSUUserAgent(pSUUserAgent string) ApiMoneyInsSddMandateUnregisterPutRequest {
+	r.pSUUserAgent = &pSUUserAgent
+	return r
+}
+
+
+// Use Authorization from given provider. Overrides usage of manually set Authorization header.
+// Auth type describes authorization type to use, like "Bearer" or "Basic"
+func (r ApiMoneyInsSddMandateUnregisterPutRequest) AuthorizationFromProvider(authType AuthType) ApiMoneyInsSddMandateUnregisterPutRequest {
+    r.ctx = context.WithValue(r.ctx, authorizationFromProviderCtxKey, authType)
+    return r
+}
+
+// Use Basic Authorization from given provider. Overrides usage of manually set Authorization header.
+func (r ApiMoneyInsSddMandateUnregisterPutRequest) AuthorizationBasicFromProvider() ApiMoneyInsSddMandateUnregisterPutRequest {
+    return r.AuthorizationFromProvider(AuthTypeBasic)
+}
+
+// Use Bearer Authorization from given provider. Overrides usage of manually set Authorization header.
+func (r ApiMoneyInsSddMandateUnregisterPutRequest) AuthorizationBearerFromProvider() ApiMoneyInsSddMandateUnregisterPutRequest {
+    return r.AuthorizationFromProvider(AuthTypeBearer)
+}
+
+func (r ApiMoneyInsSddMandateUnregisterPutRequest) Execute() (*UnregisterSddMandateOutput, *http.Response, error) {
+	return r.ApiService.MoneyInsSddMandateUnregisterPutExecute(r)
+}
+
+/*
+MoneyInsSddMandateUnregisterPut Deactivate a Mandate
+
+This allows you to deactivate a mandate
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param mandatid
+ @return ApiMoneyInsSddMandateUnregisterPutRequest
+*/
+func (a *MoneyInsDirectDebitsApiService) MoneyInsSddMandateUnregisterPut(ctx context.Context, mandatid int64) ApiMoneyInsSddMandateUnregisterPutRequest {
+	return ApiMoneyInsSddMandateUnregisterPutRequest{
+		ApiService: a,
+		ctx: ctx,
+		mandatid: mandatid,
+	}
+}
+
+// Execute executes the request
+//  @return UnregisterSddMandateOutput
+func (a *MoneyInsDirectDebitsApiService) MoneyInsSddMandateUnregisterPutExecute(r ApiMoneyInsSddMandateUnregisterPutRequest) (*UnregisterSddMandateOutput, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPut
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *UnregisterSddMandateOutput
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MoneyInsDirectDebitsApiService.MoneyInsSddMandateUnregisterPut")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v2/moneyins/sdd/mandate/{mandatid}/unregister"
+	localVarPath = strings.Replace(localVarPath, "{"+"mandatid"+"}", url.PathEscape(parameterToString(r.mandatid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+    localAdditionalValues := make(map[string]interface{})
+
+    if r.ctx != nil {
+        if authProviderAuthType, ok := r.ctx.Value(authorizationFromProviderCtxKey).(AuthType); ok && authProviderAuthType != "" {
+            token, err := a.client.authProvider.GetToken()
+            if err != nil {
+                return localVarReturnValue, nil, &GenericOpenAPIError{
+                    body: nil,
+                    error: err.Error(),
+                    model: localAdditionalValues,
+                }
+            }
+            localAdditionalValues["authorization"] = string(authProviderAuthType)+" "+token
+        }
+    }
+	if r.authorization == nil {
+        value, ok := localAdditionalValues["authorization"].(string)
+        if !ok {
+            return localVarReturnValue, nil, reportError("authorization is required and must be specified")
+        }
+        r.authorization = &value
+	}
+	if r.pSUIPAddress == nil {
+        value, ok := localAdditionalValues["pSUIPAddress"].(string)
+        if !ok {
+            return localVarReturnValue, nil, reportError("pSUIPAddress is required and must be specified")
+        }
+        r.pSUIPAddress = &value
+	}
+	if r.parameters == nil {
+        value, ok := localAdditionalValues["parameters"].(UnregisterSddMandateInput)
         if !ok {
             return localVarReturnValue, nil, reportError("parameters is required and must be specified")
         }

@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **OriginId** | Pointer to **int64** | Money-In - ID responsible for the chargeback | [optional] 
 **BuyNowPayLaterInfo** | Pointer to [**BnplInfo**](BnplInfo.md) |  | [optional] 
 **Id** | Pointer to **int64** | Transaction ID | [optional] 
-**Method** | Pointer to **int32** | Payment Method    0 Card      1 Bank transfer (MoneyIn)       3 Bank transfer (MoneyOut)       4 P2P      13 iDEAL      14 SEPA DirectDebit      15 Cheque      17 Sofort      19 Multibanco      21 MBWAY      23 Pagare        30 BNPL    35 PayPal     ---   **Important:** The following services have been discontinued.      16 Neosurf    18 PFS Physical Card    20 Payshop    22 Polish Instant Transfer     24 MobilePay  25 Paytrail  26 WeChat    27 P24    28 MoneyIn by TPE    29 Trustly | [optional] 
+**Method** | Pointer to **int32** | Payment Method    0 Card      1 Bank transfer (MoneyIn)       3 Bank transfer (MoneyOut)       4 P2P      13 iDEAL      14 SEPA DirectDebit      15 Cheque      19 Multibanco      21 MBWAY      30 BNPL    35 PayPal     ---   **Important:** The following services have been discontinued.      16 Neosurf    17 Sofort    18 PFS Physical Card    20 Payshop    22 Polish Instant Transfer    23 Pagare    24 MobilePay  25 Paytrail  26 WeChat    27 P24    28 MoneyIn by TPE    29 Trustly | [optional] 
 **MethodDetails** | Pointer to **int32** | Payment Method Details  0 Standard  1 Pay By Bank&lt;br/&gt;0 &#x3D; STANDARD.&lt;br/&gt;1 &#x3D; PAY_BY_BANK.&lt;br/&gt; | [optional] 
 **Date** | Pointer to **int32** | Transaction initialization date, UTC Unix timestamp | [optional] 
 **CommissionAmount** | Pointer to **int32** | Your fee  Amounts are given as integer numbers in cents | [optional] 

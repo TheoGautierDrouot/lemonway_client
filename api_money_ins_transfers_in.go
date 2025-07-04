@@ -146,7 +146,11 @@ func (a *MoneyInsTransfersInApiService) MoneyInsBankwireGetExecute(r ApiMoneyIns
         if authProviderAuthType, ok := r.ctx.Value(authorizationFromProviderCtxKey).(AuthType); ok && authProviderAuthType != "" {
             token, err := a.client.authProvider.GetToken()
             if err != nil {
-                return localVarReturnValue, nil, err
+                return localVarReturnValue, nil, &GenericOpenAPIError{
+                    body: nil,
+                    error: err.Error(),
+                    model: localAdditionalValues,
+                }
             }
             localAdditionalValues["authorization"] = string(authProviderAuthType)+" "+token
         }

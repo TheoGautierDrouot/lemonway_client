@@ -11,8 +11,8 @@ Name | Type | Description | Notes
 **CaptureDelayedDays** | Pointer to **int32** | Indicate the number of days of the deferred payment. Between 0 and 6 days to have a guaranteed payment.   Only usable with isPreAuth &#x3D; 0-6 | [optional] 
 **Label** | Pointer to **string** | Indicates the name of the shop on the payment page. | [optional] 
 **CardId** | Pointer to **string** | Indicates the CardId | [optional] 
-**MoneyInNature** | Pointer to **int32** | Indicates the nature of activity for this Money-In:&lt;br/&gt;0 &#x3D; Activite 1.&lt;br/&gt;1 &#x3D; Activite 2.&lt;br/&gt; | [optional] 
-**ThreeDs** | Pointer to [**ThreeDs**](ThreeDs.md) |  | [optional] 
+**MoneyInNature** | Pointer to **int32** | Indicates the nature of activity for this Money-In:&lt;br/&gt;0 &#x3D; Activity 1.&lt;br/&gt;1 &#x3D; Activity 2.&lt;br/&gt; | [optional] 
+**ThreeDS** | Pointer to [**ThreeDS**](ThreeDS.md) |  | [optional] 
 **RiskAnalysis** | Pointer to [**RiskAnalysis**](RiskAnalysis.md) |  | [optional] 
 **RecurringAvgAmount** | Pointer to **int32** | Average amount of future recurring payments to cover recurring payments with variable amounts.    **Note:** Only if the amount is higher than the amount of the first transaction. | [optional] 
 **PaymentPattern** | Pointer to **string** | **Recurring**: If a payment follows a recurring amount or **One_shot**: when there is no future recurring payments. | [optional] 
@@ -21,7 +21,7 @@ Name | Type | Description | Notes
 **TotalAmount** | Pointer to **int32** | Amount to Debit  Amounts are given as integer numbers in cents | [optional] 
 **CommissionAmount** | Pointer to **int32** | Your Fee  Amounts are given as integer numbers in cents | [optional] 
 **Comment** | Pointer to **string** | Comment Regarding the Transaction | [optional] 
-**AutoCommission** | Pointer to **bool** | If true:  1. [amountCom] will be ignored and will be replaced with Lemonway&#39;s fee  2. You will not receive any fee | [optional] 
+**AutoCommission** | Pointer to **bool** | If true:  1. [amountCom] will be ignored and will be replaced with Lemonway&#39;s fee    2. You will not receive any fee | [optional] 
 
 ## Methods
 
@@ -229,22 +229,22 @@ HasMoneyInNature returns a boolean if a field has been set.
 
 ### GetThreeDS
 
-`func (o *MoneyInWebInitInput) GetThreeDS() ThreeDs`
+`func (o *MoneyInWebInitInput) GetThreeDS() ThreeDS`
 
-GetThreeDS returns the ThreeDs field if non-nil, zero value otherwise.
+GetThreeDS returns the ThreeDS field if non-nil, zero value otherwise.
 
 ### GetThreeDSOk
 
-`func (o *MoneyInWebInitInput) GetThreeDSOk() (*ThreeDs, bool)`
+`func (o *MoneyInWebInitInput) GetThreeDSOk() (*ThreeDS, bool)`
 
-GetThreeDSOk returns a tuple with the ThreeDs field if it's non-nil, zero value otherwise
+GetThreeDSOk returns a tuple with the ThreeDS field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetThreeDS
 
-`func (o *MoneyInWebInitInput) SetThreeDS(v ThreeDs)`
+`func (o *MoneyInWebInitInput) SetThreeDS(v ThreeDS)`
 
-SetThreeDS sets ThreeDs field to given value.
+SetThreeDS sets ThreeDS field to given value.
 
 ### HasThreeDS
 

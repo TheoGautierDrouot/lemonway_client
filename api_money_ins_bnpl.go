@@ -86,11 +86,7 @@ func (r ApiMoneyInsCreateBnplPaymentRequest) Execute() (*CreateBnplPaymentOutput
 /*
 MoneyInsCreateBnplPayment Create New Pending Payment
 
-Depending on your activated payment plans this call will let you setup a new payment plan.  
-Typical body parameters include: `paymentPlanId` , `accountId` , `deferredPaymentDate` , and `totalAmount`. 
-Possible DeliveryMode values are: `CollectionOfTheGoodsInTheMerchantStore`, `CollectionInAThirdPartyPoint`, `DeliveryToCustomerAddress`
-Possible PurchaseItem types are: `PhysicalGood`, `Discount`, `ShippingFee`, `DigitalGood`, `ExternalPayment`, `Insurance`
-Possible Civlity types are: `Mr`, `Ms`
+Depending on your activated payment plans this call will let you setup a new payment plan.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiMoneyInsCreateBnplPaymentRequest
@@ -128,7 +124,11 @@ func (a *MoneyInsBNPLApiService) MoneyInsCreateBnplPaymentExecute(r ApiMoneyInsC
         if authProviderAuthType, ok := r.ctx.Value(authorizationFromProviderCtxKey).(AuthType); ok && authProviderAuthType != "" {
             token, err := a.client.authProvider.GetToken()
             if err != nil {
-                return localVarReturnValue, nil, err
+                return localVarReturnValue, nil, &GenericOpenAPIError{
+                    body: nil,
+                    error: err.Error(),
+                    model: localAdditionalValues,
+                }
             }
             localAdditionalValues["authorization"] = string(authProviderAuthType)+" "+token
         }
@@ -317,7 +317,11 @@ func (a *MoneyInsBNPLApiService) MoneyInsGetBnplPaymentPlansExecute(r ApiMoneyIn
         if authProviderAuthType, ok := r.ctx.Value(authorizationFromProviderCtxKey).(AuthType); ok && authProviderAuthType != "" {
             token, err := a.client.authProvider.GetToken()
             if err != nil {
-                return localVarReturnValue, nil, err
+                return localVarReturnValue, nil, &GenericOpenAPIError{
+                    body: nil,
+                    error: err.Error(),
+                    model: localAdditionalValues,
+                }
             }
             localAdditionalValues["authorization"] = string(authProviderAuthType)+" "+token
         }

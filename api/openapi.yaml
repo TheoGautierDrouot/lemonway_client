@@ -313,7 +313,7 @@ paths:
                 accounts:
                 - id: "13"
                   status: 5
-                  date: "1710596004"
+                  date: "1749028528"
               schema:
                 $ref: '#/components/schemas/KycStatusOutput'
           description: OK
@@ -420,12 +420,12 @@ paths:
         \ account.\r\nThe following numbered list corresponds to the payment type\
         \ specified in the response attribute method:  \r\n\r\n0 Card  \r\n1 Bank\
         \ transfer (MoneyIn)   \r\n3 Bank transfer (MoneyOut)   \r\n4 P2P  \r\n13\
-        \ iDEAL  \r\n14 SEPA DirectDebit  \r\n15 Cheque  \r\n17 Sofort  \r\n19 Multibanco\
-        \  \r\n21 MBWAY  \r\n23 Pagare \r\n35 PayPal\r\n\r\n\r\n ---\r\n **Important:**\
-        \ The following services have been discontinued. \r\n \r\n16 Neosurf  \r\n\
-        18 PFS Physical Card  \r\n20 Payshop  \r\n22 Polish Instant Transfer   \r\n\
-        24 MobilePay  \r\n25 Paytrail  \r\n26 WeChat  \r\n27 P24  \r\n28 MoneyIn by\
-        \ TPE  \r\n29 Trustly"
+        \ iDEAL  \r\n14 SEPA DirectDebit  \r\n15 Cheque  \r\n19 Multibanco  \r\n35\
+        \ PayPal\r\n\r\n\r\n ---\r\n **Important:** The following services have been\
+        \ discontinued. \r\n \r\n16 Neosurf  \r\n17 Sofort  \r\n18 PFS Physical Card\
+        \  \r\n20 Payshop  \r\n21 MBWAY  \r\n22 Polish Instant Transfer  \r\n23 Pagare\
+        \   \r\n24 MobilePay  \r\n25 Paytrail  \r\n26 WeChat  \r\n27 P24  \r\n28 MoneyIn\
+        \ by TPE  \r\n29 Trustly"
       operationId: Accounts_TransactionsGet
       parameters:
       - description: Account ID
@@ -521,6 +521,7 @@ paths:
                         country: FRA
                         maskedNumber: "455622"
                         isRegistered: false
+                        holderName: Peter PAN
                       refundAmount: 1500.0
                       bankReference: null
                       ChequeSendingAddress_CorporateName: null
@@ -529,7 +530,7 @@ paths:
                       ChequeSendingAddress_PostCode: null
                       id: 255
                       method: 0
-                      date: 1710596004
+                      date: 1749028528
                       commissionAmount: 200
                       comment: Order number 245776
                       status: 0
@@ -1133,7 +1134,7 @@ paths:
         "500":
           content: {}
           description: InternalServerError
-      summary: Initialize a Deutsche Post POSTIDENT Identification
+      summary: (Deprecated) Initialize a Deutsche Post POSTIDENT Identification
       tags:
       - Accounts | Admin
       x-codegen-request-body-name: parameters
@@ -1459,6 +1460,57 @@ paths:
       summary: Get the Card Associated to a Payment Account
       tags:
       - MoneyIns | Cards
+  /v2/moneyins/bankwire/iban/count:
+    get:
+      description: "This endpoint enables you to retrieve the VIBAN count, the remaining\
+        \ VIBAN count and the max VIBAN thresholds."
+      operationId: MoneyIns_BankwireIbanCountGet
+      parameters:
+      - description: Authorization bearer (OAuth 2)
+        in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+      - description: Response language accepted by final client (PSU). English by
+          default
+        in: header
+        name: PSU-Accept-Language
+        schema:
+          type: string
+      - description: IP address of the final client (PSU).
+        in: header
+        name: PSU-IP-Address
+        required: true
+        schema:
+          type: string
+      - description: User-agent of the final client (PSU).
+        in: header
+        name: PSU-User-Agent
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                activeVibanCount: 100
+                inactiveVibanCount: 100
+                remainingVibanCount: 900
+                maxVibanThreshold: 1000
+                maxVibanPerWalletThreshold: 100
+              schema:
+                $ref: '#/components/schemas/GetVibanCountOutput'
+          description: OK
+        "401":
+          content: {}
+          description: Unauthorized
+        "500":
+          content: {}
+          description: InternalServerError
+      summary: Get VIBANs count
+      tags:
+      - MoneyIns | Virtual IBAN
   /v2/moneyins/{accountid}/mandate:
     get:
       operationId: MoneyIns_MandateGet
@@ -1872,7 +1924,7 @@ paths:
                     ChequeSendingAddress_PostCode: null
                     id: 255
                     method: 0
-                    date: 1710596004
+                    date: 1749028528
                     commissionAmount: 100
                     comment: Order number 2457765AX2
                     status: 0
@@ -1968,7 +2020,7 @@ paths:
                     ChequeSendingAddress_PostCode: null
                     id: 255
                     method: 0
-                    date: 1710596004
+                    date: 1749028528
                     commissionAmount: 100
                     comment: "245"
                     status: 0
@@ -2074,7 +2126,7 @@ paths:
                     ChequeSendingAddress_PostCode: null
                     id: 255
                     method: 0
-                    date: 1710596004
+                    date: 1749028528
                     commissionAmount: 100
                     comment: Order number 2457765AX2
                     status: 0
@@ -2110,7 +2162,8 @@ paths:
           maxLength: 140
           minLength: 0
           type: string
-      - description: Token from wkToken variable
+      - description: Unique ID generated by your server. This ID can be used as a
+          reference for a search field when looking for operation details.
         in: query
         name: transactionMerchantToken
         schema:
@@ -2184,6 +2237,7 @@ paths:
                       maskedNumber: 4972XXXXXXXXXX03
                       type: VISA
                       isRegistered: false
+                      holderName: Peter PAN
                     refundAmount: 0.0
                     bankReference: null
                     ChequeSendingAddress_CorporateName: null
@@ -2192,7 +2246,7 @@ paths:
                     ChequeSendingAddress_PostCode: null
                     id: 255
                     method: 0
-                    date: 1710596004
+                    date: 1749028528
                     commissionAmount: 200
                     comment: Order number 245776
                     status: 0
@@ -2213,6 +2267,7 @@ paths:
                       maskedNumber: 4972XXXXXXXXXX03
                       type: VISA
                       isRegistered: false
+                      holderName: Peter PAN
                     refundAmount: 0.0
                     bankReference: null
                     ChequeSendingAddress_CorporateName: null
@@ -2221,7 +2276,7 @@ paths:
                     ChequeSendingAddress_PostCode: null
                     id: 255
                     method: 0
-                    date: 1710596004
+                    date: 1749028528
                     commissionAmount: 200
                     comment: Order number 245776
                     status: 0
@@ -2249,10 +2304,10 @@ paths:
                     buyNowPayLaterInfo:
                       paymentPlanId: 1
                       type: installments
-                      secondInstallmentPaymentDate: 2024-05-15
+                      secondInstallmentPaymentDate: 2025-08-04
                     id: 259
                     method: 30
-                    date: 1710596004
+                    date: 1749028528
                     commissionAmount: 200
                     comment: Order number 2457790
                     status: 0
@@ -2328,6 +2383,7 @@ paths:
                     maskedNumber: 4972XXXXXXXXXX03
                     type: VISA
                     isRegistered: false
+                    holderName: Peter PAN
                   refundAmount: 0.0
                   bankReference: null
                   ChequeSendingAddress_CorporateName: null
@@ -2336,7 +2392,7 @@ paths:
                   ChequeSendingAddress_PostCode: null
                   id: 255
                   method: 0
-                  date: 1710596004
+                  date: 1749028528
                   commissionAmount: 200
                   comment: order 245
                   status: 0
@@ -2479,7 +2535,7 @@ paths:
                   ChequeSendingAddress_PostCode: null
                   id: 255
                   method: 0
-                  date: 1710596004
+                  date: 1749028528
                   commissionAmount: 200
                   comment: null
                   status: 0
@@ -2606,7 +2662,7 @@ paths:
                   ChequeSendingAddress_PostCode: null
                   id: 255
                   method: 0
-                  date: 1710596004
+                  date: 1749028528
                   commissionAmount: 200
                   comment: Order number 2457765AX2
                   status: 0
@@ -2755,6 +2811,7 @@ paths:
                     country: FRA
                     maskedNumber: "43245"
                     isRegistered: false
+                    holderName: Peter PAN
                   refundAmount: 0.0
                   bankReference: null
                   ChequeSendingAddress_CorporateName: null
@@ -2763,7 +2820,7 @@ paths:
                   ChequeSendingAddress_PostCode: null
                   id: 255
                   method: 0
-                  date: 1710596004
+                  date: 1749028528
                   commissionAmount: 100
                   comment: Order number 2457765AX2
                   status: 0
@@ -2855,7 +2912,7 @@ paths:
                   ChequeSendingAddress_PostCode: null
                   id: 677
                   method: 0
-                  date: 1710596004
+                  date: 1749028528
                   commissionAmount: 200
                   comment: "245"
                   status: 0
@@ -2985,7 +3042,7 @@ paths:
         "500":
           content: {}
           description: InternalServerError
-      summary: Initialize MB WAY Payment
+      summary: (Deprecated) Initialize MB WAY Payment
       tags:
       - MoneyIns | Local Payments
       x-codegen-request-body-name: parameters
@@ -3040,6 +3097,7 @@ paths:
                     authorizationNumber: "218571"
                     maskedNumber: XXXX XXXX XXXX 9845
                     isRegistered: false
+                    holderName: Peter PAN
                   refundAmount: 0.0
                   bankReference: null
                   ChequeSendingAddress_CorporateName: null
@@ -3048,7 +3106,7 @@ paths:
                   ChequeSendingAddress_PostCode: null
                   id: 255
                   method: 0
-                  date: 1710596004
+                  date: 1749028528
                   commissionAmount: 200
                   comment: Order number 2457765AX2
                   status: 0
@@ -3125,6 +3183,7 @@ paths:
                     authorizationNumber: "218571"
                     maskedNumber: XXXX XXXX XXXX 9845
                     isRegistered: false
+                    holderName: Peter PAN
                   refundAmount: 0.0
                   bankReference: null
                   ChequeSendingAddress_CorporateName: null
@@ -3133,7 +3192,7 @@ paths:
                   ChequeSendingAddress_PostCode: null
                   id: 255
                   method: 0
-                  date: 1710596004
+                  date: 1749028528
                   commissionAmount: 200
                   comment: Order number 2457765AX2
                   status: 0
@@ -3212,7 +3271,7 @@ paths:
                   ChequeSendingAddress_PostCode: null
                   id: 677
                   method: 0
-                  date: 1710596004
+                  date: 1749028528
                   commissionAmount: 200
                   comment: "245"
                   status: 0
@@ -3284,7 +3343,7 @@ paths:
         "500":
           content: {}
           description: InternalServerError
-      summary: Initate Pay by PayPal
+      summary: Initiate Pay by PayPal
       tags:
       - MoneyIns | PayPal
       x-codegen-request-body-name: input
@@ -3401,7 +3460,7 @@ paths:
         "500":
           content: {}
           description: InternalServerError
-      summary: Initialize Sofort Payment
+      summary: (Deprecated) Initialize Sofort Payment
       tags:
       - MoneyIns | Local Payments
       x-codegen-request-body-name: parameters
@@ -3553,7 +3612,7 @@ paths:
         "500":
           content: {}
           description: InternalServerError
-      summary: Initialize Payshop Payment
+      summary: (Deprecated) Initialize Payshop Payment
       tags:
       - MoneyIns | Local Payments
       x-codegen-request-body-name: parameters
@@ -3608,7 +3667,7 @@ paths:
         "500":
           content: {}
           description: InternalServerError
-      summary: Initialize Trustly Payment
+      summary: (Deprecated) Initialize Trustly Payment
       tags:
       - MoneyIns | Local Payments
       x-codegen-request-body-name: parameters
@@ -3661,6 +3720,7 @@ paths:
                   id: 255
                   maskedNumber: todo
                   isRegistered: false
+                  holderName: Peter PAN
               schema:
                 $ref: '#/components/schemas/RegisterCardOutput'
           description: OK
@@ -3727,7 +3787,7 @@ paths:
         "500":
           content: {}
           description: InternalServerError
-      summary: Initialize PayTrail Payment (Deprecated)
+      summary: (Deprecated) Initialize PayTrail Payment
       tags:
       - MoneyIns | Local Payments
       x-codegen-request-body-name: parameters
@@ -3783,7 +3843,7 @@ paths:
         "500":
           content: {}
           description: InternalServerError
-      summary: Initialize MobilePay Payment
+      summary: (Deprecated) Initialize MobilePay Payment
       tags:
       - MoneyIns | Local Payments
       x-codegen-request-body-name: parameters
@@ -4027,7 +4087,7 @@ paths:
                   ChequeSendingAddress_PostCode: null
                   id: 677
                   method: 0
-                  date: 1710596004
+                  date: 1749028529
                   commissionAmount: 200
                   comment: Order number 2457765AX2
                   status: 0
@@ -4048,13 +4108,8 @@ paths:
       x-codegen-request-body-name: parameters
   /v2/moneyins/buynowpaylater/init:
     post:
-      description: "Depending on your activated payment plans this call will let you\
-        \ setup a new payment plan.  \r\nTypical body parameters include: `paymentPlanId`\
-        \ , `accountId` , `deferredPaymentDate` , and `totalAmount`. \r\nPossible\
-        \ DeliveryMode values are: `CollectionOfTheGoodsInTheMerchantStore`, `CollectionInAThirdPartyPoint`,\
-        \ `DeliveryToCustomerAddress`\r\nPossible PurchaseItem types are: `PhysicalGood`,\
-        \ `Discount`, `ShippingFee`, `DigitalGood`, `ExternalPayment`, `Insurance`\r\
-        \nPossible Civlity types are: `Mr`, `Ms`"
+      description: Depending on your activated payment plans this call will let you
+        setup a new payment plan.
       operationId: MoneyIns_CreateBnplPayment
       parameters:
       - description: Authorization bearer (OAuth 2)
@@ -4291,6 +4346,7 @@ paths:
                     authorizationNumber: "218571"
                     maskedNumber: XXXX XXXX XXXX 9845
                     isRegistered: false
+                    holderName: Peter PAN
                   refundAmount: 0.0
                   bankReference: null
                   ChequeSendingAddress_CorporateName: null
@@ -4299,7 +4355,7 @@ paths:
                   ChequeSendingAddress_PostCode: null
                   id: 255
                   method: 0
-                  date: 1710596004
+                  date: 1749028529
                   commissionAmount: 200
                   comment: Order number 2457765AX2
                   status: 0
@@ -4464,6 +4520,7 @@ paths:
                       country: FRA
                       maskedNumber: "43245"
                       isRegistered: false
+                      holderName: Peter PAN
                     refundAmount: 0.0
                     bankReference: null
                     ChequeSendingAddress_CorporateName: null
@@ -4472,7 +4529,7 @@ paths:
                     ChequeSendingAddress_PostCode: null
                     id: 255
                     method: 0
-                    date: 1710596004
+                    date: 1749028529
                     commissionAmount: 200
                     comment: Order 245
                     status: 16
@@ -4744,7 +4801,7 @@ paths:
       - MoneyOuts
   /v2/moneyouts:
     get:
-      description: Use this method to get and check all Money-Out information.
+      description: Use this call to get and check all Money-Out information.
       operationId: MoneyOuts_MoneyOutGet
       parameters:
       - description: Money-Out ID
@@ -4815,7 +4872,7 @@ paths:
                     originId: 0
                     id: 255
                     method: 0
-                    date: 1710596004
+                    date: 1749028529
                     commissionAmount: 300
                     comment: Order number 255
                     status: 3
@@ -4835,7 +4892,7 @@ paths:
       - MoneyOuts
     post:
       description: "How does it work?\r\nSelect an IBAN if multiple IBAN exist for\
-        \ the Wallet. Select an amount, not greater than the balance of the wallet.\
+        \ the wallet. Select an amount, not greater than the balance of the wallet.\
         \ Call the moneout method, and the system performs the fund transfer to the\
         \ IBAN if everything is clear, or returns an error message.\r\n<ul><li>The\
         \ payment account is debited immediately and the money is then received by\
@@ -4845,11 +4902,10 @@ paths:
         \ bank transfer message so your customer will see it on the bank statement.</li><li><ul><li>The\
         \ full message will be in the following format \"XXXX-YYYY ZZZZ\", where :\
         \ </li><li>XXXX is the name of your environment</li><li>YYYY is the ID of\
-        \ the Money-Out operation as you see it in the backoffice</li><li>ZZZZ is\
-        \ your comment.</li></ul></li><li>The full message cannot be longer than 35\
-        \ characters (if longer, it will be cut), and only alphanumeric characters\
-        \ will be allowed(other characters will be replaced by spaces before it's\
-        \ sent to the bank).</li></ul>"
+        \ the Money-Out operation as you see it in the Dashboard</li><li>ZZZZ is your\
+        \ comment.</li></ul></li><li>The full message cannot be longer than 35 characters\
+        \ (if longer, it will be cut), and only alphanumeric characters will be allowed(other\
+        \ characters will be replaced by spaces before it's sent to the bank).</li></ul>"
       operationId: MoneyOuts_MoneyOutPost
       parameters:
       - description: Authorization bearer (OAuth 2)
@@ -4894,7 +4950,7 @@ paths:
                   originId: 0
                   id: 255
                   method: 0
-                  date: 1710596004
+                  date: 1749028529
                   commissionAmount: 100
                   comment: Order number 2457765AX2
                   status: 0
@@ -4915,7 +4971,7 @@ paths:
       x-codegen-request-body-name: parameters
   /v2/moneyouts/{transactionid}/cancel:
     put:
-      description: The cancel method lets you cancel a Money-Out/SDD.
+      description: The cancel call lets you cancel a Money-Out/SDD.
       operationId: MoneyOuts_CancelPut
       parameters:
       - in: path
@@ -4965,7 +5021,7 @@ paths:
                   originId: 0
                   id: 255
                   method: 0
-                  date: 1710596004
+                  date: 1749028529
                   commissionAmount: 300
                   comment: Order number 255
                   status: 0
@@ -4988,7 +5044,7 @@ paths:
     put:
       description: The <b>UnregisterIBAN</b> method enables you to disable an IBAN
         from a Payment Account. As a reminder a bank account number (IBAN) is needed
-        to process money-out. An IBAN is not needed to perform MONEY-IN on a Payment
+        to process Money-Out. An IBAN is not needed to perform Money-In on a Payment
         Account or Peer to Peer transfers between Payments Accounts.
       operationId: MoneyOuts_IbanUnregisterPut
       parameters:
@@ -5064,10 +5120,9 @@ paths:
         \ account of your Clients, you need to register their bank account details.\
         \ This method lets our system to link an IBAN to a payment account.  \r\n\
         - Bank account details are only needed for Money-Outs, not for Money-Ins or\
-        \ P2P.  \r\n- By default, you can register multiple bank accounts per payment\
-        \ account.  \r\nWhen you link a new bank account (IBAN format or other ones),\
-        \ the previous details are still active.  \r\nUse [IbanUnregisterPut](https://documentation.lemonway.com/reference/moneyouts_ibanunregisterput)\
-        \ method to deactivate a bank account from a payment account.  \r\nIf you\
+        \ P2P.  \r\n- When you link a new bank account (IBAN format or other ones),\
+        \ the previous details are still active.  \r\n- Use [IbanUnregisterPut](https://documentation.lemonway.com/reference/moneyouts_ibanunregisterput)\
+        \ call to deactivate a bank account from a payment account.  \r\n- If you\
         \ wish to use only one bank account per payment account, please contact support.\
         \  \r\n- An integrated algorithm will validate your IBAN."
       operationId: MoneyOuts_IbanPost
@@ -5126,14 +5181,12 @@ paths:
       description: "You are required to register your client's bank account details\
         \ in order to send Money-Out from a Lemonway payment account.  \r\nWith this\
         \ method, our system links other bank formats to a payment account.  \r\n\r\
-        \n**Important:** If your client bank account details are in IBAN format, use:\
-        \ [IbanPost](https://documentation.lemonway.com/reference/moneyouts_ibanextendedpost).\
-        \  \r\n\r\n- Client bank account details are **only** required for money-outs.\
-        \  \r\n- By default, you can register multiple bank accounts per payment account.\
-        \  \r\nWhen you link a new bank account (IBAN format or other ones), the previous\
-        \ ones are still active.  \r\nPlease use [IbanUnregisterPut](https://documentation.lemonway.com/reference/moneyouts_ibanunregisterput)\
-        \ method to deactivate a bank account from a payment account. \r\nIf you wish\
-        \ to use only one bank account per payment account, please contact support.\
+        \n**Important:** If your client bank account details are in IBAN format this\
+        \ call.  \r\n\r\n- Client bank account details are **only** required for money-outs.\
+        \  \r\n- When you link a new bank account (IBAN format or other ones), the\
+        \ previous ones are still active.  \r\n- Please use [IbanUnregisterPut](https://documentation.lemonway.com/reference/moneyouts_ibanunregisterput)\
+        \ method to deactivate a bank account from a payment account. \r\n- If you\
+        \ wish to use only one bank account per payment account, please contact support.\
         \  \r\n            \r\nDepending on bank country code selected or when a USD\
         \ environment is concerned, 3 fields may be required:  \r\n- bankBranchRoutingCode\
         \  \r\n- bankName  \r\n- bankBranchAddress"
@@ -5274,7 +5327,7 @@ paths:
                     feeReference: 2365
                     id: 255
                     method: 0
-                    date: 1710596004
+                    date: 1749028529
                     commissionAmount: 100
                     comment: Order number 2457765AX2
                     status: 0
@@ -5293,16 +5346,16 @@ paths:
       tags:
       - P2Ps
     post:
-      description: "This method debits Wallet A and credits Wallet B. Payment accounts\
+      description: "This call debits Wallet A and credits Wallet B. Payment accounts\
         \ are internal to Lemonway. You can schedule this payment if you do not want\
         \ the payment to occure immediately.\r\nThe following list corresponds to\
         \ the payment type specified in the response attribute called:    \r\n  \r\
         \n0 Card  \r\n1 Bank transfert (Money-In)  \r\n3 Bank transfert (Money-Out)\
-        \  \r\n4 P2P  \r\n13 IDEAL  \r\n14 DirectDebit  \r\n15 Cheque  \r\n16 Neosurf\
-        \  \r\n17 SoFort  \r\n18 PFS Physical Card  \r\n19 Multibanco  \r\n20 Payshop\
-        \  \r\n21 MB WAY  \r\n22 Polish Instant Transfer  \r\n23 PAGARE  \r\n24 MobilePay\
-        \  \r\n25 PayTrail  \r\n26 WeChat (via PayTend)  \r\n27 P24   \r\n28 MoneyIn\
-        \ by TPE   \r\n29 Trustly  \r\n35 PayPal"
+        \  \r\n4 P2P  \r\n13 IDEAL  \r\n14 DirectDebit  \r\n15 Cheque   \r\n19 Multibanco\
+        \  \r\n20 Payshop  \r\n21 MB WAY    \r\n35 PayPal  \r\n**Important:** The\
+        \ following services have been discontinued: 16 Neosurf, 17 SoFort, 18 PFS\
+        \ Physical Card, 20 Payshop, 22 Polish Instant Transfer, 23 PAGARE, 24 MobilePay,26\
+        \ WeChat (via PayTend),28 MoneyIn by TPE, 29 Trustly."
       operationId: P2Ps_P2pPost
       parameters:
       - description: Authorization bearer (OAuth 2)
@@ -5348,7 +5401,7 @@ paths:
                   feeReference: 0
                   id: 255
                   method: 0
-                  date: 1710596004
+                  date: 1749028529
                   commissionAmount: 100
                   comment: Order number 2457765AX2
                   status: 0
@@ -5380,9 +5433,8 @@ paths:
         \n- It is possible to cumulate refunds until the total amount is refunded.\r\
         \n\r\n**Card Payments:**\r\n\r\n- Card payment refunds are not available from\
         \ 22:00 and 03:00 (Central European Time - UTC/GMT+1 ).\r\n- Refunds can only\
-        \ be made upto 12 months after the initial payment. \r\n\r\n**Sofort:** Refunds\
-        \ are only available upto **3 months** after the initial payment.  \r\n**iDEAL:**\
-        \ Refunds are only available upto **99 days** after the initial payment."
+        \ be made upto 12 months after the initial payment. \r\n \r\n**iDEAL:** Refunds\
+        \ are only available upto **99 days** after the initial payment."
       operationId: Refunds_RefundPut
       parameters:
       - in: path
@@ -5433,7 +5485,7 @@ paths:
                   originId: 0
                   id: 255
                   method: 0
-                  date: 1710596004
+                  date: 1749028529
                   commissionAmount: 100
                   comment: null
                   executionDate: 0
@@ -5503,7 +5555,7 @@ paths:
                   originId: 0
                   id: 255
                   method: 0
-                  date: 1710596004
+                  date: 1749028529
                   commissionAmount: 100
                   comment: null
                   executionDate: 0
@@ -5580,7 +5632,7 @@ paths:
                     originId: 90
                     id: 255
                     method: 0
-                    date: 1710596004
+                    date: 1749028529
                     commissionAmount: 1000
                     comment: chargeback
                     status: 0
@@ -6762,6 +6814,7 @@ components:
               receiverAccountId: receiverAccountId
               refundAmount: 1.4658129805029452
               method: 2
+              substatus: substatus
               childTransactions:
               - date: 1
                 reference: reference
@@ -6807,6 +6860,7 @@ components:
               card:
                 country: country
                 maskedNumber: maskedNumber
+                holderName: holderName
                 authorizationNumber: authorizationNumber
                 is3DS: true
                 expiration: expiration
@@ -6890,6 +6944,7 @@ components:
               receiverAccountId: receiverAccountId
               refundAmount: 1.4658129805029452
               method: 2
+              substatus: substatus
               childTransactions:
               - date: 1
                 reference: reference
@@ -6935,6 +6990,7 @@ components:
               card:
                 country: country
                 maskedNumber: maskedNumber
+                holderName: holderName
                 authorizationNumber: authorizationNumber
                 is3DS: true
                 expiration: expiration
@@ -7034,6 +7090,7 @@ components:
             receiverAccountId: receiverAccountId
             refundAmount: 1.4658129805029452
             method: 2
+            substatus: substatus
             childTransactions:
             - date: 1
               reference: reference
@@ -7079,6 +7136,7 @@ components:
             card:
               country: country
               maskedNumber: maskedNumber
+              holderName: holderName
               authorizationNumber: authorizationNumber
               is3DS: true
               expiration: expiration
@@ -7162,6 +7220,7 @@ components:
             receiverAccountId: receiverAccountId
             refundAmount: 1.4658129805029452
             method: 2
+            substatus: substatus
             childTransactions:
             - date: 1
               reference: reference
@@ -7207,6 +7266,7 @@ components:
             card:
               country: country
               maskedNumber: maskedNumber
+              holderName: holderName
               authorizationNumber: authorizationNumber
               is3DS: true
               expiration: expiration
@@ -7298,6 +7358,7 @@ components:
           receiverAccountId: receiverAccountId
           refundAmount: 1.4658129805029452
           method: 2
+          substatus: substatus
           childTransactions:
           - date: 1
             reference: reference
@@ -7343,6 +7404,7 @@ components:
           card:
             country: country
             maskedNumber: maskedNumber
+            holderName: holderName
             authorizationNumber: authorizationNumber
             is3DS: true
             expiration: expiration
@@ -7435,6 +7497,7 @@ components:
         receiverAccountId: receiverAccountId
         refundAmount: 1.4658129805029452
         method: 2
+        substatus: substatus
         childTransactions:
         - date: 1
           reference: reference
@@ -7480,6 +7543,7 @@ components:
         card:
           country: country
           maskedNumber: maskedNumber
+          holderName: holderName
           authorizationNumber: authorizationNumber
           is3DS: true
           expiration: expiration
@@ -7539,12 +7603,12 @@ components:
         method:
           description: "Payment Method  \r\n0 Card    \r\n1 Bank transfer (MoneyIn)\
             \     \r\n3 Bank transfer (MoneyOut)     \r\n4 P2P    \r\n13 iDEAL   \
-            \ \r\n14 SEPA DirectDebit    \r\n15 Cheque    \r\n17 Sofort    \r\n19\
-            \ Multibanco    \r\n21 MBWAY    \r\n23 Pagare      \r\n30 BNPL  \r\n35\
-            \ PayPal\r\n\r\n ---\r\n **Important:** The following services have been\
-            \ discontinued. \r\n \r\n16 Neosurf  \r\n18 PFS Physical Card  \r\n20\
-            \ Payshop  \r\n22 Polish Instant Transfer   \r\n24 MobilePay\r\n25 Paytrail\r\
-            \n26 WeChat  \r\n27 P24  \r\n28 MoneyIn by TPE  \r\n29 Trustly"
+            \ \r\n14 SEPA DirectDebit    \r\n15 Cheque    \r\n19 Multibanco    \r\n\
+            21 MBWAY    \r\n30 BNPL  \r\n35 PayPal\r\n\r\n ---\r\n **Important:**\
+            \ The following services have been discontinued. \r\n \r\n16 Neosurf \
+            \ \r\n17 Sofort  \r\n18 PFS Physical Card  \r\n20 Payshop  \r\n22 Polish\
+            \ Instant Transfer  \r\n23 Pagare  \r\n24 MobilePay\r\n25 Paytrail\r\n\
+            26 WeChat  \r\n27 P24  \r\n28 MoneyIn by TPE  \r\n29 Trustly"
           format: int32
           type: integer
         methodDetails:
@@ -7567,13 +7631,12 @@ components:
           description: Comment
           type: string
         status:
-          description: "**Money-In and Money-Out**   \r\n  \r\n0: Success  \r\n3:\
-            \ Lemonway Error  \r\n4: Pending  \r\n6: PSP error  \r\n7: Cancelled \
-            \ \r\n16: Validation pending  \r\n\r\n**Important:**  For /v2/moneyins/{transactionid}/validate`\
+          description: "**Money-In**   \r\n  \r\n0: Success  \r\n3: Lemonway Error\
+            \  \r\n4: Pending  \r\n6: PSP error  \r\n7: Cancelled  \r\n16: Validation\
+            \ pending  \r\n\r\n**Money-Out**  \r\n\r\n**Important:**  For /v2/moneyins/{transactionid}/validate`\
             \ use the status codes:  \r\n\r\n0: Waiting for finalization    \r\n3:\
-            \ Success    \r\n4: Lemonway Error    \r\n6: PSP Error  \r\n7: Cancelled\
-            \  \r\n16: Validation Pending\r\n            \r\n**P2P**\r\n\r\n0: Pending\
-            \  \r\n3: Success"
+            \ Success    \r\n4: Lemonway Error    \r\n            \r\n**P2P**\r\n\r\
+            \n0: Pending  \r\n3: Success"
           format: int32
           type: integer
         executionDate:
@@ -7588,6 +7651,9 @@ components:
         remainingAmount:
           format: int32
           type: integer
+        substatus:
+          description: Is Payment token consumed?
+          type: string
         authorization:
           $ref: '#/components/schemas/TransactionCapturedAuthorization'
         childTransactions:
@@ -7653,12 +7719,12 @@ components:
         method:
           description: "Payment Method  \r\n0 Card    \r\n1 Bank transfer (MoneyIn)\
             \     \r\n3 Bank transfer (MoneyOut)     \r\n4 P2P    \r\n13 iDEAL   \
-            \ \r\n14 SEPA DirectDebit    \r\n15 Cheque    \r\n17 Sofort    \r\n19\
-            \ Multibanco    \r\n21 MBWAY    \r\n23 Pagare      \r\n30 BNPL  \r\n35\
-            \ PayPal\r\n\r\n ---\r\n **Important:** The following services have been\
-            \ discontinued. \r\n \r\n16 Neosurf  \r\n18 PFS Physical Card  \r\n20\
-            \ Payshop  \r\n22 Polish Instant Transfer   \r\n24 MobilePay\r\n25 Paytrail\r\
-            \n26 WeChat  \r\n27 P24  \r\n28 MoneyIn by TPE  \r\n29 Trustly"
+            \ \r\n14 SEPA DirectDebit    \r\n15 Cheque    \r\n19 Multibanco    \r\n\
+            21 MBWAY    \r\n30 BNPL  \r\n35 PayPal\r\n\r\n ---\r\n **Important:**\
+            \ The following services have been discontinued. \r\n \r\n16 Neosurf \
+            \ \r\n17 Sofort  \r\n18 PFS Physical Card  \r\n20 Payshop  \r\n22 Polish\
+            \ Instant Transfer  \r\n23 Pagare  \r\n24 MobilePay\r\n25 Paytrail\r\n\
+            26 WeChat  \r\n27 P24  \r\n28 MoneyIn by TPE  \r\n29 Trustly"
           format: int32
           type: integer
         methodDetails:
@@ -7681,13 +7747,12 @@ components:
           description: Comment
           type: string
         status:
-          description: "**Money-In and Money-Out**   \r\n  \r\n0: Success  \r\n3:\
-            \ Lemonway Error  \r\n4: Pending  \r\n6: PSP error  \r\n7: Cancelled \
-            \ \r\n16: Validation pending  \r\n\r\n**Important:**  For /v2/moneyins/{transactionid}/validate`\
+          description: "**Money-In**   \r\n  \r\n0: Success  \r\n3: Lemonway Error\
+            \  \r\n4: Pending  \r\n6: PSP error  \r\n7: Cancelled  \r\n16: Validation\
+            \ pending  \r\n\r\n**Money-Out**  \r\n\r\n**Important:**  For /v2/moneyins/{transactionid}/validate`\
             \ use the status codes:  \r\n\r\n0: Waiting for finalization    \r\n3:\
-            \ Success    \r\n4: Lemonway Error    \r\n6: PSP Error  \r\n7: Cancelled\
-            \  \r\n16: Validation Pending\r\n            \r\n**P2P**\r\n\r\n0: Pending\
-            \  \r\n3: Success"
+            \ Success    \r\n4: Lemonway Error    \r\n            \r\n**P2P**\r\n\r\
+            \n0: Pending  \r\n3: Success"
           format: int32
           type: integer
         executionDate:
@@ -7759,12 +7824,12 @@ components:
         method:
           description: "Payment Method  \r\n0 Card    \r\n1 Bank transfer (MoneyIn)\
             \     \r\n3 Bank transfer (MoneyOut)     \r\n4 P2P    \r\n13 iDEAL   \
-            \ \r\n14 SEPA DirectDebit    \r\n15 Cheque    \r\n17 Sofort    \r\n19\
-            \ Multibanco    \r\n21 MBWAY    \r\n23 Pagare      \r\n30 BNPL  \r\n35\
-            \ PayPal\r\n\r\n ---\r\n **Important:** The following services have been\
-            \ discontinued. \r\n \r\n16 Neosurf  \r\n18 PFS Physical Card  \r\n20\
-            \ Payshop  \r\n22 Polish Instant Transfer   \r\n24 MobilePay\r\n25 Paytrail\r\
-            \n26 WeChat  \r\n27 P24  \r\n28 MoneyIn by TPE  \r\n29 Trustly"
+            \ \r\n14 SEPA DirectDebit    \r\n15 Cheque    \r\n19 Multibanco    \r\n\
+            21 MBWAY    \r\n30 BNPL  \r\n35 PayPal\r\n\r\n ---\r\n **Important:**\
+            \ The following services have been discontinued. \r\n \r\n16 Neosurf \
+            \ \r\n17 Sofort  \r\n18 PFS Physical Card  \r\n20 Payshop  \r\n22 Polish\
+            \ Instant Transfer  \r\n23 Pagare  \r\n24 MobilePay\r\n25 Paytrail\r\n\
+            26 WeChat  \r\n27 P24  \r\n28 MoneyIn by TPE  \r\n29 Trustly"
           format: int32
           type: integer
         methodDetails:
@@ -7787,13 +7852,12 @@ components:
           description: Comment
           type: string
         status:
-          description: "**Money-In and Money-Out**   \r\n  \r\n0: Success  \r\n3:\
-            \ Lemonway Error  \r\n4: Pending  \r\n6: PSP error  \r\n7: Cancelled \
-            \ \r\n16: Validation pending  \r\n\r\n**Important:**  For /v2/moneyins/{transactionid}/validate`\
+          description: "**Money-In**   \r\n  \r\n0: Success  \r\n3: Lemonway Error\
+            \  \r\n4: Pending  \r\n6: PSP error  \r\n7: Cancelled  \r\n16: Validation\
+            \ pending  \r\n\r\n**Money-Out**  \r\n\r\n**Important:**  For /v2/moneyins/{transactionid}/validate`\
             \ use the status codes:  \r\n\r\n0: Waiting for finalization    \r\n3:\
-            \ Success    \r\n4: Lemonway Error    \r\n6: PSP Error  \r\n7: Cancelled\
-            \  \r\n16: Validation Pending\r\n            \r\n**P2P**\r\n\r\n0: Pending\
-            \  \r\n3: Success"
+            \ Success    \r\n4: Lemonway Error    \r\n            \r\n**P2P**\r\n\r\
+            \n0: Pending  \r\n3: Success"
           format: int32
           type: integer
         executionDate:
@@ -7810,6 +7874,7 @@ components:
       example:
         country: country
         maskedNumber: maskedNumber
+        holderName: holderName
         authorizationNumber: authorizationNumber
         is3DS: true
         expiration: expiration
@@ -7842,6 +7907,9 @@ components:
         isRegistered:
           description: Card is registered
           type: boolean
+        holderName:
+          description: Card's holder name
+          type: string
       type: object
     ThreeDs:
       example:
@@ -9133,6 +9201,7 @@ components:
         card:
           country: country
           maskedNumber: maskedNumber
+          holderName: holderName
           authorizationNumber: authorizationNumber
           is3DS: true
           expiration: expiration
@@ -9150,6 +9219,7 @@ components:
         cards:
         - country: country
           maskedNumber: maskedNumber
+          holderName: holderName
           authorizationNumber: authorizationNumber
           is3DS: true
           expiration: expiration
@@ -9158,6 +9228,7 @@ components:
           type: type
         - country: country
           maskedNumber: maskedNumber
+          holderName: holderName
           authorizationNumber: authorizationNumber
           is3DS: true
           expiration: expiration
@@ -9176,6 +9247,37 @@ components:
           items:
             $ref: '#/components/schemas/Card'
           type: array
+        error:
+          $ref: '#/components/schemas/Error'
+      type: object
+    GetVibanCountOutput:
+      example:
+        activeVibanCount: 0
+        remainingVibanCount: 1
+        inactiveVibanCount: 6
+        error:
+          code: 2
+          message: message
+          psp:
+            message: message
+        maxVibanThreshold: 5
+        maxVibanPerWalletThreshold: 5
+      properties:
+        activeVibanCount:
+          format: int32
+          type: integer
+        inactiveVibanCount:
+          format: int32
+          type: integer
+        remainingVibanCount:
+          format: int32
+          type: integer
+        maxVibanThreshold:
+          format: int32
+          type: integer
+        maxVibanPerWalletThreshold:
+          format: int32
+          type: integer
         error:
           $ref: '#/components/schemas/Error'
       type: object
@@ -9569,6 +9671,7 @@ components:
             receiverAccountId: receiverAccountId
             refundAmount: 6.027456183070403
             method: 5
+            substatus: substatus
             methodDetails: 5
             PSP:
               message: message
@@ -9585,6 +9688,7 @@ components:
             card:
               country: country
               maskedNumber: maskedNumber
+              holderName: holderName
               authorizationNumber: authorizationNumber
               is3DS: true
               expiration: expiration
@@ -9613,6 +9717,7 @@ components:
             receiverAccountId: receiverAccountId
             refundAmount: 6.027456183070403
             method: 5
+            substatus: substatus
             methodDetails: 5
             PSP:
               message: message
@@ -9629,6 +9734,7 @@ components:
             card:
               country: country
               maskedNumber: maskedNumber
+              holderName: holderName
               authorizationNumber: authorizationNumber
               is3DS: true
               expiration: expiration
@@ -9673,6 +9779,7 @@ components:
           receiverAccountId: receiverAccountId
           refundAmount: 6.027456183070403
           method: 5
+          substatus: substatus
           methodDetails: 5
           PSP:
             message: message
@@ -9689,6 +9796,7 @@ components:
           card:
             country: country
             maskedNumber: maskedNumber
+            holderName: holderName
             authorizationNumber: authorizationNumber
             is3DS: true
             expiration: expiration
@@ -9717,6 +9825,7 @@ components:
           receiverAccountId: receiverAccountId
           refundAmount: 6.027456183070403
           method: 5
+          substatus: substatus
           methodDetails: 5
           PSP:
             message: message
@@ -9733,6 +9842,7 @@ components:
           card:
             country: country
             maskedNumber: maskedNumber
+            holderName: holderName
             authorizationNumber: authorizationNumber
             is3DS: true
             expiration: expiration
@@ -9769,6 +9879,7 @@ components:
         receiverAccountId: receiverAccountId
         refundAmount: 6.027456183070403
         method: 5
+        substatus: substatus
         methodDetails: 5
         PSP:
           message: message
@@ -9785,6 +9896,7 @@ components:
         card:
           country: country
           maskedNumber: maskedNumber
+          holderName: holderName
           authorizationNumber: authorizationNumber
           is3DS: true
           expiration: expiration
@@ -9844,12 +9956,12 @@ components:
         method:
           description: "Payment Method  \r\n0 Card    \r\n1 Bank transfer (MoneyIn)\
             \     \r\n3 Bank transfer (MoneyOut)     \r\n4 P2P    \r\n13 iDEAL   \
-            \ \r\n14 SEPA DirectDebit    \r\n15 Cheque    \r\n17 Sofort    \r\n19\
-            \ Multibanco    \r\n21 MBWAY    \r\n23 Pagare      \r\n30 BNPL  \r\n35\
-            \ PayPal\r\n\r\n ---\r\n **Important:** The following services have been\
-            \ discontinued. \r\n \r\n16 Neosurf  \r\n18 PFS Physical Card  \r\n20\
-            \ Payshop  \r\n22 Polish Instant Transfer   \r\n24 MobilePay\r\n25 Paytrail\r\
-            \n26 WeChat  \r\n27 P24  \r\n28 MoneyIn by TPE  \r\n29 Trustly"
+            \ \r\n14 SEPA DirectDebit    \r\n15 Cheque    \r\n19 Multibanco    \r\n\
+            21 MBWAY    \r\n30 BNPL  \r\n35 PayPal\r\n\r\n ---\r\n **Important:**\
+            \ The following services have been discontinued. \r\n \r\n16 Neosurf \
+            \ \r\n17 Sofort  \r\n18 PFS Physical Card  \r\n20 Payshop  \r\n22 Polish\
+            \ Instant Transfer  \r\n23 Pagare  \r\n24 MobilePay\r\n25 Paytrail\r\n\
+            26 WeChat  \r\n27 P24  \r\n28 MoneyIn by TPE  \r\n29 Trustly"
           format: int32
           type: integer
         methodDetails:
@@ -9872,13 +9984,12 @@ components:
           description: Comment
           type: string
         status:
-          description: "**Money-In and Money-Out**   \r\n  \r\n0: Success  \r\n3:\
-            \ Lemonway Error  \r\n4: Pending  \r\n6: PSP error  \r\n7: Cancelled \
-            \ \r\n16: Validation pending  \r\n\r\n**Important:**  For /v2/moneyins/{transactionid}/validate`\
+          description: "**Money-In**   \r\n  \r\n0: Success  \r\n3: Lemonway Error\
+            \  \r\n4: Pending  \r\n6: PSP error  \r\n7: Cancelled  \r\n16: Validation\
+            \ pending  \r\n\r\n**Money-Out**  \r\n\r\n**Important:**  For /v2/moneyins/{transactionid}/validate`\
             \ use the status codes:  \r\n\r\n0: Waiting for finalization    \r\n3:\
-            \ Success    \r\n4: Lemonway Error    \r\n6: PSP Error  \r\n7: Cancelled\
-            \  \r\n16: Validation Pending\r\n            \r\n**P2P**\r\n\r\n0: Pending\
-            \  \r\n3: Success"
+            \ Success    \r\n4: Lemonway Error    \r\n            \r\n**P2P**\r\n\r\
+            \n0: Pending  \r\n3: Success"
           format: int32
           type: integer
         executionDate:
@@ -9893,6 +10004,9 @@ components:
         remainingAmount:
           format: int32
           type: integer
+        substatus:
+          description: Is Payment token consumed?
+          type: string
       type: object
     GetMoneyInSddInput:
       properties:
@@ -9985,6 +10099,7 @@ components:
             receiverAccountId: receiverAccountId
             refundAmount: 6.027456183070403
             method: 5
+            substatus: substatus
             methodDetails: 5
             PSP:
               message: message
@@ -10001,6 +10116,7 @@ components:
             card:
               country: country
               maskedNumber: maskedNumber
+              holderName: holderName
               authorizationNumber: authorizationNumber
               is3DS: true
               expiration: expiration
@@ -10029,6 +10145,7 @@ components:
             receiverAccountId: receiverAccountId
             refundAmount: 6.027456183070403
             method: 5
+            substatus: substatus
             methodDetails: 5
             PSP:
               message: message
@@ -10045,6 +10162,7 @@ components:
             card:
               country: country
               maskedNumber: maskedNumber
+              holderName: holderName
               authorizationNumber: authorizationNumber
               is3DS: true
               expiration: expiration
@@ -10164,6 +10282,7 @@ components:
             receiverAccountId: receiverAccountId
             refundAmount: 6.027456183070403
             method: 5
+            substatus: substatus
             methodDetails: 5
             PSP:
               message: message
@@ -10180,6 +10299,7 @@ components:
             card:
               country: country
               maskedNumber: maskedNumber
+              holderName: holderName
               authorizationNumber: authorizationNumber
               is3DS: true
               expiration: expiration
@@ -10208,6 +10328,7 @@ components:
             receiverAccountId: receiverAccountId
             refundAmount: 6.027456183070403
             method: 5
+            substatus: substatus
             methodDetails: 5
             PSP:
               message: message
@@ -10224,6 +10345,7 @@ components:
             card:
               country: country
               maskedNumber: maskedNumber
+              holderName: holderName
               authorizationNumber: authorizationNumber
               is3DS: true
               expiration: expiration
@@ -10257,7 +10379,8 @@ components:
           minLength: 0
           type: string
         TransactionMerchantToken:
-          description: Token from wkToken variable
+          description: Unique ID generated by your server. This ID can be used as
+            a reference for a search field when looking for operation details.
           maxLength: 50
           minLength: 0
           type: string
@@ -10351,6 +10474,7 @@ components:
             receiverAccountId: receiverAccountId
             refundAmount: 1.4658129805029452
             method: 2
+            substatus: substatus
             childTransactions:
             - date: 1
               reference: reference
@@ -10396,6 +10520,7 @@ components:
             card:
               country: country
               maskedNumber: maskedNumber
+              holderName: holderName
               authorizationNumber: authorizationNumber
               is3DS: true
               expiration: expiration
@@ -10428,6 +10553,7 @@ components:
             receiverAccountId: receiverAccountId
             refundAmount: 1.4658129805029452
             method: 2
+            substatus: substatus
             childTransactions:
             - date: 1
               reference: reference
@@ -10473,6 +10599,7 @@ components:
             card:
               country: country
               maskedNumber: maskedNumber
+              holderName: holderName
               authorizationNumber: authorizationNumber
               is3DS: true
               expiration: expiration
@@ -10521,6 +10648,7 @@ components:
           receiverAccountId: receiverAccountId
           refundAmount: 1.4658129805029452
           method: 2
+          substatus: substatus
           childTransactions:
           - date: 1
             reference: reference
@@ -10566,6 +10694,7 @@ components:
           card:
             country: country
             maskedNumber: maskedNumber
+            holderName: holderName
             authorizationNumber: authorizationNumber
             is3DS: true
             expiration: expiration
@@ -10598,6 +10727,7 @@ components:
           receiverAccountId: receiverAccountId
           refundAmount: 1.4658129805029452
           method: 2
+          substatus: substatus
           childTransactions:
           - date: 1
             reference: reference
@@ -10643,6 +10773,7 @@ components:
           card:
             country: country
             maskedNumber: maskedNumber
+            holderName: holderName
             authorizationNumber: authorizationNumber
             is3DS: true
             expiration: expiration
@@ -10697,6 +10828,7 @@ components:
           receiverAccountId: receiverAccountId
           refundAmount: 6.027456183070403
           method: 5
+          substatus: substatus
           methodDetails: 5
           PSP:
             message: message
@@ -10713,6 +10845,7 @@ components:
           card:
             country: country
             maskedNumber: maskedNumber
+            holderName: holderName
             authorizationNumber: authorizationNumber
             is3DS: true
             expiration: expiration
@@ -10818,6 +10951,7 @@ components:
           receiverAccountId: receiverAccountId
           refundAmount: 6.027456183070403
           method: 5
+          substatus: substatus
           methodDetails: 5
           PSP:
             message: message
@@ -10834,6 +10968,7 @@ components:
           card:
             country: country
             maskedNumber: maskedNumber
+            holderName: holderName
             authorizationNumber: authorizationNumber
             is3DS: true
             expiration: expiration
@@ -10874,6 +11009,7 @@ components:
         receiverAccountId: receiverAccountId
         refundAmount: 6.027456183070403
         method: 5
+        substatus: substatus
         methodDetails: 5
         PSP:
           message: message
@@ -10890,6 +11026,7 @@ components:
         card:
           country: country
           maskedNumber: maskedNumber
+          holderName: holderName
           authorizationNumber: authorizationNumber
           is3DS: true
           expiration: expiration
@@ -10949,12 +11086,12 @@ components:
         method:
           description: "Payment Method  \r\n0 Card    \r\n1 Bank transfer (MoneyIn)\
             \     \r\n3 Bank transfer (MoneyOut)     \r\n4 P2P    \r\n13 iDEAL   \
-            \ \r\n14 SEPA DirectDebit    \r\n15 Cheque    \r\n17 Sofort    \r\n19\
-            \ Multibanco    \r\n21 MBWAY    \r\n23 Pagare      \r\n30 BNPL  \r\n35\
-            \ PayPal\r\n\r\n ---\r\n **Important:** The following services have been\
-            \ discontinued. \r\n \r\n16 Neosurf  \r\n18 PFS Physical Card  \r\n20\
-            \ Payshop  \r\n22 Polish Instant Transfer   \r\n24 MobilePay\r\n25 Paytrail\r\
-            \n26 WeChat  \r\n27 P24  \r\n28 MoneyIn by TPE  \r\n29 Trustly"
+            \ \r\n14 SEPA DirectDebit    \r\n15 Cheque    \r\n19 Multibanco    \r\n\
+            21 MBWAY    \r\n30 BNPL  \r\n35 PayPal\r\n\r\n ---\r\n **Important:**\
+            \ The following services have been discontinued. \r\n \r\n16 Neosurf \
+            \ \r\n17 Sofort  \r\n18 PFS Physical Card  \r\n20 Payshop  \r\n22 Polish\
+            \ Instant Transfer  \r\n23 Pagare  \r\n24 MobilePay\r\n25 Paytrail\r\n\
+            26 WeChat  \r\n27 P24  \r\n28 MoneyIn by TPE  \r\n29 Trustly"
           format: int32
           type: integer
         methodDetails:
@@ -10977,13 +11114,12 @@ components:
           description: Comment
           type: string
         status:
-          description: "**Money-In and Money-Out**   \r\n  \r\n0: Success  \r\n3:\
-            \ Lemonway Error  \r\n4: Pending  \r\n6: PSP error  \r\n7: Cancelled \
-            \ \r\n16: Validation pending  \r\n\r\n**Important:**  For /v2/moneyins/{transactionid}/validate`\
+          description: "**Money-In**   \r\n  \r\n0: Success  \r\n3: Lemonway Error\
+            \  \r\n4: Pending  \r\n6: PSP error  \r\n7: Cancelled  \r\n16: Validation\
+            \ pending  \r\n\r\n**Money-Out**  \r\n\r\n**Important:**  For /v2/moneyins/{transactionid}/validate`\
             \ use the status codes:  \r\n\r\n0: Waiting for finalization    \r\n3:\
-            \ Success    \r\n4: Lemonway Error    \r\n6: PSP Error  \r\n7: Cancelled\
-            \  \r\n16: Validation Pending\r\n            \r\n**P2P**\r\n\r\n0: Pending\
-            \  \r\n3: Success"
+            \ Success    \r\n4: Lemonway Error    \r\n            \r\n**P2P**\r\n\r\
+            \n0: Pending  \r\n3: Success"
           format: int32
           type: integer
         executionDate:
@@ -10998,6 +11134,9 @@ components:
         remainingAmount:
           format: int32
           type: integer
+        substatus:
+          description: Is Payment token consumed?
+          type: string
         authorization:
           $ref: '#/components/schemas/TransactionCapturedAuthorization'
       type: object
@@ -11040,6 +11179,7 @@ components:
           receiverAccountId: receiverAccountId
           refundAmount: 6.027456183070403
           method: 5
+          substatus: substatus
           methodDetails: 5
           PSP:
             message: message
@@ -11056,6 +11196,7 @@ components:
           card:
             country: country
             maskedNumber: maskedNumber
+            holderName: holderName
             authorizationNumber: authorizationNumber
             is3DS: true
             expiration: expiration
@@ -11115,7 +11256,7 @@ components:
           cardType: 1
           cardNumber: "4716202982346875"
           cardCode: "123"
-          cardDate: 04/2026
+          cardDate: 07/2027
         md: 1Ok9dCP55UUkWfdJwEid
         pares: eJxVkdtSwjAQhl+lwwM0SY+EWTKDgsKMICIgXGbaV
       properties:
@@ -11205,6 +11346,7 @@ components:
           receiverAccountId: receiverAccountId
           refundAmount: 6.027456183070403
           method: 5
+          substatus: substatus
           methodDetails: 5
           PSP:
             message: message
@@ -11221,6 +11363,7 @@ components:
           card:
             country: country
             maskedNumber: maskedNumber
+            holderName: holderName
             authorizationNumber: authorizationNumber
             is3DS: true
             expiration: expiration
@@ -11238,7 +11381,7 @@ components:
     MoneyInSddInitInput:
       example:
         sddMandateId: 356
-        collectionDate: 2024/04/18
+        collectionDate: 2025/07/07
         reference: Dze8778
         accountId: "33612345678"
         totalAmount: 1500
@@ -11283,7 +11426,7 @@ components:
           type: string
         autoCommission:
           description: "If true:\r\n1. [amountCom] will be ignored and will be replaced\
-            \ with Lemonway's fee\r\n2. You will not receive any fee"
+            \ with Lemonway's fee  \r\n2. You will not receive any fee"
           type: boolean
       required:
       - accountId
@@ -11317,6 +11460,7 @@ components:
           receiverAccountId: receiverAccountId
           refundAmount: 6.027456183070403
           method: 5
+          substatus: substatus
           methodDetails: 5
           PSP:
             message: message
@@ -11333,6 +11477,7 @@ components:
           card:
             country: country
             maskedNumber: maskedNumber
+            holderName: holderName
             authorizationNumber: authorizationNumber
             is3DS: true
             expiration: expiration
@@ -11400,7 +11545,7 @@ components:
           type: string
         autoCommission:
           description: "If true:\r\n1. [amountCom] will be ignored and will be replaced\
-            \ with Lemonway's fee\r\n2. You will not receive any fee"
+            \ with Lemonway's fee  \r\n2. You will not receive any fee"
           type: boolean
       required:
       - accountId
@@ -11474,7 +11619,7 @@ components:
           type: string
         autoCommission:
           description: "If true:\r\n1. [amountCom] will be ignored and will be replaced\
-            \ with Lemonway's fee\r\n2. You will not receive any fee"
+            \ with Lemonway's fee  \r\n2. You will not receive any fee"
           type: boolean
       required:
       - accountId
@@ -11559,7 +11704,7 @@ components:
           type: string
         autoCommission:
           description: "If true:\r\n1. [amountCom] will be ignored and will be replaced\
-            \ with Lemonway's fee\r\n2. You will not receive any fee"
+            \ with Lemonway's fee  \r\n2. You will not receive any fee"
           type: boolean
       required:
       - accountId
@@ -11673,6 +11818,7 @@ components:
           receiverAccountId: receiverAccountId
           refundAmount: 6.027456183070403
           method: 5
+          substatus: substatus
           methodDetails: 5
           PSP:
             message: message
@@ -11689,6 +11835,7 @@ components:
           card:
             country: country
             maskedNumber: maskedNumber
+            holderName: holderName
             authorizationNumber: authorizationNumber
             is3DS: true
             expiration: expiration
@@ -11709,7 +11856,7 @@ components:
           cardType: 1
           cardNumber: "4716202982346875"
           cardCode: "123"
-          cardDate: 04/2026
+          cardDate: 07/2027
         reference: Dze8778
         accountId: "33612345678"
         totalAmount: 1500
@@ -11765,7 +11912,7 @@ components:
           type: string
         autoCommission:
           description: "If true:\r\n1. [amountCom] will be ignored and will be replaced\
-            \ with Lemonway's fee\r\n2. You will not receive any fee"
+            \ with Lemonway's fee  \r\n2. You will not receive any fee"
           type: boolean
       required:
       - accountId
@@ -11859,7 +12006,7 @@ components:
           type: string
         autoCommission:
           description: "If true:\r\n1. [amountCom] will be ignored and will be replaced\
-            \ with Lemonway's fee\r\n2. You will not receive any fee"
+            \ with Lemonway's fee  \r\n2. You will not receive any fee"
           type: boolean
       required:
       - accountId
@@ -11892,6 +12039,7 @@ components:
           receiverAccountId: receiverAccountId
           refundAmount: 6.027456183070403
           method: 5
+          substatus: substatus
           methodDetails: 5
           PSP:
             message: message
@@ -11908,6 +12056,7 @@ components:
           card:
             country: country
             maskedNumber: maskedNumber
+            holderName: holderName
             authorizationNumber: authorizationNumber
             is3DS: true
             expiration: expiration
@@ -11941,34 +12090,35 @@ components:
         riskData:
           key: riskData
         items:
-        - quantity: 435321354
+        - quantity: 890262545
           description: description
-          unitAmount: 890262545
+          unitAmount: 1586191969
           merchantAccountId: merchantAccountId
-          type: 7
-          taxAmount: 264465518
-        - quantity: 435321354
+          type: 1
+          taxAmount: 220040988
+        - quantity: 890262545
           description: description
-          unitAmount: 890262545
+          unitAmount: 1586191969
           merchantAccountId: merchantAccountId
-          type: 7
-          taxAmount: 264465518
+          type: 1
+          taxAmount: 220040988
         transaction:
           reference: reference
           accountId: accountId
           totalAmount: 0
           isPreAuth: true
           comment: comment
+          captureMode: 1
           autoCommission: true
           commissionAmount: 6
         amountBreakdown:
-          insurance: 1516424369
-          totalItems: 314780940
-          totalItemTaxes: 1280358508
-          shipping: 1210617418
-          discount: 776546568
-          handling: 494379917
-          shippingDiscount: 1997469940
+          insurance: 1997469940
+          totalItems: 1280358508
+          totalItemTaxes: 1210617418
+          shipping: 494379917
+          discount: 435321354
+          handling: 1516424369
+          shippingDiscount: 776546568
       properties:
         redirections:
           $ref: '#/components/schemas/Redirections'
@@ -12028,6 +12178,7 @@ components:
         totalAmount: 0
         isPreAuth: true
         comment: comment
+        captureMode: 1
         autoCommission: true
         commissionAmount: 6
       properties:
@@ -12052,8 +12203,16 @@ components:
           description: Auto Commission
           type: boolean
         isPreAuth:
-          description: Intention to authorize
           type: boolean
+        captureMode:
+          description: "Specifies the capture mode for the payment:\r\nAutomatic results\
+            \ in a Capture type, and Manual results in an Authorize type.<br/>1 =\
+            \ Automatic.<br/>2 = Manual.<br/>"
+          enum:
+          - 1
+          - 2
+          format: int32
+          type: integer
       required:
       - accountId
       - commissionAmount
@@ -12063,13 +12222,13 @@ components:
     AmountBreakdown:
       description: The amount breakdown.
       example:
-        insurance: 1516424369
-        totalItems: 314780940
-        totalItemTaxes: 1280358508
-        shipping: 1210617418
-        discount: 776546568
-        handling: 494379917
-        shippingDiscount: 1997469940
+        insurance: 1997469940
+        totalItems: 1280358508
+        totalItemTaxes: 1210617418
+        shipping: 494379917
+        discount: 435321354
+        handling: 1516424369
+        shippingDiscount: 776546568
       properties:
         totalItems:
           description: The subtotal for all items.
@@ -12137,12 +12296,12 @@ components:
     PurchaseItem:
       description: Item
       example:
-        quantity: 435321354
+        quantity: 890262545
         description: description
-        unitAmount: 890262545
+        unitAmount: 1586191969
         merchantAccountId: merchantAccountId
-        type: 7
-        taxAmount: 264465518
+        type: 1
+        taxAmount: 220040988
       properties:
         merchantAccountId:
           description: Merchant account id
@@ -12442,7 +12601,7 @@ components:
           type: string
         autoCommission:
           description: "If true:\r\n1. [amountCom] will be ignored and will be replaced\
-            \ with Lemonway's fee\r\n2. You will not receive any fee"
+            \ with Lemonway's fee  \r\n2. You will not receive any fee"
           type: boolean
       required:
       - accountId
@@ -12553,14 +12712,14 @@ components:
           type: string
         moneyInNature:
           description: Indicates the nature of activity for this Money-In:<br/>0 =
-            Activite 1.<br/>1 = Activite 2.<br/>
+            Activity 1.<br/>1 = Activity 2.<br/>
           enum:
           - 0
           - 1
           format: int32
           type: integer
         threeDS:
-          $ref: '#/components/schemas/ThreeDs'
+          $ref: '#/components/schemas/ThreeDS'
         riskAnalysis:
           $ref: '#/components/schemas/RiskAnalysis'
         recurringAvgAmount:
@@ -12600,7 +12759,7 @@ components:
           type: string
         autoCommission:
           description: "If true:\r\n1. [amountCom] will be ignored and will be replaced\
-            \ with Lemonway's fee\r\n2. You will not receive any fee"
+            \ with Lemonway's fee  \r\n2. You will not receive any fee"
           type: boolean
       required:
       - accountId
@@ -12608,7 +12767,7 @@ components:
       - errorUrl
       - returnUrl
       type: object
-    ThreeDs:
+    ThreeDS:
       properties:
         challengeMode:
           description: "If you would like to enforce 3D Secure for your client then\
@@ -12853,7 +13012,7 @@ components:
           type: string
         autoCommission:
           description: "If true:\r\n1. [amountCom] will be ignored and will be replaced\
-            \ with Lemonway's fee\r\n2. You will not receive any fee"
+            \ with Lemonway's fee  \r\n2. You will not receive any fee"
           type: boolean
       required:
       - accountId
@@ -12933,7 +13092,7 @@ components:
           type: string
         autoCommission:
           description: "If true:\r\n1. [amountCom] will be ignored and will be replaced\
-            \ with Lemonway's fee\r\n2. You will not receive any fee"
+            \ with Lemonway's fee  \r\n2. You will not receive any fee"
           type: boolean
       required:
       - accountId
@@ -12969,7 +13128,7 @@ components:
           cardType: 1
           cardNumber: "4716202982346875"
           cardCode: "123"
-          cardDate: 04/2026
+          cardDate: 07/2027
       properties:
         accountId:
           description: Payment Account ID
@@ -12995,6 +13154,7 @@ components:
         card:
           country: country
           maskedNumber: maskedNumber
+          holderName: holderName
           authorizationNumber: authorizationNumber
           is3DS: true
           expiration: expiration
@@ -13050,7 +13210,7 @@ components:
           type: string
         autoCommission:
           description: "If true:\r\n1. [amountCom] will be ignored and will be replaced\
-            \ with Lemonway's fee\r\n2. You will not receive any fee"
+            \ with Lemonway's fee  \r\n2. You will not receive any fee"
           type: boolean
       required:
       - accountId
@@ -13119,7 +13279,7 @@ components:
           type: string
         autoCommission:
           description: "If true:\r\n1. [amountCom] will be ignored and will be replaced\
-            \ with Lemonway's fee\r\n2. You will not receive any fee"
+            \ with Lemonway's fee  \r\n2. You will not receive any fee"
           type: boolean
       required:
       - accountId
@@ -13194,7 +13354,7 @@ components:
           type: string
         autoCommission:
           description: "If true:\r\n1. [amountCom] will be ignored and will be replaced\
-            \ with Lemonway's fee\r\n2. You will not receive any fee"
+            \ with Lemonway's fee  \r\n2. You will not receive any fee"
           type: boolean
       required:
       - accountId
@@ -13480,7 +13640,7 @@ components:
           cardType: 1
           cardNumber: "4716202982346875"
           cardCode: "123"
-          cardDate: 04/2026
+          cardDate: 07/2027
         returnUrl: https://www.mysite.com/payment/?id=356
         registerCard: false
         reference: Dze8778
@@ -13502,7 +13662,7 @@ components:
         registerCard:
           type: boolean
         threeDS:
-          $ref: '#/components/schemas/ThreeDs'
+          $ref: '#/components/schemas/ThreeDS'
         riskAnalysis:
           $ref: '#/components/schemas/RiskAnalysis'
         recurringAvgAmount:
@@ -13544,7 +13704,7 @@ components:
           type: string
         autoCommission:
           description: "If true:\r\n1. [amountCom] will be ignored and will be replaced\
-            \ with Lemonway's fee\r\n2. You will not receive any fee"
+            \ with Lemonway's fee  \r\n2. You will not receive any fee"
           type: boolean
       required:
       - accountId
@@ -13586,6 +13746,7 @@ components:
           receiverAccountId: receiverAccountId
           refundAmount: 6.027456183070403
           method: 5
+          substatus: substatus
           methodDetails: 5
           PSP:
             message: message
@@ -13602,6 +13763,7 @@ components:
           card:
             country: country
             maskedNumber: maskedNumber
+            holderName: holderName
             authorizationNumber: authorizationNumber
             is3DS: true
             expiration: expiration
@@ -13698,26 +13860,28 @@ components:
           format: int64
           type: integer
         captureMode:
-          description: Defines if the payment should be captured right away or if
-            the capture should be deferred (default is 'Automatic')
+          description: "Defines if the payment should be captured right away or if\
+            \ the capture should be deferred.\r\nPossible values: `Automatic` and\
+            \ `Manual`. Default is set to 'Automatic'."
           type: string
         delivery:
           $ref: '#/components/schemas/BnplDelivery'
         items:
-          description: Delivery information.
+          description: "Possible values:  \r\n`PhysicalGood`  \r\n`Discount`  \r\n\
+            `ShippingFee`  \r\n`DigitalGood`  \r\n`ExternalPayment`  \r\n`Insurance`"
           items:
             $ref: '#/components/schemas/BnplPurchaseItem'
           type: array
         customer:
           $ref: '#/components/schemas/Customer'
         returnUrl:
-          description: Return success url.
+          description: Return success url
           type: string
         errorUrl:
-          description: Return error url.
+          description: Return error url
           type: string
         cancelUrl:
-          description: Return cancel url.
+          description: Return cancel url
           type: string
         reference:
           description: "Unique ID of the call, generated by your server. This ID can\
@@ -13746,7 +13910,7 @@ components:
           type: string
         autoCommission:
           description: "If true:\r\n1. [amountCom] will be ignored and will be replaced\
-            \ with Lemonway's fee\r\n2. You will not receive any fee"
+            \ with Lemonway's fee  \r\n2. You will not receive any fee"
           type: boolean
       required:
       - accountId
@@ -13761,6 +13925,8 @@ components:
     BnplDelivery:
       properties:
         deliveryMode:
+          description: "Possible values:   \r\n`CollectionOfTheGoodsInTheMerchantStore`\r\
+            \n`CollectionInAThirdPartyPoint`\r\n`DeliveryToCustomerAddress`"
           type: string
         expressDelivery:
           type: boolean
@@ -13805,7 +13971,7 @@ components:
           description: Client account Id.
           type: string
         civility:
-          description: Client civility.
+          description: "Client civility.  \r\nPossible values: `Mr` and `Ms`"
           type: string
         firstName:
           description: Client first name.
@@ -13890,9 +14056,9 @@ components:
           type: string
         country:
           description: "ISO2 code of the country from which the IBAN must be generated\r\
-            \nWe currently serve 5 countries:\r\n<ul><li>BE: Belgium (BNP Fortis)</li><li>DE:\
-            \ Germany (BNP Paribas Niederlassung)</li><li>ES: BNP Paribas Sucursal\
-            \ en España</li><li>FR: France (BNP Paribas)</li><li>IT: Italy (BNL)</li></ul>"
+            \nWe currently serve 4 countries:\r\n<ul><li>BE: Belgium (BNP Fortis)</li><li>ES:\
+            \ BNP Paribas Sucursal en España</li><li>FR: France (BNP Paribas)</li><li>IT:\
+            \ Italy (BNL)</li></ul>"
           maxLength: 2
           minLength: 0
           type: string
@@ -13906,8 +14072,8 @@ components:
         pdfLanguage:
           description: "ISO 639-1 language code for the PDF document. The supported\
             \ languages are:\r\n<ul><li>en: English</li><li>es: Spanish</li><li>fr:\
-            \ French</li><li>de: German</li><li>it: Italian</li></ul>\r\nThis field\
-            \ is ignored if generatePDFAndQrCode is false."
+            \ French</li><li>it: Italian</li></ul>\r\nThis field is ignored if generatePDFAndQrCode\
+            \ is false."
           maxLength: 2
           minLength: 0
           type: string
@@ -14023,7 +14189,7 @@ components:
           type: string
         autoCommission:
           description: "If true:\r\n1. [amountCom] will be ignored and will be replaced\
-            \ with Lemonway's fee\r\n2. You will not receive any fee"
+            \ with Lemonway's fee  \r\n2. You will not receive any fee"
           type: boolean
       required:
       - accountId
@@ -14056,6 +14222,7 @@ components:
           receiverAccountId: receiverAccountId
           refundAmount: 6.027456183070403
           method: 5
+          substatus: substatus
           methodDetails: 5
           PSP:
             message: message
@@ -14072,6 +14239,7 @@ components:
           card:
             country: country
             maskedNumber: maskedNumber
+            holderName: holderName
             authorizationNumber: authorizationNumber
             is3DS: true
             expiration: expiration
@@ -14147,11 +14315,12 @@ components:
           type: string
         autoCommission:
           description: "If true:\r\n1. [amountCom] will be ignored and will be replaced\
-            \ with Lemonway's fee\r\n2. You will not receive any fee"
+            \ with Lemonway's fee  \r\n2. You will not receive any fee"
           type: boolean
       required:
       - accountId
       - cancelUrl
+      - countryCode
       - errorUrl
       - returnUrl
       type: object
@@ -14213,7 +14382,7 @@ components:
           type: string
         autoCommission:
           description: "If true:\r\n1. [amountCom] will be ignored and will be replaced\
-            \ with Lemonway's fee\r\n2. You will not receive any fee"
+            \ with Lemonway's fee  \r\n2. You will not receive any fee"
           type: boolean
       required:
       - Count
@@ -14244,6 +14413,7 @@ components:
             receiverAccountId: receiverAccountId
             refundAmount: 6.027456183070403
             method: 5
+            substatus: substatus
             methodDetails: 5
             PSP:
               message: message
@@ -14260,6 +14430,7 @@ components:
             card:
               country: country
               maskedNumber: maskedNumber
+              holderName: holderName
               authorizationNumber: authorizationNumber
               is3DS: true
               expiration: expiration
@@ -14288,6 +14459,7 @@ components:
             receiverAccountId: receiverAccountId
             refundAmount: 6.027456183070403
             method: 5
+            substatus: substatus
             methodDetails: 5
             PSP:
               message: message
@@ -14304,6 +14476,7 @@ components:
             card:
               country: country
               maskedNumber: maskedNumber
+              holderName: holderName
               authorizationNumber: authorizationNumber
               is3DS: true
               expiration: expiration
@@ -14362,7 +14535,7 @@ components:
           cardType: 1
           cardNumber: "4716202982346875"
           cardCode: "123"
-          cardDate: 04/2026
+          cardDate: 07/2027
         md: 1Ok9dCP55UUkWfdJwEid
         pares: eJxVkdtSwjAQhl+lwwM0SY+EWTKDgsKMICIgXGbaV
       properties:
@@ -14962,7 +15135,7 @@ components:
           minLength: 2
           type: string
         comment:
-          description: Reason for New Bank Account Details if another one is already
+          description: Reason for new Bank Account details if another one is already
             linked to the Payment Account.
           maxLength: 512
           minLength: 1
@@ -15224,7 +15397,7 @@ components:
         creditAccountId: taxi67
         amount: 1500
         comment: Order number 2457765AX2
-        scheduledDate: 2024/04/15
+        scheduledDate: 2025/07/04
         privateData:
           value:
           - My data 1
@@ -15235,12 +15408,12 @@ components:
         originTransactionId: 4086
       properties:
         debitAccountId:
-          description: Wallet ID to be Debited
+          description: Account ID to be Debited
           maxLength: 256
           minLength: 0
           type: string
         creditAccountId:
-          description: Wallet ID to Credited
+          description: Account ID to Credited
           maxLength: 256
           minLength: 0
           type: string
@@ -15326,7 +15499,10 @@ components:
           format: int32
           type: integer
         comment:
-          description: "Comment on the refund\r\n**Please explain why you refunded**"
+          description: "Comment on the refund. \r\n**Explain the reason for the refunded\
+            \ amount** \r\n**Note:** In the API Response displayed before the comment\
+            \ will appear the refund transaction id. Example: comment\": \"Refund\
+            \ 2763789 Items not wanted\""
           maxLength: 140
           minLength: 0
           type: string
@@ -15432,12 +15608,12 @@ components:
         method:
           description: "Payment Method  \r\n0 Card    \r\n1 Bank transfer (MoneyIn)\
             \     \r\n3 Bank transfer (MoneyOut)     \r\n4 P2P    \r\n13 iDEAL   \
-            \ \r\n14 SEPA DirectDebit    \r\n15 Cheque    \r\n17 Sofort    \r\n19\
-            \ Multibanco    \r\n21 MBWAY    \r\n23 Pagare      \r\n30 BNPL  \r\n35\
-            \ PayPal\r\n\r\n ---\r\n **Important:** The following services have been\
-            \ discontinued. \r\n \r\n16 Neosurf  \r\n18 PFS Physical Card  \r\n20\
-            \ Payshop  \r\n22 Polish Instant Transfer   \r\n24 MobilePay\r\n25 Paytrail\r\
-            \n26 WeChat  \r\n27 P24  \r\n28 MoneyIn by TPE  \r\n29 Trustly"
+            \ \r\n14 SEPA DirectDebit    \r\n15 Cheque    \r\n19 Multibanco    \r\n\
+            21 MBWAY    \r\n30 BNPL  \r\n35 PayPal\r\n\r\n ---\r\n **Important:**\
+            \ The following services have been discontinued. \r\n \r\n16 Neosurf \
+            \ \r\n17 Sofort  \r\n18 PFS Physical Card  \r\n20 Payshop  \r\n22 Polish\
+            \ Instant Transfer  \r\n23 Pagare  \r\n24 MobilePay\r\n25 Paytrail\r\n\
+            26 WeChat  \r\n27 P24  \r\n28 MoneyIn by TPE  \r\n29 Trustly"
           format: int32
           type: integer
         methodDetails:
@@ -15478,12 +15654,12 @@ components:
         - 33
         - 98
         - 87
-        transactionDateTime: "1713188004"
+        transactionDateTime: "1751620529"
         amountToRefund: 1500
         comment: Never received the PO 12366GG
       properties:
         linkedP2pIds:
-          description: P2P transactions linked to money-in refund.
+          description: P2P transactions linked to Money-In refund.
           items:
             format: int64
             type: integer
@@ -15498,7 +15674,10 @@ components:
           format: int32
           type: integer
         comment:
-          description: "Comment on the refund\r\n**Please explain why you refunded**"
+          description: "Comment on the refund. \r\n**Explain the reason for the refunded\
+            \ amount** \r\n**Note:** In the API Response displayed before the comment\
+            \ will appear the refund transaction id. Example: comment\": \"Refund\
+            \ 2763789 Items not wanted\""
           maxLength: 140
           minLength: 0
           type: string

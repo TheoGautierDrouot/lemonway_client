@@ -154,7 +154,11 @@ func (a *{{{classname}}}Service) {{nickname}}Execute(r {{#structPrefix}}{{&class
         if authProviderAuthType, ok := r.ctx.Value(authorizationFromProviderCtxKey).(AuthType); ok && authProviderAuthType != "" {
             token, err := a.client.authProvider.GetToken()
             if err != nil {
-                return {{#returnType}}localVarReturnValue, {{/returnType}}nil, err
+                return {{#returnType}}localVarReturnValue, {{/returnType}}nil, &GenericOpenAPIError{
+                    body: nil,
+                    error: err.Error(),
+                    model: localAdditionalValues,
+                }
             }
             localAdditionalValues["authorization"] = string(authProviderAuthType)+" "+token
         }

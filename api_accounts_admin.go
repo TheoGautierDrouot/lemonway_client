@@ -127,7 +127,11 @@ func (a *AccountsAdminApiService) AccountsAccountSingleGetExecute(r ApiAccountsA
         if authProviderAuthType, ok := r.ctx.Value(authorizationFromProviderCtxKey).(AuthType); ok && authProviderAuthType != "" {
             token, err := a.client.authProvider.GetToken()
             if err != nil {
-                return localVarReturnValue, nil, err
+                return localVarReturnValue, nil, &GenericOpenAPIError{
+                    body: nil,
+                    error: err.Error(),
+                    model: localAdditionalValues,
+                }
             }
             localAdditionalValues["authorization"] = string(authProviderAuthType)+" "+token
         }
@@ -342,7 +346,11 @@ func (a *AccountsAdminApiService) AccountsBalancesGetExecute(r ApiAccountsBalanc
         if authProviderAuthType, ok := r.ctx.Value(authorizationFromProviderCtxKey).(AuthType); ok && authProviderAuthType != "" {
             token, err := a.client.authProvider.GetToken()
             if err != nil {
-                return localVarReturnValue, nil, err
+                return localVarReturnValue, nil, &GenericOpenAPIError{
+                    body: nil,
+                    error: err.Error(),
+                    model: localAdditionalValues,
+                }
             }
             localAdditionalValues["authorization"] = string(authProviderAuthType)+" "+token
         }
@@ -548,7 +556,11 @@ func (a *AccountsAdminApiService) AccountsBalancesHistoryGetExecute(r ApiAccount
         if authProviderAuthType, ok := r.ctx.Value(authorizationFromProviderCtxKey).(AuthType); ok && authProviderAuthType != "" {
             token, err := a.client.authProvider.GetToken()
             if err != nil {
-                return localVarReturnValue, nil, err
+                return localVarReturnValue, nil, &GenericOpenAPIError{
+                    body: nil,
+                    error: err.Error(),
+                    model: localAdditionalValues,
+                }
             }
             localAdditionalValues["authorization"] = string(authProviderAuthType)+" "+token
         }
@@ -737,7 +749,11 @@ func (a *AccountsAdminApiService) AccountsBlockedPutExecute(r ApiAccountsBlocked
         if authProviderAuthType, ok := r.ctx.Value(authorizationFromProviderCtxKey).(AuthType); ok && authProviderAuthType != "" {
             token, err := a.client.authProvider.GetToken()
             if err != nil {
-                return localVarReturnValue, nil, err
+                return localVarReturnValue, nil, &GenericOpenAPIError{
+                    body: nil,
+                    error: err.Error(),
+                    model: localAdditionalValues,
+                }
             }
             localAdditionalValues["authorization"] = string(authProviderAuthType)+" "+token
         }
@@ -930,7 +946,11 @@ func (a *AccountsAdminApiService) AccountsDocumentGetExecute(r ApiAccountsDocume
         if authProviderAuthType, ok := r.ctx.Value(authorizationFromProviderCtxKey).(AuthType); ok && authProviderAuthType != "" {
             token, err := a.client.authProvider.GetToken()
             if err != nil {
-                return localVarReturnValue, nil, err
+                return localVarReturnValue, nil, &GenericOpenAPIError{
+                    body: nil,
+                    error: err.Error(),
+                    model: localAdditionalValues,
+                }
             }
             localAdditionalValues["authorization"] = string(authProviderAuthType)+" "+token
         }
@@ -1130,7 +1150,11 @@ func (a *AccountsAdminApiService) AccountsDocumentsSignInitPostExecute(r ApiAcco
         if authProviderAuthType, ok := r.ctx.Value(authorizationFromProviderCtxKey).(AuthType); ok && authProviderAuthType != "" {
             token, err := a.client.authProvider.GetToken()
             if err != nil {
-                return localVarReturnValue, nil, err
+                return localVarReturnValue, nil, &GenericOpenAPIError{
+                    body: nil,
+                    error: err.Error(),
+                    model: localAdditionalValues,
+                }
             }
             localAdditionalValues["authorization"] = string(authProviderAuthType)+" "+token
         }
@@ -1284,7 +1308,7 @@ func (r ApiAccountsEnrolmentInitRequest) Execute() (*EnrolmentInitOutput, *http.
 }
 
 /*
-AccountsEnrolmentInit Initialize a Deutsche Post POSTIDENT Identification
+AccountsEnrolmentInit (Deprecated) Initialize a Deutsche Post POSTIDENT Identification
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param accountid
@@ -1325,7 +1349,11 @@ func (a *AccountsAdminApiService) AccountsEnrolmentInitExecute(r ApiAccountsEnro
         if authProviderAuthType, ok := r.ctx.Value(authorizationFromProviderCtxKey).(AuthType); ok && authProviderAuthType != "" {
             token, err := a.client.authProvider.GetToken()
             if err != nil {
-                return localVarReturnValue, nil, err
+                return localVarReturnValue, nil, &GenericOpenAPIError{
+                    body: nil,
+                    error: err.Error(),
+                    model: localAdditionalValues,
+                }
             }
             localAdditionalValues["authorization"] = string(authProviderAuthType)+" "+token
         }
@@ -1526,7 +1554,11 @@ func (a *AccountsAdminApiService) AccountsRetrievePostExecute(r ApiAccountsRetri
         if authProviderAuthType, ok := r.ctx.Value(authorizationFromProviderCtxKey).(AuthType); ok && authProviderAuthType != "" {
             token, err := a.client.authProvider.GetToken()
             if err != nil {
-                return localVarReturnValue, nil, err
+                return localVarReturnValue, nil, &GenericOpenAPIError{
+                    body: nil,
+                    error: err.Error(),
+                    model: localAdditionalValues,
+                }
             }
             localAdditionalValues["authorization"] = string(authProviderAuthType)+" "+token
         }
@@ -1731,10 +1763,7 @@ The following numbered list corresponds to the payment type specified in the res
 13 iDEAL  
 14 SEPA DirectDebit  
 15 Cheque  
-17 Sofort  
 19 Multibanco  
-21 MBWAY  
-23 Pagare 
 35 PayPal
 
 
@@ -1742,9 +1771,12 @@ The following numbered list corresponds to the payment type specified in the res
  **Important:** The following services have been discontinued. 
  
 16 Neosurf  
+17 Sofort  
 18 PFS Physical Card  
 20 Payshop  
-22 Polish Instant Transfer   
+21 MBWAY  
+22 Polish Instant Transfer  
+23 Pagare   
 24 MobilePay  
 25 Paytrail  
 26 WeChat  
@@ -1791,7 +1823,11 @@ func (a *AccountsAdminApiService) AccountsTransactionsGetExecute(r ApiAccountsTr
         if authProviderAuthType, ok := r.ctx.Value(authorizationFromProviderCtxKey).(AuthType); ok && authProviderAuthType != "" {
             token, err := a.client.authProvider.GetToken()
             if err != nil {
-                return localVarReturnValue, nil, err
+                return localVarReturnValue, nil, &GenericOpenAPIError{
+                    body: nil,
+                    error: err.Error(),
+                    model: localAdditionalValues,
+                }
             }
             localAdditionalValues["authorization"] = string(authProviderAuthType)+" "+token
         }

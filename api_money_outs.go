@@ -88,7 +88,7 @@ func (r ApiMoneyOutsCancelPutRequest) Execute() (*CancelMoneyOutOutput, *http.Re
 /*
 MoneyOutsCancelPut Money-Out Cancellation
 
-The cancel method lets you cancel a Money-Out/SDD.
+The cancel call lets you cancel a Money-Out/SDD.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param transactionid
@@ -129,7 +129,11 @@ func (a *MoneyOutsApiService) MoneyOutsCancelPutExecute(r ApiMoneyOutsCancelPutR
         if authProviderAuthType, ok := r.ctx.Value(authorizationFromProviderCtxKey).(AuthType); ok && authProviderAuthType != "" {
             token, err := a.client.authProvider.GetToken()
             if err != nil {
-                return localVarReturnValue, nil, err
+                return localVarReturnValue, nil, &GenericOpenAPIError{
+                    body: nil,
+                    error: err.Error(),
+                    model: localAdditionalValues,
+                }
             }
             localAdditionalValues["authorization"] = string(authProviderAuthType)+" "+token
         }
@@ -287,13 +291,12 @@ MoneyOutsIbanExtendedPost Add Bank Account to a Payment Account for Money-Outs
 You are required to register your client's bank account details in order to send Money-Out from a Lemonway payment account.  
 With this method, our system links other bank formats to a payment account.  
 
-**Important:** If your client bank account details are in IBAN format, use: [IbanPost](https://documentation.lemonway.com/reference/moneyouts_ibanextendedpost).  
+**Important:** If your client bank account details are in IBAN format this call.  
 
 - Client bank account details are **only** required for money-outs.  
-- By default, you can register multiple bank accounts per payment account.  
-When you link a new bank account (IBAN format or other ones), the previous ones are still active.  
-Please use [IbanUnregisterPut](https://documentation.lemonway.com/reference/moneyouts_ibanunregisterput) method to deactivate a bank account from a payment account. 
-If you wish to use only one bank account per payment account, please contact support.  
+- When you link a new bank account (IBAN format or other ones), the previous ones are still active.  
+- Please use [IbanUnregisterPut](https://documentation.lemonway.com/reference/moneyouts_ibanunregisterput) method to deactivate a bank account from a payment account. 
+- If you wish to use only one bank account per payment account, please contact support.  
             
 Depending on bank country code selected or when a USD environment is concerned, 3 fields may be required:  
 - bankBranchRoutingCode  
@@ -336,7 +339,11 @@ func (a *MoneyOutsApiService) MoneyOutsIbanExtendedPostExecute(r ApiMoneyOutsIba
         if authProviderAuthType, ok := r.ctx.Value(authorizationFromProviderCtxKey).(AuthType); ok && authProviderAuthType != "" {
             token, err := a.client.authProvider.GetToken()
             if err != nil {
-                return localVarReturnValue, nil, err
+                return localVarReturnValue, nil, &GenericOpenAPIError{
+                    body: nil,
+                    error: err.Error(),
+                    model: localAdditionalValues,
+                }
             }
             localAdditionalValues["authorization"] = string(authProviderAuthType)+" "+token
         }
@@ -525,7 +532,11 @@ func (a *MoneyOutsApiService) MoneyOutsIbanGetExecute(r ApiMoneyOutsIbanGetReque
         if authProviderAuthType, ok := r.ctx.Value(authorizationFromProviderCtxKey).(AuthType); ok && authProviderAuthType != "" {
             token, err := a.client.authProvider.GetToken()
             if err != nil {
-                return localVarReturnValue, nil, err
+                return localVarReturnValue, nil, &GenericOpenAPIError{
+                    body: nil,
+                    error: err.Error(),
+                    model: localAdditionalValues,
+                }
             }
             localAdditionalValues["authorization"] = string(authProviderAuthType)+" "+token
         }
@@ -673,10 +684,9 @@ MoneyOutsIbanPost Add an IBAN to a Payment Account for Money-Outs
 
 To send Money-Out from the Lemonway payment account to the bank account of your Clients, you need to register their bank account details. This method lets our system to link an IBAN to a payment account.  
 - Bank account details are only needed for Money-Outs, not for Money-Ins or P2P.  
-- By default, you can register multiple bank accounts per payment account.  
-When you link a new bank account (IBAN format or other ones), the previous details are still active.  
-Use [IbanUnregisterPut](https://documentation.lemonway.com/reference/moneyouts_ibanunregisterput) method to deactivate a bank account from a payment account.  
-If you wish to use only one bank account per payment account, please contact support.  
+- When you link a new bank account (IBAN format or other ones), the previous details are still active.  
+- Use [IbanUnregisterPut](https://documentation.lemonway.com/reference/moneyouts_ibanunregisterput) call to deactivate a bank account from a payment account.  
+- If you wish to use only one bank account per payment account, please contact support.  
 - An integrated algorithm will validate your IBAN.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -715,7 +725,11 @@ func (a *MoneyOutsApiService) MoneyOutsIbanPostExecute(r ApiMoneyOutsIbanPostReq
         if authProviderAuthType, ok := r.ctx.Value(authorizationFromProviderCtxKey).(AuthType); ok && authProviderAuthType != "" {
             token, err := a.client.authProvider.GetToken()
             if err != nil {
-                return localVarReturnValue, nil, err
+                return localVarReturnValue, nil, &GenericOpenAPIError{
+                    body: nil,
+                    error: err.Error(),
+                    model: localAdditionalValues,
+                }
             }
             localAdditionalValues["authorization"] = string(authProviderAuthType)+" "+token
         }
@@ -871,7 +885,7 @@ func (r ApiMoneyOutsIbanUnregisterPutRequest) Execute() (*UnregisterIBANOutput, 
 /*
 MoneyOutsIbanUnregisterPut Disable Bank Information (IBAN) from a Payment Account
 
-The <b>UnregisterIBAN</b> method enables you to disable an IBAN from a Payment Account. As a reminder a bank account number (IBAN) is needed to process money-out. An IBAN is not needed to perform MONEY-IN on a Payment Account or Peer to Peer transfers between Payments Accounts.
+The <b>UnregisterIBAN</b> method enables you to disable an IBAN from a Payment Account. As a reminder a bank account number (IBAN) is needed to process Money-Out. An IBAN is not needed to perform Money-In on a Payment Account or Peer to Peer transfers between Payments Accounts.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param ibanId
@@ -912,7 +926,11 @@ func (a *MoneyOutsApiService) MoneyOutsIbanUnregisterPutExecute(r ApiMoneyOutsIb
         if authProviderAuthType, ok := r.ctx.Value(authorizationFromProviderCtxKey).(AuthType); ok && authProviderAuthType != "" {
             token, err := a.client.authProvider.GetToken()
             if err != nil {
-                return localVarReturnValue, nil, err
+                return localVarReturnValue, nil, &GenericOpenAPIError{
+                    body: nil,
+                    error: err.Error(),
+                    model: localAdditionalValues,
+                }
             }
             localAdditionalValues["authorization"] = string(authProviderAuthType)+" "+token
         }
@@ -1096,7 +1114,7 @@ func (r ApiMoneyOutsMoneyOutGetRequest) Execute() (*GetMoneyOutTransDetailsOutpu
 /*
 MoneyOutsMoneyOutGet Search for a Money-Out
 
-Use this method to get and check all Money-Out information.
+Use this call to get and check all Money-Out information.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiMoneyOutsMoneyOutGetRequest
@@ -1134,7 +1152,11 @@ func (a *MoneyOutsApiService) MoneyOutsMoneyOutGetExecute(r ApiMoneyOutsMoneyOut
         if authProviderAuthType, ok := r.ctx.Value(authorizationFromProviderCtxKey).(AuthType); ok && authProviderAuthType != "" {
             token, err := a.client.authProvider.GetToken()
             if err != nil {
-                return localVarReturnValue, nil, err
+                return localVarReturnValue, nil, &GenericOpenAPIError{
+                    body: nil,
+                    error: err.Error(),
+                    model: localAdditionalValues,
+                }
             }
             localAdditionalValues["authorization"] = string(authProviderAuthType)+" "+token
         }
@@ -1296,8 +1318,8 @@ func (r ApiMoneyOutsMoneyOutPostRequest) Execute() (*MoneyOutOutput, *http.Respo
 MoneyOutsMoneyOutPost External Fund Transfer from a Payment Account to a Bank Account
 
 How does it work?
-Select an IBAN if multiple IBAN exist for the Wallet. Select an amount, not greater than the balance of the wallet. Call the moneout method, and the system performs the fund transfer to the IBAN if everything is clear, or returns an error message.
-<ul><li>The payment account is debited immediately and the money is then received by the owner, in their bank account between 1 to 3 days after, depending on the interbanking system and on the banks (SEPA is faster).</li><li>You can ask us to configure your platform so that your comment is included in the bank transfer message so your customer will see it on the bank statement.</li><li><ul><li>The full message will be in the following format "XXXX-YYYY ZZZZ", where : </li><li>XXXX is the name of your environment</li><li>YYYY is the ID of the Money-Out operation as you see it in the backoffice</li><li>ZZZZ is your comment.</li></ul></li><li>The full message cannot be longer than 35 characters (if longer, it will be cut), and only alphanumeric characters will be allowed(other characters will be replaced by spaces before it's sent to the bank).</li></ul>
+Select an IBAN if multiple IBAN exist for the wallet. Select an amount, not greater than the balance of the wallet. Call the moneout method, and the system performs the fund transfer to the IBAN if everything is clear, or returns an error message.
+<ul><li>The payment account is debited immediately and the money is then received by the owner, in their bank account between 1 to 3 days after, depending on the interbanking system and on the banks (SEPA is faster).</li><li>You can ask us to configure your platform so that your comment is included in the bank transfer message so your customer will see it on the bank statement.</li><li><ul><li>The full message will be in the following format "XXXX-YYYY ZZZZ", where : </li><li>XXXX is the name of your environment</li><li>YYYY is the ID of the Money-Out operation as you see it in the Dashboard</li><li>ZZZZ is your comment.</li></ul></li><li>The full message cannot be longer than 35 characters (if longer, it will be cut), and only alphanumeric characters will be allowed(other characters will be replaced by spaces before it's sent to the bank).</li></ul>
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiMoneyOutsMoneyOutPostRequest
@@ -1335,7 +1357,11 @@ func (a *MoneyOutsApiService) MoneyOutsMoneyOutPostExecute(r ApiMoneyOutsMoneyOu
         if authProviderAuthType, ok := r.ctx.Value(authorizationFromProviderCtxKey).(AuthType); ok && authProviderAuthType != "" {
             token, err := a.client.authProvider.GetToken()
             if err != nil {
-                return localVarReturnValue, nil, err
+                return localVarReturnValue, nil, &GenericOpenAPIError{
+                    body: nil,
+                    error: err.Error(),
+                    model: localAdditionalValues,
+                }
             }
             localAdditionalValues["authorization"] = string(authProviderAuthType)+" "+token
         }

@@ -124,7 +124,11 @@ func (a *MoneyInsLocalPaymentsApiService) MoneyInsIDealConfirmPutExecute(r ApiMo
         if authProviderAuthType, ok := r.ctx.Value(authorizationFromProviderCtxKey).(AuthType); ok && authProviderAuthType != "" {
             token, err := a.client.authProvider.GetToken()
             if err != nil {
-                return localVarReturnValue, nil, err
+                return localVarReturnValue, nil, &GenericOpenAPIError{
+                    body: nil,
+                    error: err.Error(),
+                    model: localAdditionalValues,
+                }
             }
             localAdditionalValues["authorization"] = string(authProviderAuthType)+" "+token
         }
@@ -309,7 +313,11 @@ func (a *MoneyInsLocalPaymentsApiService) MoneyInsIDealInitPostExecute(r ApiMone
         if authProviderAuthType, ok := r.ctx.Value(authorizationFromProviderCtxKey).(AuthType); ok && authProviderAuthType != "" {
             token, err := a.client.authProvider.GetToken()
             if err != nil {
-                return localVarReturnValue, nil, err
+                return localVarReturnValue, nil, &GenericOpenAPIError{
+                    body: nil,
+                    error: err.Error(),
+                    model: localAdditionalValues,
+                }
             }
             localAdditionalValues["authorization"] = string(authProviderAuthType)+" "+token
         }
@@ -462,7 +470,7 @@ func (r ApiMoneyInsMbwayInitPostRequest) Execute() (*MoneyInMbwayInitOutput, *ht
 }
 
 /*
-MoneyInsMbwayInitPost Initialize MB WAY Payment
+MoneyInsMbwayInitPost (Deprecated) Initialize MB WAY Payment
 
 Payment process:
 <ul><li>You call the Lemonway DirectKit API, provide a phone number to initialize the payment</li><li>The payment order is sent to the customer's smartphone</li><li>The customer pays with their smartphone</li><li>You will be notified after the payment is settled</li></ul>
@@ -503,7 +511,11 @@ func (a *MoneyInsLocalPaymentsApiService) MoneyInsMbwayInitPostExecute(r ApiMone
         if authProviderAuthType, ok := r.ctx.Value(authorizationFromProviderCtxKey).(AuthType); ok && authProviderAuthType != "" {
             token, err := a.client.authProvider.GetToken()
             if err != nil {
-                return localVarReturnValue, nil, err
+                return localVarReturnValue, nil, &GenericOpenAPIError{
+                    body: nil,
+                    error: err.Error(),
+                    model: localAdditionalValues,
+                }
             }
             localAdditionalValues["authorization"] = string(authProviderAuthType)+" "+token
         }
@@ -656,7 +668,7 @@ func (r ApiMoneyInsMobilePayInitPostRequest) Execute() (*MoneyInMobilePayInitOut
 }
 
 /*
-MoneyInsMobilePayInitPost Initialize MobilePay Payment
+MoneyInsMobilePayInitPost (Deprecated) Initialize MobilePay Payment
 
 You will need two integration points on your code:
 <ul><li>One call to Lemonway DirectKit API to init MobilePay payment to credit the payment account</li><li>One redirection from your website to the return URL by MobilePay</li></ul>
@@ -697,7 +709,11 @@ func (a *MoneyInsLocalPaymentsApiService) MoneyInsMobilePayInitPostExecute(r Api
         if authProviderAuthType, ok := r.ctx.Value(authorizationFromProviderCtxKey).(AuthType); ok && authProviderAuthType != "" {
             token, err := a.client.authProvider.GetToken()
             if err != nil {
-                return localVarReturnValue, nil, err
+                return localVarReturnValue, nil, &GenericOpenAPIError{
+                    body: nil,
+                    error: err.Error(),
+                    model: localAdditionalValues,
+                }
             }
             localAdditionalValues["authorization"] = string(authProviderAuthType)+" "+token
         }
@@ -891,7 +907,11 @@ func (a *MoneyInsLocalPaymentsApiService) MoneyInsMultibancoInitPostExecute(r Ap
         if authProviderAuthType, ok := r.ctx.Value(authorizationFromProviderCtxKey).(AuthType); ok && authProviderAuthType != "" {
             token, err := a.client.authProvider.GetToken()
             if err != nil {
-                return localVarReturnValue, nil, err
+                return localVarReturnValue, nil, &GenericOpenAPIError{
+                    body: nil,
+                    error: err.Error(),
+                    model: localAdditionalValues,
+                }
             }
             localAdditionalValues["authorization"] = string(authProviderAuthType)+" "+token
         }
@@ -1044,7 +1064,7 @@ func (r ApiMoneyInsPayTrailInitPostRequest) Execute() (*MoneyInPayTrailInitOutpu
 }
 
 /*
-MoneyInsPayTrailInitPost Initialize PayTrail Payment (Deprecated)
+MoneyInsPayTrailInitPost (Deprecated) Initialize PayTrail Payment
 
 You will need 2 integration points on your code:
 <ul><li>One call to Lemonway DirectKit API to init PayTrail payment to credit the payment account</li><li>One redirection from your website to the return URL by PayTrail</li></ul>
@@ -1085,7 +1105,11 @@ func (a *MoneyInsLocalPaymentsApiService) MoneyInsPayTrailInitPostExecute(r ApiM
         if authProviderAuthType, ok := r.ctx.Value(authorizationFromProviderCtxKey).(AuthType); ok && authProviderAuthType != "" {
             token, err := a.client.authProvider.GetToken()
             if err != nil {
-                return localVarReturnValue, nil, err
+                return localVarReturnValue, nil, &GenericOpenAPIError{
+                    body: nil,
+                    error: err.Error(),
+                    model: localAdditionalValues,
+                }
             }
             localAdditionalValues["authorization"] = string(authProviderAuthType)+" "+token
         }
@@ -1238,7 +1262,7 @@ func (r ApiMoneyInsPayshopInitPostRequest) Execute() (*MoneyInPayshopInitOutput,
 }
 
 /*
-MoneyInsPayshopInitPost Initialize Payshop Payment
+MoneyInsPayshopInitPost (Deprecated) Initialize Payshop Payment
 
 Payment process
 <ul><li>Your system will call the Lemonway DirectKit API to initialize the credit transaction of a payment account and get a payment reference</li><li>Your system gives the payment reference to the final customer</li><li>The customer uses the reference to pay in a shop</li><li>Your system will be notified after the payment is settled</li></ul>
@@ -1279,7 +1303,11 @@ func (a *MoneyInsLocalPaymentsApiService) MoneyInsPayshopInitPostExecute(r ApiMo
         if authProviderAuthType, ok := r.ctx.Value(authorizationFromProviderCtxKey).(AuthType); ok && authProviderAuthType != "" {
             token, err := a.client.authProvider.GetToken()
             if err != nil {
-                return localVarReturnValue, nil, err
+                return localVarReturnValue, nil, &GenericOpenAPIError{
+                    body: nil,
+                    error: err.Error(),
+                    model: localAdditionalValues,
+                }
             }
             localAdditionalValues["authorization"] = string(authProviderAuthType)+" "+token
         }
@@ -1432,7 +1460,7 @@ func (r ApiMoneyInsSofortInitPostRequest) Execute() (*MoneyInSofortInitOutput, *
 }
 
 /*
-MoneyInsSofortInitPost Initialize Sofort Payment
+MoneyInsSofortInitPost (Deprecated) Initialize Sofort Payment
 
 You will need 2 integration points on your code:
 <ul><li>One call to Lemonway DirectKit API to init Sofort payment to credit the payment account</li><li>One redirection from your website to the return URL by Sofort</li></ul>
@@ -1473,7 +1501,11 @@ func (a *MoneyInsLocalPaymentsApiService) MoneyInsSofortInitPostExecute(r ApiMon
         if authProviderAuthType, ok := r.ctx.Value(authorizationFromProviderCtxKey).(AuthType); ok && authProviderAuthType != "" {
             token, err := a.client.authProvider.GetToken()
             if err != nil {
-                return localVarReturnValue, nil, err
+                return localVarReturnValue, nil, &GenericOpenAPIError{
+                    body: nil,
+                    error: err.Error(),
+                    model: localAdditionalValues,
+                }
             }
             localAdditionalValues["authorization"] = string(authProviderAuthType)+" "+token
         }
@@ -1626,7 +1658,7 @@ func (r ApiMoneyInsTrustlyInitPostRequest) Execute() (*MoneyInTrustlyInitOutput,
 }
 
 /*
-MoneyInsTrustlyInitPost Initialize Trustly Payment
+MoneyInsTrustlyInitPost (Deprecated) Initialize Trustly Payment
 
 Trustly is a Swedish payment method used in 29 European countries. With Trustly you can buy and pay from your bank account.
 
@@ -1666,7 +1698,11 @@ func (a *MoneyInsLocalPaymentsApiService) MoneyInsTrustlyInitPostExecute(r ApiMo
         if authProviderAuthType, ok := r.ctx.Value(authorizationFromProviderCtxKey).(AuthType); ok && authProviderAuthType != "" {
             token, err := a.client.authProvider.GetToken()
             if err != nil {
-                return localVarReturnValue, nil, err
+                return localVarReturnValue, nil, &GenericOpenAPIError{
+                    body: nil,
+                    error: err.Error(),
+                    model: localAdditionalValues,
+                }
             }
             localAdditionalValues["authorization"] = string(authProviderAuthType)+" "+token
         }

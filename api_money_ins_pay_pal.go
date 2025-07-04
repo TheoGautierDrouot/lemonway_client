@@ -85,7 +85,7 @@ func (r ApiMoneyInsMoneyInPayPalInitRequest) Execute() (*InitPayPalTransactionOu
 }
 
 /*
-MoneyInsMoneyInPayPalInit Initate Pay by PayPal
+MoneyInsMoneyInPayPalInit Initiate Pay by PayPal
 
 Lets you integrate PayPal payments on your platform. The integration is implemented as a standard web page redirect to PayPal.com, it enables buyers to login to their accounts and make a payment to your organization.
 
@@ -125,7 +125,11 @@ func (a *MoneyInsPayPalApiService) MoneyInsMoneyInPayPalInitExecute(r ApiMoneyIn
         if authProviderAuthType, ok := r.ctx.Value(authorizationFromProviderCtxKey).(AuthType); ok && authProviderAuthType != "" {
             token, err := a.client.authProvider.GetToken()
             if err != nil {
-                return localVarReturnValue, nil, err
+                return localVarReturnValue, nil, &GenericOpenAPIError{
+                    body: nil,
+                    error: err.Error(),
+                    model: localAdditionalValues,
+                }
             }
             localAdditionalValues["authorization"] = string(authProviderAuthType)+" "+token
         }
@@ -319,7 +323,11 @@ func (a *MoneyInsPayPalApiService) MoneyInsPayPalTransactionResumeExecute(r ApiM
         if authProviderAuthType, ok := r.ctx.Value(authorizationFromProviderCtxKey).(AuthType); ok && authProviderAuthType != "" {
             token, err := a.client.authProvider.GetToken()
             if err != nil {
-                return localVarReturnValue, nil, err
+                return localVarReturnValue, nil, &GenericOpenAPIError{
+                    body: nil,
+                    error: err.Error(),
+                    model: localAdditionalValues,
+                }
             }
             localAdditionalValues["authorization"] = string(authProviderAuthType)+" "+token
         }

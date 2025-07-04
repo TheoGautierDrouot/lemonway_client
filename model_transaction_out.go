@@ -30,7 +30,7 @@ type TransactionOut struct {
 	BuyNowPayLaterInfo *BnplInfo `json:"buyNowPayLaterInfo,omitempty"`
 	// Transaction ID
 	Id *int64 `json:"id,omitempty"`
-	// Payment Method    0 Card      1 Bank transfer (MoneyIn)       3 Bank transfer (MoneyOut)       4 P2P      13 iDEAL      14 SEPA DirectDebit      15 Cheque      17 Sofort      19 Multibanco      21 MBWAY      23 Pagare        30 BNPL    35 PayPal     ---   **Important:** The following services have been discontinued.      16 Neosurf    18 PFS Physical Card    20 Payshop    22 Polish Instant Transfer     24 MobilePay  25 Paytrail  26 WeChat    27 P24    28 MoneyIn by TPE    29 Trustly
+	// Payment Method    0 Card      1 Bank transfer (MoneyIn)       3 Bank transfer (MoneyOut)       4 P2P      13 iDEAL      14 SEPA DirectDebit      15 Cheque      19 Multibanco      21 MBWAY      30 BNPL    35 PayPal     ---   **Important:** The following services have been discontinued.      16 Neosurf    17 Sofort    18 PFS Physical Card    20 Payshop    22 Polish Instant Transfer    23 Pagare    24 MobilePay  25 Paytrail  26 WeChat    27 P24    28 MoneyIn by TPE    29 Trustly
 	Method *int32 `json:"method,omitempty"`
 	// Payment Method Details  0 Standard  1 Pay By Bank<br/>0 = STANDARD.<br/>1 = PAY_BY_BANK.<br/>
 	MethodDetails *int32 `json:"methodDetails,omitempty"`
@@ -40,7 +40,7 @@ type TransactionOut struct {
 	CommissionAmount *int32 `json:"commissionAmount,omitempty"`
 	// Comment
 	Comment *string `json:"comment,omitempty"`
-	// **Money-In and Money-Out**         0: Success    3: Lemonway Error    4: Pending    6: PSP error    7: Cancelled    16: Validation pending      **Important:**  For /v2/moneyins/{transactionid}/validate` use the status codes:      0: Waiting for finalization      3: Success      4: Lemonway Error      6: PSP Error    7: Cancelled    16: Validation Pending                **P2P**    0: Pending    3: Success
+	// **Money-In**         0: Success    3: Lemonway Error    4: Pending    6: PSP error    7: Cancelled    16: Validation pending      **Money-Out**      **Important:**  For /v2/moneyins/{transactionid}/validate` use the status codes:      0: Waiting for finalization      3: Success      4: Lemonway Error                    **P2P**    0: Pending    3: Success
 	Status *int32 `json:"status,omitempty"`
 	// Transaction execution date
 	ExecutionDate *int32 `json:"executionDate,omitempty"`

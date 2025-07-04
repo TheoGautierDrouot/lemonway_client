@@ -10,7 +10,7 @@ Method | HTTP request | Description
 [**AccountsBlockedPut**](AccountsAdminApi.md#AccountsBlockedPut) | **Put** /v2/accounts/{accountid}/blocked | Block or Unblock an Account
 [**AccountsDocumentGet**](AccountsAdminApi.md#AccountsDocumentGet) | **Get** /v2/accounts/{accountid}/documents | Get Documents Associated with a Payment Account
 [**AccountsDocumentsSignInitPost**](AccountsAdminApi.md#AccountsDocumentsSignInitPost) | **Post** /v2/accounts/{accountid}/documents/{documentid}/signinit | Generate an Electronic Signature of a Document
-[**AccountsEnrolmentInit**](AccountsAdminApi.md#AccountsEnrolmentInit) | **Post** /v2/accounts/{accountid}/enrolment/init | Initialize a Deutsche Post POSTIDENT Identification
+[**AccountsEnrolmentInit**](AccountsAdminApi.md#AccountsEnrolmentInit) | **Post** /v2/accounts/{accountid}/enrolment/init | (Deprecated) Initialize a Deutsche Post POSTIDENT Identification
 [**AccountsRetrievePost**](AccountsAdminApi.md#AccountsRetrievePost) | **Post** /v2/accounts/retrieve | Get Detailed Payments Accounts Data
 [**AccountsTransactionsGet**](AccountsAdminApi.md#AccountsTransactionsGet) | **Get** /v2/accounts/{accountId}/transactions | Get list of all Payment Account transactions
 
@@ -499,7 +499,7 @@ No authorization required
 
 > EnrolmentInitOutput AccountsEnrolmentInit(ctx, accountid).Authorization(authorization).PSUIPAddress(pSUIPAddress).Parameters(parameters).PSUAcceptLanguage(pSUAcceptLanguage).PSUUserAgent(pSUUserAgent).Execute()
 
-Initialize a Deutsche Post POSTIDENT Identification
+(Deprecated) Initialize a Deutsche Post POSTIDENT Identification
 
 ### Example
 

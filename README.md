@@ -84,7 +84,7 @@ Class | Method | HTTP request | Description
 *AccountsAdminApi* | [**AccountsBlockedPut**](docs/AccountsAdminApi.md#accountsblockedput) | **Put** /v2/accounts/{accountid}/blocked | Block or Unblock an Account
 *AccountsAdminApi* | [**AccountsDocumentGet**](docs/AccountsAdminApi.md#accountsdocumentget) | **Get** /v2/accounts/{accountid}/documents | Get Documents Associated with a Payment Account
 *AccountsAdminApi* | [**AccountsDocumentsSignInitPost**](docs/AccountsAdminApi.md#accountsdocumentssigninitpost) | **Post** /v2/accounts/{accountid}/documents/{documentid}/signinit | Generate an Electronic Signature of a Document
-*AccountsAdminApi* | [**AccountsEnrolmentInit**](docs/AccountsAdminApi.md#accountsenrolmentinit) | **Post** /v2/accounts/{accountid}/enrolment/init | Initialize a Deutsche Post POSTIDENT Identification
+*AccountsAdminApi* | [**AccountsEnrolmentInit**](docs/AccountsAdminApi.md#accountsenrolmentinit) | **Post** /v2/accounts/{accountid}/enrolment/init | (Deprecated) Initialize a Deutsche Post POSTIDENT Identification
 *AccountsAdminApi* | [**AccountsRetrievePost**](docs/AccountsAdminApi.md#accountsretrievepost) | **Post** /v2/accounts/retrieve | Get Detailed Payments Accounts Data
 *AccountsAdminApi* | [**AccountsTransactionsGet**](docs/AccountsAdminApi.md#accountstransactionsget) | **Get** /v2/accounts/{accountId}/transactions | Get list of all Payment Account transactions
 *AccountsCreateKYCApi* | [**AccountsAddUltimateBeneficialOwner**](docs/AccountsCreateKYCApi.md#accountsaddultimatebeneficialowner) | **Post** /v2/accounts/{accountId}/ultimateBeneficialOwner | Create an Ultimate Beneficial Owner
@@ -126,21 +126,22 @@ Class | Method | HTTP request | Description
 *MoneyInsDirectDebitsApi* | [**MoneyInsSddMandateUnregisterPut**](docs/MoneyInsDirectDebitsApi.md#moneyinssddmandateunregisterput) | **Put** /v2/moneyins/sdd/mandate/{mandatid}/unregister | Deactivate a Mandate
 *MoneyInsLocalPaymentsApi* | [**MoneyInsIDealConfirmPut**](docs/MoneyInsLocalPaymentsApi.md#moneyinsidealconfirmput) | **Put** /v2/moneyins/ideal/{transactionid}/confirm | Finalize an iDeal Payment
 *MoneyInsLocalPaymentsApi* | [**MoneyInsIDealInitPost**](docs/MoneyInsLocalPaymentsApi.md#moneyinsidealinitpost) | **Post** /v2/moneyins/ideal/init | Initialize iDeal Payment
-*MoneyInsLocalPaymentsApi* | [**MoneyInsMbwayInitPost**](docs/MoneyInsLocalPaymentsApi.md#moneyinsmbwayinitpost) | **Post** /v2/moneyins/mbway/init | Initialize MB WAY Payment
-*MoneyInsLocalPaymentsApi* | [**MoneyInsMobilePayInitPost**](docs/MoneyInsLocalPaymentsApi.md#moneyinsmobilepayinitpost) | **Post** /v2/moneyins/mobilePay/init | Initialize MobilePay Payment
+*MoneyInsLocalPaymentsApi* | [**MoneyInsMbwayInitPost**](docs/MoneyInsLocalPaymentsApi.md#moneyinsmbwayinitpost) | **Post** /v2/moneyins/mbway/init | (Deprecated) Initialize MB WAY Payment
+*MoneyInsLocalPaymentsApi* | [**MoneyInsMobilePayInitPost**](docs/MoneyInsLocalPaymentsApi.md#moneyinsmobilepayinitpost) | **Post** /v2/moneyins/mobilePay/init | (Deprecated) Initialize MobilePay Payment
 *MoneyInsLocalPaymentsApi* | [**MoneyInsMultibancoInitPost**](docs/MoneyInsLocalPaymentsApi.md#moneyinsmultibancoinitpost) | **Post** /v2/moneyins/multibanco/init | Initialize Multibanco Payment
-*MoneyInsLocalPaymentsApi* | [**MoneyInsPayTrailInitPost**](docs/MoneyInsLocalPaymentsApi.md#moneyinspaytrailinitpost) | **Post** /v2/moneyins/paytrail/init | Initialize PayTrail Payment (Deprecated)
-*MoneyInsLocalPaymentsApi* | [**MoneyInsPayshopInitPost**](docs/MoneyInsLocalPaymentsApi.md#moneyinspayshopinitpost) | **Post** /v2/moneyins/payshop/init | Initialize Payshop Payment
-*MoneyInsLocalPaymentsApi* | [**MoneyInsSofortInitPost**](docs/MoneyInsLocalPaymentsApi.md#moneyinssofortinitpost) | **Post** /v2/moneyins/sofort/init | Initialize Sofort Payment
-*MoneyInsLocalPaymentsApi* | [**MoneyInsTrustlyInitPost**](docs/MoneyInsLocalPaymentsApi.md#moneyinstrustlyinitpost) | **Post** /v2/moneyins/trustly/init | Initialize Trustly Payment
+*MoneyInsLocalPaymentsApi* | [**MoneyInsPayTrailInitPost**](docs/MoneyInsLocalPaymentsApi.md#moneyinspaytrailinitpost) | **Post** /v2/moneyins/paytrail/init | (Deprecated) Initialize PayTrail Payment
+*MoneyInsLocalPaymentsApi* | [**MoneyInsPayshopInitPost**](docs/MoneyInsLocalPaymentsApi.md#moneyinspayshopinitpost) | **Post** /v2/moneyins/payshop/init | (Deprecated) Initialize Payshop Payment
+*MoneyInsLocalPaymentsApi* | [**MoneyInsSofortInitPost**](docs/MoneyInsLocalPaymentsApi.md#moneyinssofortinitpost) | **Post** /v2/moneyins/sofort/init | (Deprecated) Initialize Sofort Payment
+*MoneyInsLocalPaymentsApi* | [**MoneyInsTrustlyInitPost**](docs/MoneyInsLocalPaymentsApi.md#moneyinstrustlyinitpost) | **Post** /v2/moneyins/trustly/init | (Deprecated) Initialize Trustly Payment
 *MoneyInsPayByBankApi* | [**MoneyInsGetMoneyInBanks**](docs/MoneyInsPayByBankApi.md#moneyinsgetmoneyinbanks) | **Get** /v2/moneyins/paybybank/transfer/banks | Get Pay by Bank List
 *MoneyInsPayByBankApi* | [**MoneyInsMoneyInTransferInit**](docs/MoneyInsPayByBankApi.md#moneyinsmoneyintransferinit) | **Post** /v2/moneyins/paybybank/transfer/init | Initiate Pay by Bank
 *MoneyInsPayByLinkApi* | [**MoneyInsCardPaymentFormPost**](docs/MoneyInsPayByLinkApi.md#moneyinscardpaymentformpost) | **Post** /v2/moneyins/card/paymentform | Create Payment Form (Pay by Link)
 *MoneyInsPayByLinkApi* | [**MoneyInsPaymentFormCompletedGet**](docs/MoneyInsPayByLinkApi.md#moneyinspaymentformcompletedget) | **Get** /v2/moneyins/paymentform/{formid}/completed | Get Details of a Completed Payment Form
 *MoneyInsPayByLinkApi* | [**MoneyInsPaymentFormDisablePut**](docs/MoneyInsPayByLinkApi.md#moneyinspaymentformdisableput) | **Put** /v2/moneyins/paymentform/{formid}/disable | Disable a Payment Form
-*MoneyInsPayPalApi* | [**MoneyInsMoneyInPayPalInit**](docs/MoneyInsPayPalApi.md#moneyinsmoneyinpaypalinit) | **Post** /v2/moneyins/paypal/init | Initate Pay by PayPal
+*MoneyInsPayPalApi* | [**MoneyInsMoneyInPayPalInit**](docs/MoneyInsPayPalApi.md#moneyinsmoneyinpaypalinit) | **Post** /v2/moneyins/paypal/init | Initiate Pay by PayPal
 *MoneyInsPayPalApi* | [**MoneyInsPayPalTransactionResume**](docs/MoneyInsPayPalApi.md#moneyinspaypaltransactionresume) | **Post** /v2/moneyins/paypal/{transactionId}/resume | PayPal Resume
 *MoneyInsTransfersInApi* | [**MoneyInsBankwireGet**](docs/MoneyInsTransfersInApi.md#moneyinsbankwireget) | **Get** /v2/moneyins/bankwire | Search for a Money-In by Fund Transfer
+*MoneyInsVirtualIBANApi* | [**MoneyInsBankwireIbanCountGet**](docs/MoneyInsVirtualIBANApi.md#moneyinsbankwireibancountget) | **Get** /v2/moneyins/bankwire/iban/count | Get VIBANs count
 *MoneyInsVirtualIBANApi* | [**MoneyInsBankwireIbanCreatePost**](docs/MoneyInsVirtualIBANApi.md#moneyinsbankwireibancreatepost) | **Post** /v2/moneyins/bankwire/iban/create | Create Dedicated Virtual IBANs
 *MoneyInsVirtualIBANApi* | [**MoneyInsBankwireIbanDisablePost**](docs/MoneyInsVirtualIBANApi.md#moneyinsbankwireibandisablepost) | **Post** /v2/moneyins/bankwire/iban/{ibanid}/disable | Disable a Dedicated Virtual IBAN
 *MoneyOutsApi* | [**MoneyOutsCancelPut**](docs/MoneyOutsApi.md#moneyoutscancelput) | **Put** /v2/moneyouts/{transactionid}/cancel | Money-Out Cancellation
@@ -240,6 +241,7 @@ Class | Method | HTTP request | Description
  - [GetPaymentDetailsOutput](docs/GetPaymentDetailsOutput.md)
  - [GetPaymentPlansOutput](docs/GetPaymentPlansOutput.md)
  - [GetUltimateBeneficialOwnerOutput](docs/GetUltimateBeneficialOwnerOutput.md)
+ - [GetVibanCountOutput](docs/GetVibanCountOutput.md)
  - [Holder](docs/Holder.md)
  - [Iban](docs/Iban.md)
  - [IndividualAccount](docs/IndividualAccount.md)
@@ -326,7 +328,7 @@ Class | Method | HTTP request | Description
  - [SendPaymentOutput](docs/SendPaymentOutput.md)
  - [SignDocumentInitInput](docs/SignDocumentInitInput.md)
  - [SignDocumentInitOutput](docs/SignDocumentInitOutput.md)
- - [ThreeDs](docs/ThreeDs.md)
+ - [ThreeDS](docs/ThreeDS.md)
  - [ThreeDs](docs/ThreeDs.md)
  - [Transaction](docs/Transaction.md)
  - [TransactionAccount](docs/TransactionAccount.md)

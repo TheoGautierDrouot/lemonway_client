@@ -10,7 +10,8 @@ Name | Type | Description | Notes
 **CommissionAmount** | **int32** | Commission Amount | 
 **Comment** | Pointer to **string** | Comment | [optional] 
 **AutoCommission** | Pointer to **bool** | Auto Commission | [optional] 
-**IsPreAuth** | Pointer to **bool** | Intention to authorize | [optional] 
+**IsPreAuth** | Pointer to **bool** |  | [optional] 
+**CaptureMode** | Pointer to **int32** | Specifies the capture mode for the payment:  Automatic results in a Capture type, and Manual results in an Authorize type.&lt;br/&gt;1 &#x3D; Automatic.&lt;br/&gt;2 &#x3D; Manual.&lt;br/&gt; | [optional] 
 
 ## Methods
 
@@ -185,6 +186,31 @@ SetIsPreAuth sets IsPreAuth field to given value.
 `func (o *Transaction) HasIsPreAuth() bool`
 
 HasIsPreAuth returns a boolean if a field has been set.
+
+### GetCaptureMode
+
+`func (o *Transaction) GetCaptureMode() int32`
+
+GetCaptureMode returns the CaptureMode field if non-nil, zero value otherwise.
+
+### GetCaptureModeOk
+
+`func (o *Transaction) GetCaptureModeOk() (*int32, bool)`
+
+GetCaptureModeOk returns a tuple with the CaptureMode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCaptureMode
+
+`func (o *Transaction) SetCaptureMode(v int32)`
+
+SetCaptureMode sets CaptureMode field to given value.
+
+### HasCaptureMode
+
+`func (o *Transaction) HasCaptureMode() bool`
+
+HasCaptureMode returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -30,9 +30,9 @@ type MoneyInWebInitInput struct {
 	Label *string `json:"label,omitempty"`
 	// Indicates the CardId
 	CardId *string `json:"cardId,omitempty"`
-	// Indicates the nature of activity for this Money-In:<br/>0 = Activite 1.<br/>1 = Activite 2.<br/>
+	// Indicates the nature of activity for this Money-In:<br/>0 = Activity 1.<br/>1 = Activity 2.<br/>
 	MoneyInNature *int32 `json:"moneyInNature,omitempty"`
-	ThreeDs *ThreeDs `json:"threeDS,omitempty"`
+	ThreeDS *ThreeDS `json:"threeDS,omitempty"`
 	RiskAnalysis *RiskAnalysis `json:"riskAnalysis,omitempty"`
 	// Average amount of future recurring payments to cover recurring payments with variable amounts.    **Note:** Only if the amount is higher than the amount of the first transaction.
 	RecurringAvgAmount *int32 `json:"recurringAvgAmount,omitempty"`
@@ -48,7 +48,7 @@ type MoneyInWebInitInput struct {
 	CommissionAmount *int32 `json:"commissionAmount,omitempty"`
 	// Comment Regarding the Transaction
 	Comment *string `json:"comment,omitempty"`
-	// If true:  1. [amountCom] will be ignored and will be replaced with Lemonway's fee  2. You will not receive any fee
+	// If true:  1. [amountCom] will be ignored and will be replaced with Lemonway's fee    2. You will not receive any fee
 	AutoCommission *bool `json:"autoCommission,omitempty"`
 }
 
@@ -305,36 +305,36 @@ func (o *MoneyInWebInitInput) SetMoneyInNature(v int32) {
 	o.MoneyInNature = &v
 }
 
-// GetThreeDS returns the ThreeDs field value if set, zero value otherwise.
-func (o *MoneyInWebInitInput) GetThreeDS() ThreeDs {
-	if o == nil || o.ThreeDs == nil {
-		var ret ThreeDs
+// GetThreeDS returns the ThreeDS field value if set, zero value otherwise.
+func (o *MoneyInWebInitInput) GetThreeDS() ThreeDS {
+	if o == nil || o.ThreeDS == nil {
+		var ret ThreeDS
 		return ret
 	}
-	return *o.ThreeDs
+	return *o.ThreeDS
 }
 
-// GetThreeDSOk returns a tuple with the ThreeDs field value if set, nil otherwise
+// GetThreeDSOk returns a tuple with the ThreeDS field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *MoneyInWebInitInput) GetThreeDSOk() (*ThreeDs, bool) {
-	if o == nil || o.ThreeDs == nil {
+func (o *MoneyInWebInitInput) GetThreeDSOk() (*ThreeDS, bool) {
+	if o == nil || o.ThreeDS == nil {
 		return nil, false
 	}
-	return o.ThreeDs, true
+	return o.ThreeDS, true
 }
 
 // HasThreeDS returns a boolean if a field has been set.
 func (o *MoneyInWebInitInput) HasThreeDS() bool {
-	if o != nil && o.ThreeDs != nil {
+	if o != nil && o.ThreeDS != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetThreeDS gets a reference to the given ThreeDs and assigns it to the ThreeDs field.
-func (o *MoneyInWebInitInput) SetThreeDS(v ThreeDs) {
-	o.ThreeDs = &v
+// SetThreeDS gets a reference to the given ThreeDS and assigns it to the ThreeDS field.
+func (o *MoneyInWebInitInput) SetThreeDS(v ThreeDS) {
+	o.ThreeDS = &v
 }
 
 // GetRiskAnalysis returns the RiskAnalysis field value if set, zero value otherwise.
@@ -643,8 +643,8 @@ func (o MoneyInWebInitInput) MarshalJSON() ([]byte, error) {
 	if o.MoneyInNature != nil {
 		toSerialize["moneyInNature"] = o.MoneyInNature
 	}
-	if o.ThreeDs != nil {
-		toSerialize["threeDS"] = o.ThreeDs
+	if o.ThreeDS != nil {
+		toSerialize["threeDS"] = o.ThreeDS
 	}
 	if o.RiskAnalysis != nil {
 		toSerialize["riskAnalysis"] = o.RiskAnalysis

@@ -28,8 +28,9 @@ type Transaction struct {
 	Comment *string `json:"comment,omitempty"`
 	// Auto Commission
 	AutoCommission *bool `json:"autoCommission,omitempty"`
-	// Intention to authorize
 	IsPreAuth *bool `json:"isPreAuth,omitempty"`
+	// Specifies the capture mode for the payment:  Automatic results in a Capture type, and Manual results in an Authorize type.<br/>1 = Automatic.<br/>2 = Manual.<br/>
+	CaptureMode *int32 `json:"captureMode,omitempty"`
 }
 
 // NewTransaction instantiates a new Transaction object
@@ -245,6 +246,38 @@ func (o *Transaction) SetIsPreAuth(v bool) {
 	o.IsPreAuth = &v
 }
 
+// GetCaptureMode returns the CaptureMode field value if set, zero value otherwise.
+func (o *Transaction) GetCaptureMode() int32 {
+	if o == nil || o.CaptureMode == nil {
+		var ret int32
+		return ret
+	}
+	return *o.CaptureMode
+}
+
+// GetCaptureModeOk returns a tuple with the CaptureMode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Transaction) GetCaptureModeOk() (*int32, bool) {
+	if o == nil || o.CaptureMode == nil {
+		return nil, false
+	}
+	return o.CaptureMode, true
+}
+
+// HasCaptureMode returns a boolean if a field has been set.
+func (o *Transaction) HasCaptureMode() bool {
+	if o != nil && o.CaptureMode != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCaptureMode gets a reference to the given int32 and assigns it to the CaptureMode field.
+func (o *Transaction) SetCaptureMode(v int32) {
+	o.CaptureMode = &v
+}
+
 func (o Transaction) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
@@ -267,6 +300,9 @@ func (o Transaction) MarshalJSON() ([]byte, error) {
 	}
 	if o.IsPreAuth != nil {
 		toSerialize["isPreAuth"] = o.IsPreAuth
+	}
+	if o.CaptureMode != nil {
+		toSerialize["captureMode"] = o.CaptureMode
 	}
 	return json.Marshal(toSerialize)
 }

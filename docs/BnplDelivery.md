@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**DeliveryMode** | **string** |  | 
+**DeliveryMode** | **string** | Possible values:     &#x60;CollectionOfTheGoodsInTheMerchantStore&#x60;  &#x60;CollectionInAThirdPartyPoint&#x60;  &#x60;DeliveryToCustomerAddress&#x60; | 
 **ExpressDelivery** | **bool** |  | 
 **DeliveryAddress** | [**BnplAddress**](BnplAddress.md) |  | 
 **DeliveryPointName** | Pointer to **string** | Pickup name or recipient name.  Mandatory only if DeliveryMode is not \&quot;DeliveryToCustomerAddress\&quot;. | [optional] 

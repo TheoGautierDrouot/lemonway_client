@@ -64,6 +64,8 @@ type APIClient struct {
 
 	MoneyInsChequeApi *MoneyInsChequeApiService
 
+	MoneyInsDirectDebitsApi *MoneyInsDirectDebitsApiService
+
 	MoneyInsLocalPaymentsApi *MoneyInsLocalPaymentsApiService
 
 	MoneyInsPayByBankApi *MoneyInsPayByBankApiService
@@ -106,6 +108,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.MoneyInsBNPLApi = (*MoneyInsBNPLApiService)(&c.common)
 	c.MoneyInsCardsApi = (*MoneyInsCardsApiService)(&c.common)
 	c.MoneyInsChequeApi = (*MoneyInsChequeApiService)(&c.common)
+	c.MoneyInsDirectDebitsApi = (*MoneyInsDirectDebitsApiService)(&c.common)
 	c.MoneyInsLocalPaymentsApi = (*MoneyInsLocalPaymentsApiService)(&c.common)
 	c.MoneyInsPayByBankApi = (*MoneyInsPayByBankApiService)(&c.common)
 	c.MoneyInsPayByLinkApi = (*MoneyInsPayByLinkApiService)(&c.common)

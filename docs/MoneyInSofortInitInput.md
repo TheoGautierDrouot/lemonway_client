@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **TotalAmount** | Pointer to **int32** | Amount to Debit  Amounts are given as integer numbers in cents | [optional] 
 **CommissionAmount** | Pointer to **int32** | Your Fee  Amounts are given as integer numbers in cents | [optional] 
 **Comment** | Pointer to **string** | Comment Regarding the Transaction | [optional] 
-**AutoCommission** | Pointer to **bool** | If true:  1. [amountCom] will be ignored and will be replaced with Lemonway&#39;s fee  2. You will not receive any fee | [optional] 
+**AutoCommission** | Pointer to **bool** | If true:  1. [amountCom] will be ignored and will be replaced with Lemonway&#39;s fee    2. You will not receive any fee | [optional] 
 
 ## Methods
 

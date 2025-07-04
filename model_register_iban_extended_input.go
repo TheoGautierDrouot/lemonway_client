@@ -41,7 +41,7 @@ type RegisterIBANExtendedInput struct {
 	IntermediaryBankName *string `json:"intermediaryBankName,omitempty"`
 	// Bank Country Code of the Intermediary Bank. Two-letter country code (ISO alpha-2) for example, France=<b>FR</b>
 	IntermediaryBankCountry *string `json:"intermediaryBankCountry,omitempty"`
-	// Reason for New Bank Account Details if another one is already linked to the Payment Account.
+	// Reason for new Bank Account details if another one is already linked to the Payment Account.
 	Comment *string `json:"comment,omitempty"`
 }
 

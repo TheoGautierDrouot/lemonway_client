@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**DebitAccountId** | **string** | Wallet ID to be Debited | 
-**CreditAccountId** | **string** | Wallet ID to Credited | 
+**DebitAccountId** | **string** | Account ID to be Debited | 
+**CreditAccountId** | **string** | Account ID to Credited | 
 **Amount** | Pointer to **int32** | Payment Amount | [optional] 
 **Comment** | Pointer to **string** | Payment Comment | [optional] 
 **ScheduledDate** | Pointer to **string** | If scheduledDate is set, the following rules will apply:  1. ScheduledDate cannot be equal to the current date, Paris time (CET).  2. The payment will be inserted but not executed, the status will be pending and necessary checks like user balance or user status will not be checked.  3. At 1am, Paris time (CET), on [scheduledDate], the checks will be performed and the payment will be finalized.  **This feature is only available for some partners, contact commercial services for more information.** | [optional] 

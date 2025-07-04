@@ -23,6 +23,188 @@ import (
 // MoneyInsVirtualIBANApiService MoneyInsVirtualIBANApi service
 type MoneyInsVirtualIBANApiService service
 
+type ApiMoneyInsBankwireIbanCountGetRequest struct {
+	ctx context.Context
+	ApiService *MoneyInsVirtualIBANApiService
+	authorization *string
+	pSUIPAddress *string
+	pSUAcceptLanguage *string
+	pSUUserAgent *string
+}
+
+// Authorization bearer (OAuth 2)
+func (r ApiMoneyInsBankwireIbanCountGetRequest) Authorization(authorization string) ApiMoneyInsBankwireIbanCountGetRequest {
+	r.authorization = &authorization
+	return r
+}
+
+// IP address of the final client (PSU).
+func (r ApiMoneyInsBankwireIbanCountGetRequest) PSUIPAddress(pSUIPAddress string) ApiMoneyInsBankwireIbanCountGetRequest {
+	r.pSUIPAddress = &pSUIPAddress
+	return r
+}
+
+// Response language accepted by final client (PSU). English by default
+func (r ApiMoneyInsBankwireIbanCountGetRequest) PSUAcceptLanguage(pSUAcceptLanguage string) ApiMoneyInsBankwireIbanCountGetRequest {
+	r.pSUAcceptLanguage = &pSUAcceptLanguage
+	return r
+}
+
+// User-agent of the final client (PSU).
+func (r ApiMoneyInsBankwireIbanCountGetRequest) PSUUserAgent(pSUUserAgent string) ApiMoneyInsBankwireIbanCountGetRequest {
+	r.pSUUserAgent = &pSUUserAgent
+	return r
+}
+
+
+// Use Authorization from given provider. Overrides usage of manually set Authorization header.
+// Auth type describes authorization type to use, like "Bearer" or "Basic"
+func (r ApiMoneyInsBankwireIbanCountGetRequest) AuthorizationFromProvider(authType AuthType) ApiMoneyInsBankwireIbanCountGetRequest {
+    r.ctx = context.WithValue(r.ctx, authorizationFromProviderCtxKey, authType)
+    return r
+}
+
+// Use Basic Authorization from given provider. Overrides usage of manually set Authorization header.
+func (r ApiMoneyInsBankwireIbanCountGetRequest) AuthorizationBasicFromProvider() ApiMoneyInsBankwireIbanCountGetRequest {
+    return r.AuthorizationFromProvider(AuthTypeBasic)
+}
+
+// Use Bearer Authorization from given provider. Overrides usage of manually set Authorization header.
+func (r ApiMoneyInsBankwireIbanCountGetRequest) AuthorizationBearerFromProvider() ApiMoneyInsBankwireIbanCountGetRequest {
+    return r.AuthorizationFromProvider(AuthTypeBearer)
+}
+
+func (r ApiMoneyInsBankwireIbanCountGetRequest) Execute() (*GetVibanCountOutput, *http.Response, error) {
+	return r.ApiService.MoneyInsBankwireIbanCountGetExecute(r)
+}
+
+/*
+MoneyInsBankwireIbanCountGet Get VIBANs count
+
+This endpoint enables you to retrieve the VIBAN count, the remaining VIBAN count and the max VIBAN thresholds.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiMoneyInsBankwireIbanCountGetRequest
+*/
+func (a *MoneyInsVirtualIBANApiService) MoneyInsBankwireIbanCountGet(ctx context.Context) ApiMoneyInsBankwireIbanCountGetRequest {
+	return ApiMoneyInsBankwireIbanCountGetRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return GetVibanCountOutput
+func (a *MoneyInsVirtualIBANApiService) MoneyInsBankwireIbanCountGetExecute(r ApiMoneyInsBankwireIbanCountGetRequest) (*GetVibanCountOutput, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GetVibanCountOutput
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MoneyInsVirtualIBANApiService.MoneyInsBankwireIbanCountGet")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v2/moneyins/bankwire/iban/count"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+    localAdditionalValues := make(map[string]interface{})
+
+    if r.ctx != nil {
+        if authProviderAuthType, ok := r.ctx.Value(authorizationFromProviderCtxKey).(AuthType); ok && authProviderAuthType != "" {
+            token, err := a.client.authProvider.GetToken()
+            if err != nil {
+                return localVarReturnValue, nil, &GenericOpenAPIError{
+                    body: nil,
+                    error: err.Error(),
+                    model: localAdditionalValues,
+                }
+            }
+            localAdditionalValues["authorization"] = string(authProviderAuthType)+" "+token
+        }
+    }
+	if r.authorization == nil {
+        value, ok := localAdditionalValues["authorization"].(string)
+        if !ok {
+            return localVarReturnValue, nil, reportError("authorization is required and must be specified")
+        }
+        r.authorization = &value
+	}
+	if r.pSUIPAddress == nil {
+        value, ok := localAdditionalValues["pSUIPAddress"].(string)
+        if !ok {
+            return localVarReturnValue, nil, reportError("pSUIPAddress is required and must be specified")
+        }
+        r.pSUIPAddress = &value
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	localVarHeaderParams["Authorization"] = parameterToString(*r.authorization, "")
+	if r.pSUAcceptLanguage != nil {
+		localVarHeaderParams["PSU-Accept-Language"] = parameterToString(*r.pSUAcceptLanguage, "")
+	}
+	localVarHeaderParams["PSU-IP-Address"] = parameterToString(*r.pSUIPAddress, "")
+	if r.pSUUserAgent != nil {
+		localVarHeaderParams["PSU-User-Agent"] = parameterToString(*r.pSUUserAgent, "")
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiMoneyInsBankwireIbanCreatePostRequest struct {
 	ctx context.Context
 	ApiService *MoneyInsVirtualIBANApiService
@@ -125,7 +307,11 @@ func (a *MoneyInsVirtualIBANApiService) MoneyInsBankwireIbanCreatePostExecute(r 
         if authProviderAuthType, ok := r.ctx.Value(authorizationFromProviderCtxKey).(AuthType); ok && authProviderAuthType != "" {
             token, err := a.client.authProvider.GetToken()
             if err != nil {
-                return localVarReturnValue, nil, err
+                return localVarReturnValue, nil, &GenericOpenAPIError{
+                    body: nil,
+                    error: err.Error(),
+                    model: localAdditionalValues,
+                }
             }
             localAdditionalValues["authorization"] = string(authProviderAuthType)+" "+token
         }
@@ -322,7 +508,11 @@ func (a *MoneyInsVirtualIBANApiService) MoneyInsBankwireIbanDisablePostExecute(r
         if authProviderAuthType, ok := r.ctx.Value(authorizationFromProviderCtxKey).(AuthType); ok && authProviderAuthType != "" {
             token, err := a.client.authProvider.GetToken()
             if err != nil {
-                return localVarReturnValue, nil, err
+                return localVarReturnValue, nil, &GenericOpenAPIError{
+                    body: nil,
+                    error: err.Error(),
+                    model: localAdditionalValues,
+                }
             }
             localAdditionalValues["authorization"] = string(authProviderAuthType)+" "+token
         }
