@@ -1,4 +1,4 @@
-module github.com/TheoGautier/lemonway_client
+module github.com/TheoGautierDrouot/lemonway_client
 
 go 1.13
 

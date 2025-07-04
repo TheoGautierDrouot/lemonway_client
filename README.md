@@ -22,7 +22,7 @@ go get golang.org/x/net/context
 Put the package under your project folder and add the following in import:
 
 ```golang
-import openapi "github.com/TheoGautier/lemonway_client"
+import openapi "github.com/TheoGautierDrouot/lemonway_client"
 ```
 
 To use a proxy, set the environment variable `HTTP_PROXY`:
