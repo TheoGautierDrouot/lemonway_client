@@ -18,3 +18,9 @@ To generate go moustache template files, use:
 ````shell
 java -jar ~/bin/openapitools/openapi-generator-cli.jar author template -g go
 ````
+
+## Testing
+
+````shell
+go test .
+````
