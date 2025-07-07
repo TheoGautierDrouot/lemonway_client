@@ -39,7 +39,7 @@ type TransactionCaptured struct {
 	ChequeSendingAddressCity *string `json:"ChequeSendingAddress_City,omitempty"`
 	// Cheque sending address post code
 	ChequeSendingAddressPostCode *string `json:"ChequeSendingAddress_PostCode,omitempty"`
-	ThreeDS *ThreeDs `json:"threeDS,omitempty"`
+	ThreeDs *ThreeDs `json:"threeDS,omitempty"`
 	BuyNowPayLaterInfo *BnplInfo `json:"buyNowPayLaterInfo,omitempty"`
 	// Transaction ID
 	Id *int64 `json:"id,omitempty"`
@@ -531,36 +531,36 @@ func (o *TransactionCaptured) SetChequeSendingAddressPostCode(v string) {
 	o.ChequeSendingAddressPostCode = &v
 }
 
-// GetThreeDS returns the ThreeDS field value if set, zero value otherwise.
+// GetThreeDS returns the ThreeDs field value if set, zero value otherwise.
 func (o *TransactionCaptured) GetThreeDS() ThreeDs {
-	if o == nil || o.ThreeDS == nil {
+	if o == nil || o.ThreeDs == nil {
 		var ret ThreeDs
 		return ret
 	}
-	return *o.ThreeDS
+	return *o.ThreeDs
 }
 
-// GetThreeDSOk returns a tuple with the ThreeDS field value if set, nil otherwise
+// GetThreeDSOk returns a tuple with the ThreeDs field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TransactionCaptured) GetThreeDSOk() (*ThreeDs, bool) {
-	if o == nil || o.ThreeDS == nil {
+	if o == nil || o.ThreeDs == nil {
 		return nil, false
 	}
-	return o.ThreeDS, true
+	return o.ThreeDs, true
 }
 
 // HasThreeDS returns a boolean if a field has been set.
 func (o *TransactionCaptured) HasThreeDS() bool {
-	if o != nil && o.ThreeDS != nil {
+	if o != nil && o.ThreeDs != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetThreeDS gets a reference to the given ThreeDs and assigns it to the ThreeDS field.
+// SetThreeDS gets a reference to the given ThreeDs and assigns it to the ThreeDs field.
 func (o *TransactionCaptured) SetThreeDS(v ThreeDs) {
-	o.ThreeDS = &v
+	o.ThreeDs = &v
 }
 
 // GetBuyNowPayLaterInfo returns the BuyNowPayLaterInfo field value if set, zero value otherwise.
@@ -1055,8 +1055,8 @@ func (o TransactionCaptured) MarshalJSON() ([]byte, error) {
 	if o.ChequeSendingAddressPostCode != nil {
 		toSerialize["ChequeSendingAddress_PostCode"] = o.ChequeSendingAddressPostCode
 	}
-	if o.ThreeDS != nil {
-		toSerialize["threeDS"] = o.ThreeDS
+	if o.ThreeDs != nil {
+		toSerialize["threeDS"] = o.ThreeDs
 	}
 	if o.BuyNowPayLaterInfo != nil {
 		toSerialize["buyNowPayLaterInfo"] = o.BuyNowPayLaterInfo

@@ -20,8 +20,6 @@ type MoneyInWebInitOutput struct {
 	WebKitToken *string `json:"webKitToken,omitempty"`
 	// Transaction ID
 	Id *int32 `json:"id,omitempty"`
-	// OBSOLETE Transaction ID
-	Id *int32 `json:"id ,omitempty"`
 	CardId *int32 `json:"cardId,omitempty"`
 	Error *Error `json:"error,omitempty"`
 }
@@ -73,38 +71,6 @@ func (o *MoneyInWebInitOutput) HasWebKitToken() bool {
 // SetWebKitToken gets a reference to the given string and assigns it to the WebKitToken field.
 func (o *MoneyInWebInitOutput) SetWebKitToken(v string) {
 	o.WebKitToken = &v
-}
-
-// GetId returns the Id field value if set, zero value otherwise.
-func (o *MoneyInWebInitOutput) GetId() int32 {
-	if o == nil || o.Id == nil {
-		var ret int32
-		return ret
-	}
-	return *o.Id
-}
-
-// GetIdOk returns a tuple with the Id field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *MoneyInWebInitOutput) GetIdOk() (*int32, bool) {
-	if o == nil || o.Id == nil {
-		return nil, false
-	}
-	return o.Id, true
-}
-
-// HasId returns a boolean if a field has been set.
-func (o *MoneyInWebInitOutput) HasId() bool {
-	if o != nil && o.Id != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetId gets a reference to the given int32 and assigns it to the Id field.
-func (o *MoneyInWebInitOutput) SetId(v int32) {
-	o.Id = &v
 }
 
 // GetId returns the Id field value if set, zero value otherwise.

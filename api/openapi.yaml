@@ -12719,7 +12719,7 @@ components:
           format: int32
           type: integer
         threeDS:
-          $ref: '#/components/schemas/ThreeDS'
+          $ref: '#/components/schemas/ThreeDs'
         riskAnalysis:
           $ref: '#/components/schemas/RiskAnalysis'
         recurringAvgAmount:
@@ -12767,7 +12767,7 @@ components:
       - errorUrl
       - returnUrl
       type: object
-    ThreeDS:
+    ThreeDs:
       properties:
         challengeMode:
           description: "If you would like to enforce 3D Secure for your client then\
@@ -13662,7 +13662,7 @@ components:
         registerCard:
           type: boolean
         threeDS:
-          $ref: '#/components/schemas/ThreeDS'
+          $ref: '#/components/schemas/ThreeDs'
         riskAnalysis:
           $ref: '#/components/schemas/RiskAnalysis'
         recurringAvgAmount:

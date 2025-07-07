@@ -328,7 +328,7 @@ Class | Method | HTTP request | Description
  - [SendPaymentOutput](docs/SendPaymentOutput.md)
  - [SignDocumentInitInput](docs/SignDocumentInitInput.md)
  - [SignDocumentInitOutput](docs/SignDocumentInitOutput.md)
- - [ThreeDS](docs/ThreeDS.md)
+ - [ThreeDs](docs/ThreeDs.md)
  - [ThreeDs](docs/ThreeDs.md)
  - [Transaction](docs/Transaction.md)
  - [TransactionAccount](docs/TransactionAccount.md)

@@ -21,7 +21,7 @@ type MoneyIn3DInitInput struct {
 	ReturnUrl *string `json:"returnUrl,omitempty"`
 	CardId *int64 `json:"cardId,omitempty"`
 	RegisterCard *bool `json:"registerCard,omitempty"`
-	ThreeDS *ThreeDS `json:"threeDS,omitempty"`
+	ThreeDs *ThreeDs `json:"threeDS,omitempty"`
 	RiskAnalysis *RiskAnalysis `json:"riskAnalysis,omitempty"`
 	// Average amount of future recurring payments to cover recurring payments with variable amounts. **Note:** Only if the amount is higher than the amount of the first transaction. cover recurring payments with variable amounts. **Note:** Only if the amount is higher than the amount of the first transaction.
 	RecurringAvgAmount *int32 `json:"recurringAvgAmount,omitempty"`
@@ -187,36 +187,36 @@ func (o *MoneyIn3DInitInput) SetRegisterCard(v bool) {
 	o.RegisterCard = &v
 }
 
-// GetThreeDS returns the ThreeDS field value if set, zero value otherwise.
-func (o *MoneyIn3DInitInput) GetThreeDS() ThreeDS {
-	if o == nil || o.ThreeDS == nil {
-		var ret ThreeDS
+// GetThreeDS returns the ThreeDs field value if set, zero value otherwise.
+func (o *MoneyIn3DInitInput) GetThreeDS() ThreeDs {
+	if o == nil || o.ThreeDs == nil {
+		var ret ThreeDs
 		return ret
 	}
-	return *o.ThreeDS
+	return *o.ThreeDs
 }
 
-// GetThreeDSOk returns a tuple with the ThreeDS field value if set, nil otherwise
+// GetThreeDSOk returns a tuple with the ThreeDs field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *MoneyIn3DInitInput) GetThreeDSOk() (*ThreeDS, bool) {
-	if o == nil || o.ThreeDS == nil {
+func (o *MoneyIn3DInitInput) GetThreeDSOk() (*ThreeDs, bool) {
+	if o == nil || o.ThreeDs == nil {
 		return nil, false
 	}
-	return o.ThreeDS, true
+	return o.ThreeDs, true
 }
 
 // HasThreeDS returns a boolean if a field has been set.
 func (o *MoneyIn3DInitInput) HasThreeDS() bool {
-	if o != nil && o.ThreeDS != nil {
+	if o != nil && o.ThreeDs != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetThreeDS gets a reference to the given ThreeDS and assigns it to the ThreeDS field.
-func (o *MoneyIn3DInitInput) SetThreeDS(v ThreeDS) {
-	o.ThreeDS = &v
+// SetThreeDS gets a reference to the given ThreeDs and assigns it to the ThreeDs field.
+func (o *MoneyIn3DInitInput) SetThreeDS(v ThreeDs) {
+	o.ThreeDs = &v
 }
 
 // GetRiskAnalysis returns the RiskAnalysis field value if set, zero value otherwise.
@@ -513,8 +513,8 @@ func (o MoneyIn3DInitInput) MarshalJSON() ([]byte, error) {
 	if o.RegisterCard != nil {
 		toSerialize["registerCard"] = o.RegisterCard
 	}
-	if o.ThreeDS != nil {
-		toSerialize["threeDS"] = o.ThreeDS
+	if o.ThreeDs != nil {
+		toSerialize["threeDS"] = o.ThreeDs
 	}
 	if o.RiskAnalysis != nil {
 		toSerialize["riskAnalysis"] = o.RiskAnalysis

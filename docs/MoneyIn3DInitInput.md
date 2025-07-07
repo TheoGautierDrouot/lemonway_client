@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **ReturnUrl** | Pointer to **string** | Return URL of the 3-D Secure website. Your client will be redirected on this URL, which should be your website URL. | [optional] 
 **CardId** | Pointer to **int64** |  | [optional] 
 **RegisterCard** | Pointer to **bool** |  | [optional] 
-**ThreeDS** | Pointer to [**ThreeDS**](ThreeDS.md) |  | [optional] 
+**ThreeDs** | Pointer to [**ThreeDs**](ThreeDs.md) |  | [optional] 
 **RiskAnalysis** | Pointer to [**RiskAnalysis**](RiskAnalysis.md) |  | [optional] 
 **RecurringAvgAmount** | Pointer to **int32** | Average amount of future recurring payments to cover recurring payments with variable amounts. **Note:** Only if the amount is higher than the amount of the first transaction. cover recurring payments with variable amounts. **Note:** Only if the amount is higher than the amount of the first transaction. | [optional] 
 **PaymentPattern** | Pointer to **string** | **Recurring**: If a payment follows a recurring amount or **One_shot**: when there is no future recurring payments. | [optional] 
@@ -140,22 +140,22 @@ HasRegisterCard returns a boolean if a field has been set.
 
 ### GetThreeDS
 
-`func (o *MoneyIn3DInitInput) GetThreeDS() ThreeDS`
+`func (o *MoneyIn3DInitInput) GetThreeDS() ThreeDs`
 
-GetThreeDS returns the ThreeDS field if non-nil, zero value otherwise.
+GetThreeDS returns the ThreeDs field if non-nil, zero value otherwise.
 
 ### GetThreeDSOk
 
-`func (o *MoneyIn3DInitInput) GetThreeDSOk() (*ThreeDS, bool)`
+`func (o *MoneyIn3DInitInput) GetThreeDSOk() (*ThreeDs, bool)`
 
-GetThreeDSOk returns a tuple with the ThreeDS field if it's non-nil, zero value otherwise
+GetThreeDSOk returns a tuple with the ThreeDs field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetThreeDS
 
-`func (o *MoneyIn3DInitInput) SetThreeDS(v ThreeDS)`
+`func (o *MoneyIn3DInitInput) SetThreeDS(v ThreeDs)`
 
-SetThreeDS sets ThreeDS field to given value.
+SetThreeDS sets ThreeDs field to given value.
 
 ### HasThreeDS
 

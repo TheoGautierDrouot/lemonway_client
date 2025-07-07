@@ -23,7 +23,7 @@ import (
 // MoneyInsCardsApiService MoneyInsCardsApi service
 type MoneyInsCardsApiService service
 
-type ApiMoneyInsCancelPutRequest struct {
+type ApiMoneyInsCardsCancelPutRequest struct {
 	ctx context.Context
 	ApiService *MoneyInsCardsApiService
 	transactionid int64
@@ -35,30 +35,30 @@ type ApiMoneyInsCancelPutRequest struct {
 }
 
 // Authorization bearer (OAuth 2)
-func (r ApiMoneyInsCancelPutRequest) Authorization(authorization string) ApiMoneyInsCancelPutRequest {
+func (r ApiMoneyInsCardsCancelPutRequest) Authorization(authorization string) ApiMoneyInsCardsCancelPutRequest {
 	r.authorization = &authorization
 	return r
 }
 
 // IP address of the final client (PSU).
-func (r ApiMoneyInsCancelPutRequest) PSUIPAddress(pSUIPAddress string) ApiMoneyInsCancelPutRequest {
+func (r ApiMoneyInsCardsCancelPutRequest) PSUIPAddress(pSUIPAddress string) ApiMoneyInsCardsCancelPutRequest {
 	r.pSUIPAddress = &pSUIPAddress
 	return r
 }
 
-func (r ApiMoneyInsCancelPutRequest) Parameters(parameters CancelMoneyInInput) ApiMoneyInsCancelPutRequest {
+func (r ApiMoneyInsCardsCancelPutRequest) Parameters(parameters CancelMoneyInInput) ApiMoneyInsCardsCancelPutRequest {
 	r.parameters = &parameters
 	return r
 }
 
 // Response language accepted by final client (PSU). English by default
-func (r ApiMoneyInsCancelPutRequest) PSUAcceptLanguage(pSUAcceptLanguage string) ApiMoneyInsCancelPutRequest {
+func (r ApiMoneyInsCardsCancelPutRequest) PSUAcceptLanguage(pSUAcceptLanguage string) ApiMoneyInsCardsCancelPutRequest {
 	r.pSUAcceptLanguage = &pSUAcceptLanguage
 	return r
 }
 
 // User-agent of the final client (PSU).
-func (r ApiMoneyInsCancelPutRequest) PSUUserAgent(pSUUserAgent string) ApiMoneyInsCancelPutRequest {
+func (r ApiMoneyInsCardsCancelPutRequest) PSUUserAgent(pSUUserAgent string) ApiMoneyInsCardsCancelPutRequest {
 	r.pSUUserAgent = &pSUUserAgent
 	return r
 }
@@ -66,22 +66,22 @@ func (r ApiMoneyInsCancelPutRequest) PSUUserAgent(pSUUserAgent string) ApiMoneyI
 
 // Use Authorization from given provider. Overrides usage of manually set Authorization header.
 // Auth type describes authorization type to use, like "Bearer" or "Basic"
-func (r ApiMoneyInsCancelPutRequest) AuthorizationFromProvider(authType AuthType) ApiMoneyInsCancelPutRequest {
+func (r ApiMoneyInsCardsCancelPutRequest) AuthorizationFromProvider(authType AuthType) ApiMoneyInsCardsCancelPutRequest {
     r.ctx = context.WithValue(r.ctx, authorizationFromProviderCtxKey, authType)
     return r
 }
 
 // Use Basic Authorization from given provider. Overrides usage of manually set Authorization header.
-func (r ApiMoneyInsCancelPutRequest) AuthorizationBasicFromProvider() ApiMoneyInsCancelPutRequest {
+func (r ApiMoneyInsCardsCancelPutRequest) AuthorizationBasicFromProvider() ApiMoneyInsCardsCancelPutRequest {
     return r.AuthorizationFromProvider(AuthTypeBasic)
 }
 
 // Use Bearer Authorization from given provider. Overrides usage of manually set Authorization header.
-func (r ApiMoneyInsCancelPutRequest) AuthorizationBearerFromProvider() ApiMoneyInsCancelPutRequest {
+func (r ApiMoneyInsCardsCancelPutRequest) AuthorizationBearerFromProvider() ApiMoneyInsCardsCancelPutRequest {
     return r.AuthorizationFromProvider(AuthTypeBearer)
 }
 
-func (r ApiMoneyInsCancelPutRequest) Execute() (*CancelMoneyInOutput, *http.Response, error) {
+func (r ApiMoneyInsCardsCancelPutRequest) Execute() (*CancelMoneyInOutput, *http.Response, error) {
 	return r.ApiService.MoneyInsCancelPutExecute(r)
 }
 
@@ -92,10 +92,10 @@ With the PUT /moneyins/{transactionid}/cancel method, you can cancel a pre-autho
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param transactionid
- @return ApiMoneyInsCancelPutRequest
+ @return ApiMoneyInsCardsCancelPutRequest
 */
-func (a *MoneyInsCardsApiService) MoneyInsCancelPut(ctx context.Context, transactionid int64) ApiMoneyInsCancelPutRequest {
-	return ApiMoneyInsCancelPutRequest{
+func (a *MoneyInsCardsApiService) MoneyInsCancelPut(ctx context.Context, transactionid int64) ApiMoneyInsCardsCancelPutRequest {
+	return ApiMoneyInsCardsCancelPutRequest{
 		ApiService: a,
 		ctx: ctx,
 		transactionid: transactionid,
@@ -104,7 +104,7 @@ func (a *MoneyInsCardsApiService) MoneyInsCancelPut(ctx context.Context, transac
 
 // Execute executes the request
 //  @return CancelMoneyInOutput
-func (a *MoneyInsCardsApiService) MoneyInsCancelPutExecute(r ApiMoneyInsCancelPutRequest) (*CancelMoneyInOutput, *http.Response, error) {
+func (a *MoneyInsCardsApiService) MoneyInsCancelPutExecute(r ApiMoneyInsCardsCancelPutRequest) (*CancelMoneyInOutput, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}

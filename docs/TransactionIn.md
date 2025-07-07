@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 **ChequeSendingAddressStreet** | Pointer to **string** | Cheque sending address street name | [optional] 
 **ChequeSendingAddressCity** | Pointer to **string** | Cheque sending address city name | [optional] 
 **ChequeSendingAddressPostCode** | Pointer to **string** | Cheque sending address post code | [optional] 
-**ThreeDS** | Pointer to [**ThreeDs**](ThreeDs.md) |  | [optional] 
+**ThreeDs** | Pointer to [**ThreeDs**](ThreeDs.md) |  | [optional] 
 **BuyNowPayLaterInfo** | Pointer to [**BnplInfo**](BnplInfo.md) |  | [optional] 
 **Id** | Pointer to **int64** | Transaction ID | [optional] 
 **Method** | Pointer to **int32** | Payment Method    0 Card      1 Bank transfer (MoneyIn)       3 Bank transfer (MoneyOut)       4 P2P      13 iDEAL      14 SEPA DirectDebit      15 Cheque      19 Multibanco      21 MBWAY      30 BNPL    35 PayPal     ---   **Important:** The following services have been discontinued.      16 Neosurf    17 Sofort    18 PFS Physical Card    20 Payshop    22 Polish Instant Transfer    23 Pagare    24 MobilePay  25 Paytrail  26 WeChat    27 P24    28 MoneyIn by TPE    29 Trustly | [optional] 
@@ -406,20 +406,20 @@ HasChequeSendingAddressPostCode returns a boolean if a field has been set.
 
 `func (o *TransactionIn) GetThreeDS() ThreeDs`
 
-GetThreeDS returns the ThreeDS field if non-nil, zero value otherwise.
+GetThreeDS returns the ThreeDs field if non-nil, zero value otherwise.
 
 ### GetThreeDSOk
 
 `func (o *TransactionIn) GetThreeDSOk() (*ThreeDs, bool)`
 
-GetThreeDSOk returns a tuple with the ThreeDS field if it's non-nil, zero value otherwise
+GetThreeDSOk returns a tuple with the ThreeDs field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetThreeDS
 
 `func (o *TransactionIn) SetThreeDS(v ThreeDs)`
 
-SetThreeDS sets ThreeDS field to given value.
+SetThreeDS sets ThreeDs field to given value.
 
 ### HasThreeDS
 
