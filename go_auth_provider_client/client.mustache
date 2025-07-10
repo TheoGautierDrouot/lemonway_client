@@ -205,6 +205,10 @@ func (c *APIClient) GetConfig() *Configuration {
 	return c.cfg
 }
 
+func (c *APIClient) GetAuthProvider() AuthProvider {
+    return c.authProvider
+}
+
 type formFile struct {
 		fileBytes []byte
 		fileName string
